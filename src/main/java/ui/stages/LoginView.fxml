@@ -41,12 +41,17 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="460.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" text="Login">
+      <Button fx:id="btnLogin" layoutX="497.0" layoutY="419.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" text="Login">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExit" layoutX="460.0" layoutY="531.0" mnemonicParsing="false" onAction="#btnExitOnAction" prefHeight="43.0" prefWidth="249.0" text="Exit">
+      <Button fx:id="btnExit" layoutX="671.0" layoutY="542.0" mnemonicParsing="false" onAction="#btnExitOnAction" prefHeight="43.0" prefWidth="114.0" text="Exit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRegister" layoutX="497.0" layoutY="478.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" text="Register">
          <font>
             <Font size="20.0" />
          </font>

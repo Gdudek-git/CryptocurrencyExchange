@@ -23,4 +23,8 @@ public class LoginViewController
     void btnLoginOnAction(ActionEvent event) {
 
     }
+    @FXML
+    void btnRegisterOnAction(ActionEvent event) {
+
+    }
 }
