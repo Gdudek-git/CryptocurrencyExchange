@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ui.controllers.UserViewController">
+   <children>
+      <AnchorPane layoutY="26.0" prefHeight="66.0" prefWidth="800.0" style="-fx-background-color: darkblue;">
+         <children>
+            <Label fx:id="lbBalance" layoutX="327.0" layoutY="18.0" text="Balance:" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbProfit_Loss" layoutX="547.0" layoutY="18.0" text="Profit/Loss:" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbLoggedUser" layoutX="14.0" layoutY="18.0" text="You are logged as:" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <MenuBar prefHeight="26.0" prefWidth="800.0" style="-fx-background-color: white;">
+        <menus>
+          <Menu mnemonicParsing="false" style="-fx-foreground-color: yellow;" text="Currency">
+            <items>
+              <MenuItem fx:id="miPLN" mnemonicParsing="false" onAction="#currencyMenuOnAction" text="PLN" />
+                  <MenuItem fx:id="miUSD" mnemonicParsing="false" onAction="#currencyMenuOnAction" text="USD" />
+                  <MenuItem fx:id="miEUR" mnemonicParsing="false" onAction="#currencyMenuOnAction" text="EUR" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Update">
+            <items>
+              <MenuItem fx:id="mi10s" mnemonicParsing="false" onAction="#updateMenuOnAction" text="10s" />
+                  <MenuItem fx:id="mi1Min" mnemonicParsing="false" onAction="#updateMenuOnAction" text="1min" />
+                  <MenuItem fx:id="mi10Min" mnemonicParsing="false" onAction="#updateMenuOnAction" text="10min" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
