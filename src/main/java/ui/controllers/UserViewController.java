@@ -15,6 +15,9 @@ public class UserViewController
     private Label lbBalance;
 
     @FXML
+    private Label lbDeposit;
+
+    @FXML
     private Label lbLoggedUser;
 
     @FXML
