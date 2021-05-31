@@ -8,50 +8,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ui.controllers.LoginViewController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="400.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="379.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="460.0" layoutY="75.0" prefHeight="131.0" prefWidth="255.0" text="Login">
+      <Label layoutX="463.0" layoutY="37.0" prefHeight="131.0" prefWidth="255.0" text="Login">
          <font>
-            <Font name="System Italic" size="90.0" />
+            <Font name="System Bold" size="90.0" />
          </font>
       </Label>
-      <TextField fx:id="tfUsername" layoutX="497.0" layoutY="263.0" prefHeight="43.0" prefWidth="249.0" promptText="Enter your username">
+      <TextField fx:id="tfUsername" layoutX="525.0" layoutY="201.0" prefHeight="43.0" prefWidth="249.0" promptText="Enter your username">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="tfPassword" layoutX="498.0" layoutY="359.0" promptText="Enter your password">
+      <TextField fx:id="tfPassword" layoutX="526.0" layoutY="297.0" promptText="Enter your password">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="379.0" layoutY="270.0" text="Username">
+      <Label layoutX="407.0" layoutY="208.0" text="Username">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="382.0" layoutY="366.0" text="Password">
+      <Label layoutX="410.0" layoutY="304.0" text="Password">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="497.0" layoutY="419.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" text="Login">
+      <Button fx:id="btnLogin" layoutX="469.0" layoutY="381.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" text="Login">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnExit" layoutX="671.0" layoutY="542.0" mnemonicParsing="false" onAction="#btnExitOnAction" prefHeight="43.0" prefWidth="114.0" text="Exit">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnRegister" layoutX="497.0" layoutY="478.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" text="Register">
+      <Button fx:id="btnRegister" layoutX="466.0" layoutY="470.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" text="Register">
          <font>
             <Font size="20.0" />
          </font>
