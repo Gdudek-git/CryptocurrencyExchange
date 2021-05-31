@@ -48,4 +48,31 @@ public class UserViewController
     void updateMenuOnAction(ActionEvent event) {
 
     }
+
+
+    @FXML
+    void btnBuyOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnExchangeOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnSellOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnSendOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnSettingsOnAction(ActionEvent event) {
+
+    }
+
 }
