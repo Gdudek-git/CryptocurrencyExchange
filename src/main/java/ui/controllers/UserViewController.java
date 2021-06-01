@@ -75,4 +75,9 @@ public class UserViewController
 
     }
 
+    @FXML
+    void btnLogoutOnAction(ActionEvent event) {
+
+    }
+
 }
