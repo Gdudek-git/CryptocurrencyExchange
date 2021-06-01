@@ -1,0 +1,15 @@
+.buttonHover:hover{
+    -fx-border-color: WHITE;
+    -fx-border-width: 1px 1px 1px 1px;
+}
+
+.comboBoxHover:hover{
+-fx-border-radius:0.5cm;
+-fx-border-color: DARKBLUE;
+-fx-border-width: 2px 2px 2px 2px;
+}
+.radiusButtonHover:hover{
+-fx-border-radius:0.5cm;
+-fx-border-color: DARKBLUE;
+-fx-border-width: 2px 2px 2px 2px;
+}
