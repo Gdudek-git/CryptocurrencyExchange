@@ -2,8 +2,7 @@ package main.java.ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 
 public class UserViewController
 {
@@ -37,6 +36,29 @@ public class UserViewController
 
     @FXML
     private MenuItem mi10Min;
+
+    @FXML
+    private RadioButton rbHourly;
+
+    @FXML
+    private ToggleGroup chartUpdateGroup;
+
+    @FXML
+    private RadioButton rbDaily;
+
+    @FXML
+    private RadioButton rbWeekly;
+
+    @FXML
+    private TextField tfCurrencyType;
+
+    @FXML
+    private Label lbCurrentPrice;
+
+    @FXML
+    private Label lbAveragePrice;
+
+
     //endregion
 
     @FXML
@@ -71,7 +93,7 @@ public class UserViewController
     }
 
     @FXML
-    void btnSettingsOnAction(ActionEvent event) {
+    void btnAccountOnAction(ActionEvent event) {
 
     }
 
