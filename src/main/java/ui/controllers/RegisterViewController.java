@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 public class RegisterViewController {
 
 
+    //region Controls
     @FXML
     private TextField tfFirstName;
 
@@ -31,6 +32,7 @@ public class RegisterViewController {
 
     @FXML
     private ComboBox cbxGender;
+    //endregion
 
     @FXML
     private void initialize()
