@@ -37,7 +37,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="469.0" layoutY="381.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: black;" text="Login" textFill="WHITE">
+      <Button fx:id="btnLogin" layoutX="466.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: black;" text="Login" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -45,7 +45,7 @@
             <FontAwesomeIcon fill="WHITE" iconName="SIGN_IN" />
          </graphic>
       </Button>
-      <Button fx:id="btnRegister" layoutX="466.0" layoutY="470.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: black;" text="Register" textFill="WHITE">
+      <Button fx:id="btnRegister" layoutX="466.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: black;" text="Register" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
