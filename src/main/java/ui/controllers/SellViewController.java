@@ -45,7 +45,7 @@ public class SellViewController {
         ObservableList<String> currency = FXCollections.observableArrayList("PLN","USD","EUR");
         cbxCurrency.setItems(currency);
         ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC","ETH","DOGE");
-        cbxCryptocurrency.setItems(currency);
+        cbxCryptocurrency.setItems(cryptocurrency);
 
     }
 
