@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -250,16 +251,25 @@
          <font>
             <Font size="25.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon iconName="REPLY" />
+         </graphic>
       </Button>
       <Button layoutX="214.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnChangePasswordOnAction" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@HoverStyle.css" text="Change password">
          <font>
             <Font size="25.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon iconName="EDIT" />
+         </graphic>
       </Button>
       <Button layoutX="490.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnChangePersonalDataOnAction" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@HoverStyle.css" text="Change personal data">
          <font>
             <Font size="25.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon iconName="EDIT" />
+         </graphic>
       </Button>
     </children>
 </AnchorPane>
