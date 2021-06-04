@@ -10,50 +10,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ui.controllers.LoginViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ui.controllers.LoginViewController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="379.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/logo.png" />
+            <Image url="@../images/loginImage.png" />
          </image>
       </ImageView>
-      <Label layoutX="463.0" layoutY="37.0" prefHeight="131.0" prefWidth="255.0" text="Login">
+      <Label layoutX="463.0" layoutY="37.0" prefHeight="131.0" prefWidth="255.0" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="90.0" />
          </font>
       </Label>
-      <TextField fx:id="tfUsername" focusTraversable="false" layoutX="525.0" layoutY="201.0" prefHeight="43.0" prefWidth="249.0" promptText="Enter your username" style="-fx-background-color: black; -fx-text-fill: white;">
+      <TextField fx:id="tfUsername" focusTraversable="false" layoutX="525.0" layoutY="201.0" prefHeight="43.0" prefWidth="249.0" promptText="Enter your username" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label layoutX="388.0" layoutY="205.0" text="Username:">
+      <Label layoutX="388.0" layoutY="205.0" text="Username:" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="391.0" layoutY="301.0" text="Password:">
+      <Label layoutX="391.0" layoutY="301.0" text="Password:" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="466.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: black;" text="Login" textFill="WHITE">
+      <Button fx:id="btnLogin" layoutX="466.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@HoverStyle.css" text="Login">
          <font>
             <Font size="20.0" />
          </font>
          <graphic>
-            <FontAwesomeIcon fill="WHITE" iconName="SIGN_IN" />
+            <FontAwesomeIcon iconName="SIGN_IN" selectionFill="BLACK" />
          </graphic>
       </Button>
-      <Button fx:id="btnRegister" layoutX="466.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: black;" text="Register" textFill="WHITE">
+      <Button fx:id="btnRegister" layoutX="466.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@HoverStyle.css" text="Register">
          <font>
             <Font size="20.0" />
          </font>
          <graphic>
-            <FontAwesomeIcon fill="WHITE" iconName="USER_PLUS" />
+            <FontAwesomeIcon iconName="USER_PLUS" />
          </graphic>
       </Button>
-      <PasswordField fx:id="tfPassword" focusTraversable="false" layoutX="525.0" layoutY="297.0" promptText="Enter your password" style="-fx-background-color: black; -fx-text-fill: white;">
+      <PasswordField fx:id="tfPassword" focusTraversable="false" layoutX="525.0" layoutY="297.0" promptText="Enter your password" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
          <font>
             <Font size="20.0" />
          </font>
