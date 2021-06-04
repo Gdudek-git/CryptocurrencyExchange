@@ -6,17 +6,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class RegisterViewController {
 
 
-    //region Controls
+    //region Controllers
     @FXML
     private TextField tfFirstName;
 
     @FXML
-    private TextField tfUsername;
+    private TextField tfCountry;
 
     @FXML
     private TextField tfLastName;
@@ -25,14 +26,22 @@ public class RegisterViewController {
     private TextField tfEmail;
 
     @FXML
-    private TextField tfPassword;
-
-    @FXML
-    private TextField tfConfirmPassword;
-
-    @FXML
     private ComboBox cbxGender;
+
+    @FXML
+    private PasswordField tfPassword;
+
+    @FXML
+    private PasswordField tfConfirmPassword;
+
+    @FXML
+    private TextField tfPhoneNumber;
+
+    @FXML
+    private TextField tfUsername;
     //endregion
+
+
 
     @FXML
     private void initialize()
