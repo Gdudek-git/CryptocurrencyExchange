@@ -3,6 +3,9 @@ package main.java.ui.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.java.ui.stage.MainStage;
+
+import static main.java.ui.stage.MainStage.getScene;
 
 public class UserViewController
 {
@@ -74,32 +77,37 @@ public class UserViewController
 
     @FXML
     void btnBuyOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("BuyView.fxml"));
     }
 
     @FXML
     void btnExchangeOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("ExchangeView.fxml"));
     }
 
     @FXML
     void btnSellOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("SellView.fxml"));
     }
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("SendView.fxml"));
     }
 
     @FXML
     void btnAccountOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("AccountView.fxml"));
     }
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {
+        getMainStage().setScene(getScene("LoginView.fxml"));
+    }
 
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 
 }

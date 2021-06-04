@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import main.java.ui.stage.MainStage;
+
+import static main.java.ui.stage.MainStage.getScene;
 
 public class SellViewController {
 
@@ -32,7 +35,7 @@ public class SellViewController {
 
     @FXML
     void btnReturnOnClick(ActionEvent event) {
-
+        getMainStage().setScene(getScene("UserView.fxml"));
     }
 
     @FXML
@@ -47,6 +50,11 @@ public class SellViewController {
         ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC","ETH","DOGE");
         cbxCryptocurrency.setItems(cryptocurrency);
 
+    }
+
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 
 

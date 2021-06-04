@@ -3,6 +3,9 @@ package main.java.ui.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import main.java.ui.stage.MainStage;
+
+import static main.java.ui.stage.MainStage.getScene;
 
 public class AccountView {
 
@@ -46,17 +49,22 @@ public class AccountView {
 
     @FXML
     void btnChangePasswordOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("ChangePasswordView.fxml"));
     }
 
     @FXML
     void btnChangePersonalDataOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("ChangePersonalDataView.fxml"));
     }
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
+        getMainStage().setScene(getScene("UserView.fxml"));
+    }
 
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 
 }

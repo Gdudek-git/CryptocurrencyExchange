@@ -2,18 +2,20 @@ package main.java;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.ui.stage.MainStage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/main/java/ui/stages/LoginView.fxml"));
-        primaryStage.setTitle("Grzegorz Dudek");
-        primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.show();
+
+        MainStage mainStage = MainStage.getInstance();
+        mainStage.setStage(primaryStage);
+        AnchorPane rootPane = FXMLLoader.load(getClass().getResource("/main/java/ui/stage/LoginView.fxml"));
+        mainStage.setRootPane(rootPane);
+        mainStage.setMainScene();
     }
 
 

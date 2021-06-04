@@ -3,6 +3,9 @@ package main.java.ui.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import main.java.ui.stage.MainStage;
+
+import static main.java.ui.stage.MainStage.getScene;
 
 public class ChangePersonalDataViewController {
 
@@ -58,6 +61,12 @@ public class ChangePersonalDataViewController {
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
+        getMainStage().setScene(getScene("AccountView.fxml"));
+    }
 
+
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 }
