@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import main.java.ui.stage.MainStage;
+
+import static main.java.ui.stage.MainStage.getScene;
 
 public class ExchangeViewController {
 
@@ -38,7 +41,7 @@ public class ExchangeViewController {
 
     @FXML
     void btnReturnOnClick(ActionEvent event) {
-
+        getMainStage().setScene(getScene("UserView.fxml"));
     }
 
     private void setComboBoxItems()
@@ -46,8 +49,11 @@ public class ExchangeViewController {
         ObservableList<String> currency = FXCollections.observableArrayList("PLN","USD","EUR");
         cbxCurrentCurrency.setItems(currency);
         cbxTargetCurrency.setItems(currency);
+    }
 
-
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 
 }

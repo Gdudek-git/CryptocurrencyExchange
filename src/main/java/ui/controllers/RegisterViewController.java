@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.java.ui.stage.MainStage;
+
+import static main.java.ui.stage.MainStage.getScene;
 
 public class RegisterViewController {
 
@@ -51,18 +54,23 @@ public class RegisterViewController {
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("LoginView.fxml"));
     }
 
     @FXML
     void btnConfirmOnAction(ActionEvent event) {
-
+        getMainStage().setScene(getScene("LoginView.fxml"));
     }
 
     private void setComboBoxItems()
     {
         ObservableList<String>gender = FXCollections.observableArrayList("Men","Women");
         cbxGender.setItems(gender);
+    }
+
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 
 
