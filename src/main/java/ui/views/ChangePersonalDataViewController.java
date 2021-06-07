@@ -1,11 +1,10 @@
-package main.java.ui.controllers;
+package ui.views;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import main.java.ui.stage.MainStage;
 
-import static main.java.ui.stage.MainStage.getScene;
+import static ui.views.MainStage.getScene;
 
 public class ChangePersonalDataViewController {
 
@@ -65,8 +64,7 @@ public class ChangePersonalDataViewController {
     }
 
 
-    private MainStage getMainStage()
-    {
+    private MainStage getMainStage() {
         return MainStage.getInstance();
     }
 }

@@ -1,10 +1,9 @@
-package main.java;
+package ui.views;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.ui.stage.MainStage;
 
 public class Main extends Application {
 
@@ -13,7 +12,9 @@ public class Main extends Application {
 
         MainStage mainStage = MainStage.getInstance();
         mainStage.setStage(primaryStage);
-        AnchorPane rootPane = FXMLLoader.load(getClass().getResource("/main/java/ui/stage/LoginView.fxml"));
+
+
+        AnchorPane rootPane = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
         mainStage.setRootPane(rootPane);
         mainStage.setMainScene();
     }

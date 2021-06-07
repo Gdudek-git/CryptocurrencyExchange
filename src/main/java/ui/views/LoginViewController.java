@@ -1,20 +1,14 @@
-package main.java.ui.controllers;
+package ui.views;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import main.java.ui.stage.MainStage;
 
-import java.io.IOException;
+import static ui.views.MainStage.getScene;
 
-import static main.java.ui.stage.MainStage.getScene;
-
-public class LoginViewController
-{
+public class LoginViewController {
     @FXML
     private TextField tfUsername;
 
@@ -38,8 +32,7 @@ public class LoginViewController
         getMainStage().setScene(getScene("RegisterView.fxml"));
     }
 
-    private MainStage getMainStage()
-    {
+    private MainStage getMainStage() {
         return MainStage.getInstance();
     }
 }

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #49cd8d, #00bfbc, #00aae2, #008eea, #7a67cb);" stylesheets="@HoverStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ui.controllers.UserViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #49cd8d, #00bfbc, #00aae2, #008eea, #7a67cb);" stylesheets="@../css/HoverStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.views.UserViewController">
    <children>
       <AnchorPane layoutY="26.0" prefHeight="70.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);">
          <children>
@@ -41,7 +41,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <MenuBar prefHeight="26.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" stylesheets="@MenuStyle.css">
+      <MenuBar prefHeight="26.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" stylesheets="@../css/MenuStyle.css">
         <menus>
           <Menu mnemonicParsing="false" text="Currency Type">
             <items>
@@ -61,7 +61,7 @@
       </MenuBar>
       <AnchorPane layoutY="93.0" prefHeight="398.0" prefWidth="122.0" style="-fx-background-color: linear-gradient(to bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);">
          <children>
-            <Button layoutY="338.0" mnemonicParsing="false" onAction="#btnAccountOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@HoverStyle.css" text="Account" textFill="WHITE">
+            <Button layoutY="338.0" mnemonicParsing="false" onAction="#btnAccountOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@../css/HoverStyle.css" text="Account" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -69,7 +69,7 @@
                   <FontAwesomeIcon fill="WHITE" iconName="USER" />
                </graphic>
             </Button>
-            <Button layoutY="166.0" mnemonicParsing="false" onAction="#btnExchangeOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@HoverStyle.css" text="Exchange" textFill="WHITE">
+            <Button layoutY="166.0" mnemonicParsing="false" onAction="#btnExchangeOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@../css/HoverStyle.css" text="Exchange" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -77,7 +77,7 @@
                   <FontAwesomeIcon fill="WHITE" iconName="EXCHANGE" />
                </graphic>
             </Button>
-            <Button layoutY="255.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@HoverStyle.css" text="Send" textFill="WHITE">
+            <Button layoutY="255.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@../css/HoverStyle.css" text="Send" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -85,7 +85,7 @@
                   <FontAwesomeIcon fill="WHITE" iconName="GIFT" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#btnBuyOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@HoverStyle.css" text="Buy" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#btnBuyOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@../css/HoverStyle.css" text="Buy" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -93,7 +93,7 @@
                   <FontAwesomeIcon fill="WHITE" iconName="BITCOIN" />
                </graphic>
             </Button>
-            <Button layoutY="83.0" mnemonicParsing="false" onAction="#btnSellOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@HoverStyle.css" text="Sell" textFill="WHITE">
+            <Button layoutY="83.0" mnemonicParsing="false" onAction="#btnSellOnAction" prefHeight="83.0" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@../css/HoverStyle.css" text="Sell" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -101,7 +101,7 @@
                   <FontAwesomeIcon fill="WHITE" iconName="USD" />
                </graphic>
             </Button>
-            <Button layoutY="421.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="84.8" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@HoverStyle.css" text="Log out" textFill="WHITE">
+            <Button layoutY="421.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="84.8" prefWidth="120.0" style="-fx-background-color: transparent;" styleClass="buttonHover" stylesheets="@../css/HoverStyle.css" text="Log out" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -142,7 +142,7 @@
       </AnchorPane>
       <AnchorPane layoutX="121.0" layoutY="295.0" prefHeight="294.0" prefWidth="678.0" style="-fx-background-color: white; -fx-border-color: darkblue; -fx-border-width: 4;">
          <children>
-            <LineChart layoutX="81.0" layoutY="7.0" prefHeight="289.0" prefWidth="500.0" stylesheets="@ChartStyle.css">
+            <LineChart layoutX="81.0" layoutY="7.0" prefHeight="289.0" prefWidth="500.0" stylesheets="@../css/ChartStyle.css">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

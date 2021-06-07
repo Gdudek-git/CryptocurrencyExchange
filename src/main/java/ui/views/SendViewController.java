@@ -1,4 +1,4 @@
-package main.java.ui.controllers;
+package ui.views;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,9 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import main.java.ui.stage.MainStage;
 
-import static main.java.ui.stage.MainStage.getScene;
+import static ui.views.MainStage.getScene;
 
 public class SendViewController {
 
@@ -22,8 +21,7 @@ public class SendViewController {
     private TextField tfRecipientNickname;
 
     @FXML
-    public void initialize()
-    {
+    public void initialize() {
         setComboBoxItems();
     }
 
@@ -37,14 +35,12 @@ public class SendViewController {
 
     }
 
-    private void setComboBoxItems()
-    {
-        ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC","ETH","DOGE");
+    private void setComboBoxItems() {
+        ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC", "ETH", "DOGE");
         cbxCryptocurrency.setItems(cryptocurrency);
     }
 
-    private MainStage getMainStage()
-    {
+    private MainStage getMainStage() {
         return MainStage.getInstance();
     }
 

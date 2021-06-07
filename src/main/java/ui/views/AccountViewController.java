@@ -1,13 +1,13 @@
-package main.java.ui.controllers;
+package ui.views;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import main.java.ui.stage.MainStage;
 
-import static main.java.ui.stage.MainStage.getScene;
+import static ui.views.MainStage.getScene;
 
-public class AccountView {
+
+public class AccountViewController {
 
     //region Controllers
     @FXML

@@ -1,10 +1,10 @@
-package main.java.ui.stage;
+package ui.views;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.Main;
+
 
 import java.io.IOException;
 
@@ -56,7 +56,7 @@ public class MainStage
     public static Scene getScene(String sceneName)
     {
         try {
-            AnchorPane newPane =  FXMLLoader.load(MainStage.class.getResource("/main/java/ui/stage/"+sceneName));
+            AnchorPane newPane =  FXMLLoader.load(MainStage.class.getResource(sceneName));
             return new Scene(newPane,800,600);
         } catch (IOException e) {
             e.printStackTrace();

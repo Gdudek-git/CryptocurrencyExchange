@@ -1,11 +1,10 @@
-package main.java.ui.controllers;
+package ui.views;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
-import main.java.ui.stage.MainStage;
 
-import static main.java.ui.stage.MainStage.getScene;
+import static ui.views.MainStage.getScene;
 
 public class ChangePasswordViewController {
 
@@ -30,8 +29,7 @@ public class ChangePasswordViewController {
         getMainStage().setScene(getScene("AccountView.fxml"));
     }
 
-    private MainStage getMainStage()
-    {
+    private MainStage getMainStage() {
         return MainStage.getInstance();
     }
 

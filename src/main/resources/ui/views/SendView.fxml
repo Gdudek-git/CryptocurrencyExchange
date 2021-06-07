@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.ui.controllers.SendViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.views.SendViewController">
    <children>
-      <Button layoutX="77.0" layoutY="414.0" mnemonicParsing="false" onAction="#btnReturnOnClick" prefHeight="86.0" prefWidth="234.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@HoverStyle.css" text="Return">
+      <Button layoutX="77.0" layoutY="414.0" mnemonicParsing="false" onAction="#btnReturnOnClick" prefHeight="86.0" prefWidth="234.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Return">
          <font>
             <Font size="40.0" />
          </font>
@@ -17,7 +17,7 @@
             <FontAwesomeIcon iconName="REPLY" />
          </graphic>
       </Button>
-      <Button layoutX="477.0" layoutY="414.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="86.0" prefWidth="234.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@HoverStyle.css" text="Send">
+      <Button layoutX="477.0" layoutY="414.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="86.0" prefWidth="234.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Send">
          <font>
             <Font size="40.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font size="30.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="cbxCryptocurrency" layoutX="190.0" layoutY="105.0" prefHeight="66.0" prefWidth="419.0" promptText="Choose Cryptocurrency" style="-fx-background-color: white; -fx-font-size: 30; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@HoverStyle.css" />
+      <ComboBox fx:id="cbxCryptocurrency" layoutX="190.0" layoutY="105.0" prefHeight="66.0" prefWidth="419.0" promptText="Choose Cryptocurrency" style="-fx-background-color: white; -fx-font-size: 30; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../css/HoverStyle.css" />
       <TextField fx:id="tfRecipientNickname" layoutX="214.0" layoutY="305.0" promptText="Enter recipient nickname" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
          <font>
             <Font size="30.0" />
