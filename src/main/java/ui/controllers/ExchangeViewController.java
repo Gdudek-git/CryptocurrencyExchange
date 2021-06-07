@@ -1,4 +1,4 @@
-package ui.views;
+package ui.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,15 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-import static ui.views.MainStage.getScene;
+import static ui.controllers.MainStage.getScene;
 
-public class BuyViewController {
+public class ExchangeViewController {
 
-    @FXML
-    private ComboBox cbxCryptocurrency;
 
     @FXML
-    private ComboBox cbxCurrency;
+    private ComboBox cbxTargetCurrency;
+
+    @FXML
+    private ComboBox cbxCurrentCurrency;
 
     @FXML
     private TextField tfCurrencyAmount;
@@ -31,9 +32,8 @@ public class BuyViewController {
         setComboBoxItems();
     }
 
-
     @FXML
-    void btnBuyOnAction(ActionEvent event) {
+    void btnExchangeOnAction(ActionEvent event) {
 
     }
 
@@ -44,10 +44,8 @@ public class BuyViewController {
 
     private void setComboBoxItems() {
         ObservableList<String> currency = FXCollections.observableArrayList("PLN", "USD", "EUR");
-        cbxCurrency.setItems(currency);
-        ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC", "ETH", "DOGE");
-        cbxCryptocurrency.setItems(cryptocurrency);
-
+        cbxCurrentCurrency.setItems(currency);
+        cbxTargetCurrency.setItems(currency);
     }
 
     private MainStage getMainStage() {

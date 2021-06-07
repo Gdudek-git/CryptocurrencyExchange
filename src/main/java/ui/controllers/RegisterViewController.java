@@ -1,4 +1,4 @@
-package ui.views;
+package ui.controllers;
 
 
 import javafx.collections.FXCollections;
@@ -9,7 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import static ui.views.MainStage.getScene;
+import static ui.controllers.MainStage.getScene;
 public class RegisterViewController {
 
 

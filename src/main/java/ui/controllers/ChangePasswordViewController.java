@@ -1,10 +1,10 @@
-package ui.views;
+package ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 
-import static ui.views.MainStage.getScene;
+import static ui.controllers.MainStage.getScene;
 
 public class ChangePasswordViewController {
 

@@ -1,4 +1,4 @@
-package ui.views;
+package ui.controllers;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.TextField;
 
-import static ui.views.MainStage.getScene;
+import static ui.controllers.MainStage.getScene;
 
 public class LoginViewController {
     @FXML

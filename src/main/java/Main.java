@@ -1,8 +1,6 @@
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import ui.views.MainStage;
+import ui.controllers.MainStage;
 
 public class Main extends Application {
 
