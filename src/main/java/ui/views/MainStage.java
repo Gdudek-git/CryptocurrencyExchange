@@ -19,6 +19,8 @@ public class MainStage
     {
     }
 
+
+
     static{
         mainStage = new MainStage();
     }
@@ -33,9 +35,9 @@ public class MainStage
         this.rootStage = rootStage;
     }
 
-    public void setRootPane(AnchorPane rootPane)
-    {
-        this.rootPane = rootPane;
+    public void setRootPane() throws IOException {
+        this.rootPane = FXMLLoader.load(MainStage.class.getResource("LoginView.fxml"));
+
     }
 
     public void setMainScene()
