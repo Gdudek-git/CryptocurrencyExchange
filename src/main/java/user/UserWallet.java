@@ -7,9 +7,10 @@ import javax.persistence.*;
 @Table(name="userwallet")
 public class UserWallet {
 
-    @OneToOne
-    @JoinColumn(name="username",referencedColumnName = "username")
-    private User username;
+    @Id
+    @Column(name = "username")
+    private String username;
+
 
     @Column(name = "BTC")
     private double btc=0.0;
@@ -26,12 +27,17 @@ public class UserWallet {
     @Column(name = "EUR")
     private double eur=0.0;
 
-    public User getUsername() {
-        return username;
-    }
+    @Column(name = "PLN")
+    private double pln=0.0;
 
-    public void setUsername(User username) {
-        this.username = username;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "username")
+    private User user;
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 
     public double getBtc() {
@@ -82,10 +88,5 @@ public class UserWallet {
         this.pln = pln;
     }
 
-    @Column(name = "PLN")
-    private double pln=0.0;
-
-
-
-
 }
+
