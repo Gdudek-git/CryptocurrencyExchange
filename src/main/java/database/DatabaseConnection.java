@@ -16,6 +16,8 @@ public class DatabaseConnection {
         // Creating Configuration Instance & Passing Hibernate Configuration File
         Configuration configObj = new Configuration();
         configObj.addAnnotatedClass(User.class);
+        configObj.addAnnotatedClass(UserContact.class);
+        configObj.addAnnotatedClass(UserWallet.class);
         configObj.configure("hibernate.cfg.xml");
 
 
