@@ -13,11 +13,17 @@ public class User {
     @Column(name = "username",unique = true)
     private String username;
 
-    @Column(name = "firstname")
-    private String firstname;
+    @Column(name = "firstName")
+    private String firstName;
 
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "lastName")
+    private String lastName;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "password")
+    private String password;
 
     public String getUsername() {
         return username;
@@ -27,20 +33,20 @@ public class User {
         this.username = username;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getGender() {
@@ -58,11 +64,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Column(name = "gender")
-    private String gender;
-
-    @Column(name = "password")
-    private String password;
-
 }
