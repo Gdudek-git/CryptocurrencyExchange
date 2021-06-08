@@ -27,7 +27,7 @@ public class RegisterViewController {
     private TextField tfEmail;
 
     @FXML
-    private ComboBox cbxGender;
+    private ComboBox<String> cbxGender;
 
     @FXML
     private PasswordField tfPassword;

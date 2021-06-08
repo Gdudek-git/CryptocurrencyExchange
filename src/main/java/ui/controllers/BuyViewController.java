@@ -12,10 +12,10 @@ import static ui.controllers.MainStage.getScene;
 public class BuyViewController {
 
     @FXML
-    private ComboBox cbxCryptocurrency;
+    private ComboBox<String> cbxCryptocurrency;
 
     @FXML
-    private ComboBox cbxCurrency;
+    private ComboBox<String> cbxCurrency;
 
     @FXML
     private TextField tfCurrencyAmount;

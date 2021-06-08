@@ -13,10 +13,10 @@ public class ExchangeViewController {
 
 
     @FXML
-    private ComboBox cbxTargetCurrency;
+    private ComboBox<String> cbxTargetCurrency;
 
     @FXML
-    private ComboBox cbxCurrentCurrency;
+    private ComboBox<String> cbxCurrentCurrency;
 
     @FXML
     private TextField tfCurrencyAmount;

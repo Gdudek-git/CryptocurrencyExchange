@@ -15,7 +15,7 @@ public class SendViewController {
     private TextField tfCurrencyAmount;
 
     @FXML
-    private ComboBox cbxCryptocurrency;
+    private ComboBox<String> cbxCryptocurrency;
 
     @FXML
     private TextField tfRecipientNickname;
