@@ -1,9 +1,9 @@
-package user;
+package database.tables;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "database/tables")
 public class User {
 
     @Id
@@ -23,11 +23,11 @@ public class User {
     private String password;
 
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "database/tables", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserWallet userWallet;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "database/tables", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserContact userContact;
 
