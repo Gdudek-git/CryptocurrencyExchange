@@ -5,11 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "usercontact")
-public class UserContact {
+public  class UserContact {
 
-    @OneToOne
-    @JoinColumn(name="username",referencedColumnName = "username")
-    private User username;
+    @Id
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "phonenumber")
     private String phonenumber;
@@ -20,12 +20,15 @@ public class UserContact {
     @Column(name = "country")
     private String country;
 
-    public User getUsername() {
-        return username;
-    }
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "username")
+    private User user;
 
-    public void setUsername(User username) {
-        this.username = username;
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 
     public String getPhonenumber() {
@@ -51,6 +54,5 @@ public class UserContact {
     public void setCountry(String country) {
         this.country = country;
     }
-
 
 }
