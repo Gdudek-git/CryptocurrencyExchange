@@ -1,11 +1,14 @@
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ui.controllers.MainStage;
 
+
+
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         MainStage mainStage = MainStage.getInstance();
         mainStage.setStage(primaryStage);
