@@ -21,7 +21,9 @@ public class RegisterUser {
 
     public void closeConnection()
     {
-        sessionObj.close();
+        if(sessionObj!=null) {
+            sessionObj.close();
+        }
     }
 
     public void register(String firstName,String lastName, String username, String phoneNumber, String country, String email, String gender, String password)
