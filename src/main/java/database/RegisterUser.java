@@ -9,11 +9,23 @@ import java.sql.SQLException;
 
 public class RegisterUser {
 
+    DatabaseConnection databaseConnection;
+    Session sessionObj;
+
+
+    public void establishConnection()
+    {
+        databaseConnection = new DatabaseConnection();
+        sessionObj =  databaseConnection.getSessionObj();
+    }
+
+    public void closeConnection()
+    {
+        sessionObj.close();
+    }
 
     public void register(String firstName,String lastName, String username, String phoneNumber, String country, String email, String gender, String password)
     {
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        Session sessionObj =  databaseConnection.getSessionObj();
 
         User userObj = new User();
         UserWallet userWalletObj = new UserWallet();
@@ -30,11 +42,7 @@ public class RegisterUser {
                 sessionObj.getTransaction().rollback();
             }
         }
-        finally{
-            if (sessionObj != null) {
-                sessionObj.close();
-            }
-        }
+
     }
 
     private void addUserEntity(Session sessionObj, User userObj, String firstName,String lastName, String username,String password,String gender)
@@ -72,5 +80,22 @@ public class RegisterUser {
         sessionObj.save(userContactObj);
         sessionObj.getTransaction().commit();
         sessionObj.clear();
+    }
+
+
+    public String checkIfUsernameInDatabase(String username)
+    {
+        sessionObj.beginTransaction();
+        User user = sessionObj.get(User.class, username);
+        sessionObj.getTransaction().commit();
+        sessionObj.clear();
+        if(user==null)
+        {
+            return"valid";
+        }
+        else
+        {
+            return"That username is taken";
+        }
     }
 }

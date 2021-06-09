@@ -6,39 +6,126 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.RegisterViewController">
    <children>
-      <Label layoutX="257.0" layoutY="-12.0" text="Register" textFill="WHITE">
-         <font>
-            <Font name="System Italic" size="80.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfFirstName" focusTraversable="false" layoutX="128.0" layoutY="114.0" promptText="First Name" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="tfCountry" focusTraversable="false" layoutX="129.0" layoutY="268.0" prefHeight="31.0" prefWidth="530.0" promptText="Country" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="tfLastName" focusTraversable="false" layoutX="473.0" layoutY="114.0" promptText="Last Name" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="tfEmail" focusTraversable="false" layoutX="129.0" layoutY="315.0" prefHeight="31.0" prefWidth="530.0" promptText="Email Adress" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <ComboBox fx:id="cbxGender" focusTraversable="false" layoutX="129.0" layoutY="365.0" prefHeight="26.0" prefWidth="530.0" promptText="Gender" style="-fx-font-size: 15; -fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../../css/HoverStyle.css" />
-      <Button layoutX="124.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Cancel">
+      <AnchorPane fx:id="labelsRoot" prefHeight="600.0" prefWidth="800.0">
+       <children>
+           <Label fx:id="lbFirstNameError" layoutX="129.0" layoutY="130.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+           <Label fx:id="lbUsernameError" layoutX="129.0" layoutY="185.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+           <Label fx:id="lbPhoneNumberError" layoutX="129.0" layoutY="240.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+           <Label fx:id="lbLastNameError" layoutX="467.0" layoutY="130.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+           <Label fx:id="lbCountryError" layoutX="129.0" layoutY="295.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+           <Label fx:id="lbEmailError" layoutX="129.0" layoutY="350.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+           <Label fx:id="lbPasswordError" layoutX="129.0" layoutY="460.0" textFill="RED">
+               <font>
+                   <Font size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="0.58" />
+               </effect>
+           </Label>
+       </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="textFieldsRoot" prefHeight="600.0" prefWidth="800.0">
+       <children>
+           <TextField fx:id="tfFirstName" focusTraversable="false" layoutX="129.0" layoutY="98.0" promptText="First Name" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </TextField>
+           <TextField fx:id="tfCountry" focusTraversable="false" layoutX="129.0" layoutY="265.0" prefHeight="31.0" prefWidth="530.0" promptText="Country" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </TextField>
+           <TextField fx:id="tfLastName" focusTraversable="false" layoutX="472.0" layoutY="98.0" promptText="Last Name" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </TextField>
+           <TextField fx:id="tfEmail" focusTraversable="false" layoutX="129.0" layoutY="320.0" prefHeight="31.0" prefWidth="530.0" promptText="Email Adress" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </TextField>
+
+           <PasswordField fx:id="tfPassword" focusTraversable="false" layoutX="129.0" layoutY="430.0" prefHeight="31.0" prefWidth="530.0" promptText="Enter Password" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </PasswordField>
+           <PasswordField fx:id="tfConfirmPassword" focusTraversable="false" layoutX="129.0" layoutY="485.0" prefHeight="31.0" prefWidth="530.0" promptText="Confirm Password" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </PasswordField>
+           <TextField fx:id="tfPhoneNumber" focusTraversable="false" layoutX="129.0" layoutY="210.0" prefHeight="31.0" prefWidth="530.0" promptText="Phone Number" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </TextField>
+           <TextField fx:id="tfUsername" focusTraversable="false" layoutX="129.0" layoutY="155.0" prefHeight="31.0" prefWidth="530.0" promptText="Username" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+               <font>
+                   <Font size="15.0" />
+               </font>
+           </TextField>
+       </children>
+      </AnchorPane>
+       <Label layoutX="291.0" text="Register" textFill="WHITE">
+           <font>
+               <Font name="System Italic" size="60.0" />
+           </font>
+       </Label>
+
+      <ComboBox fx:id="cbxGender" focusTraversable="false" layoutX="129.0" layoutY="375.0" prefHeight="26.0" prefWidth="530.0" promptText="Gender" style="-fx-font-size: 15; -fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../../css/HoverStyle.css" />
+      <Button layoutX="124.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Cancel">
          <font>
             <Font size="20.0" />
          </font>
@@ -46,7 +133,7 @@
             <FontAwesomeIcon iconName="CLOSE" />
          </graphic>
       </Button>
-      <Button layoutX="465.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnConfirmOnAction" prefHeight="43.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Confirm">
+      <Button layoutX="465.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnConfirmOnAction" prefHeight="43.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Confirm">
          <font>
             <Font size="20.0" />
          </font>
@@ -54,26 +141,5 @@
             <FontAwesomeIcon iconName="CHECK_CIRCLE" />
          </graphic>
       </Button>
-      <PasswordField fx:id="tfPassword" focusTraversable="false" layoutX="129.0" layoutY="415.0" prefHeight="31.0" prefWidth="530.0" promptText="Enter Password" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </PasswordField>
-      <PasswordField fx:id="tfConfirmPassword" focusTraversable="false" layoutX="129.0" layoutY="465.0" prefHeight="31.0" prefWidth="530.0" promptText="Confirm Password" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </PasswordField>
-      <TextField fx:id="tfPhoneNumber" focusTraversable="false" layoutX="129.0" layoutY="215.0" prefHeight="31.0" prefWidth="530.0" promptText="Phone Number" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="tfUsername" focusTraversable="false" layoutX="129.0" layoutY="165.0" prefHeight="31.0" prefWidth="530.0" promptText="Username" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </TextField>
-      <VBox layoutX="8.0" layoutY="224.0" prefHeight="200.0" prefWidth="100.0" />
    </children>
 </AnchorPane>
