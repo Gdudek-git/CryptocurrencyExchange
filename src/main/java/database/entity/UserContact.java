@@ -12,7 +12,7 @@ public  class UserContact {
     private String username;
 
     @Column(name = "phonenumber")
-    private String phonenumber;
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
@@ -31,12 +31,12 @@ public  class UserContact {
         this.user = user;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {

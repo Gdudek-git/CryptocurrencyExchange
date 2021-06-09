@@ -3,7 +3,7 @@ package database.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "database/entity")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -23,11 +23,11 @@ public class User {
     private String password;
 
 
-    @OneToOne(mappedBy = "database/entity", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserWallet userWallet;
 
-    @OneToOne(mappedBy = "database/entity", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserContact userContact;
 
