@@ -1,6 +1,7 @@
 package ui.controllers;
 
 
+import database.RegisterUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,6 +56,9 @@ public class RegisterViewController {
 
     @FXML
     void btnConfirmOnAction(ActionEvent event) {
+
+        RegisterUser registerUser = new RegisterUser();
+        registerUser.register(tfFirstName.getText(),tfLastName.getText(),tfUsername.getText(),tfPhoneNumber.getText(),tfCountry.getText(),tfEmail.getText(),"Men",tfPassword.getText());
         getMainStage().setScene(getScene("LoginView.fxml"));
     }
 
