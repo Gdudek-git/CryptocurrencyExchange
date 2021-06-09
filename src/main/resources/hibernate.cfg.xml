@@ -13,6 +13,6 @@
         <property name="show_sql">true</property>
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 
-        <mapping class="src.main.java.database.tables.User" />
+        <mapping class="src.main.java.database.entity.User" />
     </session-factory>
 </hibernate-configuration>

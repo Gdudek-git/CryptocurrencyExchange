@@ -1,13 +1,13 @@
 package database;
 
-import database.tables.UserContact;
-import database.tables.UserWallet;
+import database.entity.UserContact;
+import database.entity.UserWallet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import database.tables.User;
+import database.entity.User;
 
 public class DatabaseConnection {
 

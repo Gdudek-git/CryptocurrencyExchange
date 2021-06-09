@@ -1,4 +1,4 @@
-package database.tables;
+package database.entity;
 
 
 import javax.persistence.*;
