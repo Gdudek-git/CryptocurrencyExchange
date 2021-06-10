@@ -83,7 +83,7 @@ public class UserDataValidation {
             String result = isValidLength(username);
             if(result.equals("valid"))
             {
-                result = registerUser.checkIfUsernameInDatabase(username);
+                result = registerUser.checkIfUsernameIsInDatabase(username);
             }
             return result;
         }

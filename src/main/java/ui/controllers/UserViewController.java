@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+
 import static ui.controllers.MainStage.getScene;
 
 public class UserViewController {
@@ -75,6 +76,7 @@ public class UserViewController {
 
     @FXML
     void btnBuyOnAction(ActionEvent event) {
+
         getMainStage().setScene(getScene("BuyView.fxml"));
     }
 

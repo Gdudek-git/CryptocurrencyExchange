@@ -85,7 +85,7 @@ public class RegisterUser {
     }
 
 
-    public String checkIfUsernameInDatabase(String username)
+    public String checkIfUsernameIsInDatabase(String username)
     {
         sessionObj.beginTransaction();
         User user = sessionObj.get(User.class, username);

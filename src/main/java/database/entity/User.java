@@ -31,6 +31,13 @@ public class User {
     @PrimaryKeyJoinColumn
     private UserContact userContact;
 
+    public UserWallet getUserWallet() {
+        return userWallet;
+    }
+
+    public UserContact getUserContact() {
+        return userContact;
+    }
 
     public String getUsername() {
         return username;

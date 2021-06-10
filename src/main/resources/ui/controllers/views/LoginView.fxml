@@ -58,5 +58,10 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
+      <Label fx:id="lbWrongLoginData" layoutX="399.0" layoutY="340.0" textFill="RED">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
