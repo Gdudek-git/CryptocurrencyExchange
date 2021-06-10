@@ -15,7 +15,7 @@ public class RegisterUser {
 
     public void establishConnection()
     {
-        databaseConnection = new DatabaseConnection();
+        databaseConnection = DatabaseConnection.getInstance();
         sessionObj =  databaseConnection.getSessionObj();
     }
 

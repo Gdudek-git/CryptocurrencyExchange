@@ -9,8 +9,14 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import database.entity.User;
 
-public class DatabaseConnection {
+public final class DatabaseConnection {
 
+    private static DatabaseConnection databaseConnection = new DatabaseConnection();
+
+    public static DatabaseConnection getInstance()
+    {
+        return  databaseConnection;
+    }
 
     private static SessionFactory buildSessionFactory () {
 
