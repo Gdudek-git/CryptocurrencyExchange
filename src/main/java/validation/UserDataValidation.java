@@ -141,7 +141,7 @@ public class UserDataValidation {
         {
             return "Password must contain at least one uppercase and digit";
         }
-            return "Password must have a least one uppercase, digit and 6 to 16 characters";
+            return "Password must have at least one uppercase, digit and 6 to 16 characters";
     }
 
     private String isEmailValid(String email)

@@ -1,10 +1,11 @@
 package session;
 
+import com.mysql.cj.log.Log;
 import database.DatabaseConnection;
 import database.entity.User;
 import org.hibernate.Session;
 
-public class LoadUserData {
+public class ChangeUserData {
 
     DatabaseConnection databaseConnection;
     Session sessionObj;
@@ -22,10 +23,16 @@ public class LoadUserData {
         }
     }
 
-   public User loadUser(String username)
-   {
-      return sessionObj.get(User.class,username);
-   }
+    public void changeUserData()
+    {
+        if(sessionObj!=null) {
+            sessionObj.beginTransaction();
+            sessionObj.update(LoggedUser.getInstance().getLoggedUser());
+            sessionObj.getTransaction().commit();
+            sessionObj.clear();
+        }
+    }
+
 
 
 }
