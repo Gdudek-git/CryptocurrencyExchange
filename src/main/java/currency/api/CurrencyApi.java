@@ -10,7 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class CurrencyApi {
+public abstract class CurrencyApi {
 
     private static CalculateAndSetCurrencyExchangeRates calculateAndSetCurrencyExchangeRates = new CalculateAndSetCurrencyExchangeRates();
 
@@ -26,7 +26,6 @@ public class CurrencyApi {
 
     private static void parseData(String JSON_format)
     {
-       // jsonObject = new JSONObject(JSON_format); ???? doesn't work
         JSONArray jsonArray = new JSONArray(JSON_format);
         jsonArray = jsonArray.getJSONObject(0).getJSONArray("rates");
         getRates(jsonArray);
