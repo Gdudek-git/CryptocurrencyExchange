@@ -51,7 +51,7 @@ public class CurrencyExchangeRates {
             currencyExchangeBid_Ask_ValuesArrayList.add(ask);
         }
 
-        public void addValues(String key)
+        public void setCurrencyExchangeRates(String key)
         {
             exchangeRatesMap.replace(key, currencyExchangeBid_Ask_ValuesArrayList);
         }
