@@ -7,15 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CurrencyExchangeRates {
+public final class CurrencyExchangeRates extends CurrencyApi{
 
-        private static CurrencyExchangeRates currencyExchangeRates = new CurrencyExchangeRates();
+        private static CurrencyExchangeRates currencyExchangeRates;
         private Map<String, List<Double>> exchangeRatesMap = new HashMap<>();
-        private CurrencyApi currencyApi;
-        private List<Double> currencyExchangeBid_Ask_ValuesArrayList;
 
        public static CurrencyExchangeRates getInstance()
     {
+        if(currencyExchangeRates==null)
+        {
+            currencyExchangeRates = new CurrencyExchangeRates();
+        }
         return currencyExchangeRates;
     }
 
@@ -23,8 +25,6 @@ public class CurrencyExchangeRates {
         private CurrencyExchangeRates()
         {
             setMapKeys();
-            currencyApi=new CurrencyApi();
-            updateRates();
         }
 
         public Map<String, List<Double>> getExchangeRates()
@@ -34,7 +34,7 @@ public class CurrencyExchangeRates {
 
         private void setMapKeys()
         {
-            currencyExchangeBid_Ask_ValuesArrayList = new ArrayList<>();
+            List<Double> currencyExchangeBid_Ask_ValuesArrayList = new ArrayList<>();
             currencyExchangeBid_Ask_ValuesArrayList.add(0.0);
             currencyExchangeBid_Ask_ValuesArrayList.add(0.0);
             exchangeRatesMap.put("eurToPln", currencyExchangeBid_Ask_ValuesArrayList);
@@ -44,21 +44,17 @@ public class CurrencyExchangeRates {
         }
 
 
-        public void setBid_Ask_Values(double bid, double ask)
+        public void setCurrencyExchangeRates(String key,double bid, double ask)
         {
-            currencyExchangeBid_Ask_ValuesArrayList = new ArrayList<>();
+            List<Double> currencyExchangeBid_Ask_ValuesArrayList = new ArrayList<>();
             currencyExchangeBid_Ask_ValuesArrayList.add(bid);
             currencyExchangeBid_Ask_ValuesArrayList.add(ask);
-        }
-
-        public void setCurrencyExchangeRates(String key)
-        {
             exchangeRatesMap.replace(key, currencyExchangeBid_Ask_ValuesArrayList);
         }
 
 
         public void updateRates()
         {
-            currencyApi.getData();
+            getData();
         }
 }

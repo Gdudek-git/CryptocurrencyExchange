@@ -6,11 +6,9 @@ public class CalculateAndSetCurrencyExchangeRates {
 
     public void setKnownRates(double usdToPlnBid,double usdToPlnAsk,double eurToPlnBid, double eurToPlnAsk)
     {
-        currencyExchangeRates.setBid_Ask_Values(usdToPlnBid,usdToPlnAsk);
-        currencyExchangeRates.setCurrencyExchangeRates("usdToPln");
+        currencyExchangeRates.setCurrencyExchangeRates("usdToPln",usdToPlnBid,usdToPlnAsk);
 
-        currencyExchangeRates.setBid_Ask_Values(eurToPlnBid,eurToPlnAsk);
-        currencyExchangeRates.setCurrencyExchangeRates("eurToPln");
+        currencyExchangeRates.setCurrencyExchangeRates("eurToPln",eurToPlnBid,eurToPlnAsk);
 
         calculateAndSetPlnToUsdBid_Ask(usdToPlnBid);
         calculateAndSetPlnToEurBid_Ask(eurToPlnBid);
@@ -22,8 +20,7 @@ public class CalculateAndSetCurrencyExchangeRates {
     {
         double plnToUsdBid = 1/usdToPlnBid;
         double plnToUsdAsk = plnToUsdBid+((plnToUsdBid*1.98) /100);
-        currencyExchangeRates.setBid_Ask_Values(plnToUsdBid,plnToUsdAsk);
-        currencyExchangeRates.setCurrencyExchangeRates("plnToUsd");
+        currencyExchangeRates.setCurrencyExchangeRates("plnToUsd",plnToUsdBid,plnToUsdAsk);
     }
 
 
@@ -31,8 +28,7 @@ public class CalculateAndSetCurrencyExchangeRates {
     {
         double plnToEurBid = 1/eurToPlnBid;
         double plnToEurAsk = plnToEurBid+((plnToEurBid*1.98)/100);
-        currencyExchangeRates.setBid_Ask_Values(plnToEurBid,plnToEurAsk);
-        currencyExchangeRates.setCurrencyExchangeRates("plnToEur");
+        currencyExchangeRates.setCurrencyExchangeRates("plnToEur",plnToEurBid,plnToEurAsk);
     }
 
 
