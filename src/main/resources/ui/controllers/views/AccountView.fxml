@@ -187,17 +187,17 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbUsername" layoutX="11.0" layoutY="32.0" text=" Username:" GridPane.columnIndex="1">
+            <Label fx:id="lbUsername" layoutX="11.0" layoutY="32.0" text="  Username:" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbFirstName" layoutX="11.0" layoutY="112.0" text=" First Name:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lbFirstName" layoutX="11.0" layoutY="112.0" text="  First Name:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbLastName" layoutX="144.0" layoutY="112.0" text=" First Name:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="lbLastName" layoutX="144.0" layoutY="112.0" text="  First Name:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="25.0" />
                </font>
@@ -230,17 +230,17 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbEmail" layoutX="11.0" layoutY="32.0" text=" Email:" GridPane.columnIndex="1">
+            <Label fx:id="lbEmail" layoutX="11.0" layoutY="32.0" text="  Email:" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbNumber" layoutX="11.0" layoutY="112.0" text=" Number:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lbNumber" layoutX="11.0" layoutY="112.0" text="  Number:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbCountry" layoutX="11.0" layoutY="192.0" text=" Country:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="lbCountry" layoutX="11.0" layoutY="192.0" text="  Country:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="25.0" />
                </font>
