@@ -70,7 +70,7 @@ public abstract class CryptocurrencyApi {
 
     private void setRates()
     {
-        setCryptocurrencyExchangeRates.setExchangeRates(currentCryptocurrency,cryptocurrencyRates);
+        setCryptocurrencyExchangeRates.roundAndSetExchangeRates(currentCryptocurrency,cryptocurrencyRates);
     }
 
 

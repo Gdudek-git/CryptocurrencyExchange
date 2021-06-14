@@ -10,6 +10,11 @@ import java.util.Map;
 public final class CryptocurrencyExchangeRates extends CryptocurrencyApi {
 
     private static CryptocurrencyExchangeRates cryptocurrencyExchangeRates;
+
+    public Map<String, List<Double>> getExchangeRatesMap() {
+        return exchangeRatesMap;
+    }
+
     private Map<String, List<Double>> exchangeRatesMap = new HashMap<>();
 
 
