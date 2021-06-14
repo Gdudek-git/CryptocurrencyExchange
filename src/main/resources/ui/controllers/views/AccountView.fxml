@@ -163,8 +163,8 @@
         </ScrollPane>
       <GridPane layoutX="34.0" layoutY="14.0" prefHeight="238.0" prefWidth="336.0" style="-fx-background-color: white; -fx-border-color: black;">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.199951171875" minWidth="10.0" prefWidth="133.2" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.60002441406246" minWidth="10.0" prefWidth="200.39999999999998" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.199951171875" minWidth="10.0" prefWidth="141.6" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.60002441406246" minWidth="10.0" prefWidth="192.80000000000004" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -174,30 +174,30 @@
          <children>
             <Label text=" Username:">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
             <Label layoutX="10.0" layoutY="24.0" text=" Last Name:" GridPane.rowIndex="2">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
             <Label layoutX="10.0" layoutY="104.0" text=" First Name:" GridPane.rowIndex="1">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbUsername" layoutX="11.0" layoutY="32.0" text="  Username:" GridPane.columnIndex="1">
+            <Label fx:id="lbUsername" layoutX="11.0" layoutY="32.0" text="    Username:" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbFirstName" layoutX="11.0" layoutY="112.0" text="  First Name:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lbFirstName" layoutX="11.0" layoutY="112.0" text="    First Name:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbLastName" layoutX="144.0" layoutY="112.0" text="  First Name:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="lbLastName" layoutX="144.0" layoutY="112.0" text="    First Name:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="25.0" />
                </font>
@@ -206,8 +206,8 @@
       </GridPane>
       <GridPane layoutX="430.0" layoutY="14.0" prefHeight="238.0" prefWidth="336.0" style="-fx-background-color: white; -fx-border-color: black;">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.4000244140625" minWidth="10.0" prefWidth="107.79998779296876" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.20001220703125" minWidth="10.0" prefWidth="226.20001220703125" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.4000244140625" minWidth="10.0" prefWidth="116.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.20001220703125" minWidth="10.0" prefWidth="218.39999999999998" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -217,30 +217,30 @@
          <children>
             <Label text=" Email:">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
             <Label layoutX="11.0" layoutY="32.0" text=" Number:" GridPane.rowIndex="1">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
             <Label layoutX="11.0" layoutY="112.0" text=" Country:" GridPane.rowIndex="2">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbEmail" layoutX="11.0" layoutY="32.0" text="  Email:" GridPane.columnIndex="1">
+            <Label fx:id="lbEmail" layoutX="11.0" layoutY="32.0" text="    Email:" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbNumber" layoutX="11.0" layoutY="112.0" text="  Number:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lbNumber" layoutX="11.0" layoutY="112.0" text="    Number:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lbCountry" layoutX="11.0" layoutY="192.0" text="  Country:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="lbCountry" layoutX="11.0" layoutY="192.0" text="    Country:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="25.0" />
                </font>
