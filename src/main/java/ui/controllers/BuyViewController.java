@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import services.RequestToBuyCryptocurrency;
-import validation.Buy_Send_Sell_ExchangeViewsValidation;
+import validation.BuyViewValidation;
 
 
 import static ui.controllers.MainStage.getScene;
@@ -49,7 +49,7 @@ public class BuyViewController {
     private String selectedCryptocurrency="BTC";
     private String selectedCurrency="PLN";
     private double amountUserCanBuy;
-    Buy_Send_Sell_ExchangeViewsValidation buyValidation = Buy_Send_Sell_ExchangeViewsValidation.getInstance();
+    BuyViewValidation buyValidation = BuyViewValidation.getInstance();
 
     @FXML
     public void initialize() {
