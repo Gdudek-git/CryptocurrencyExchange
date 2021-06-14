@@ -33,7 +33,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="tfCryptocurrencyAmount" layoutX="425.0" layoutY="288.0" promptText="Enter amount" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
+      <TextField fx:id="tfCryptocurrencyAmount" editable="false" layoutX="425.0" layoutY="288.0" promptText="You will get" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
          <font>
             <Font size="20.0" />
          </font>
@@ -53,15 +53,11 @@
             <Font size="30.0" />
          </font>
       </TextField>
-      <Label fx:id="lbCurrencyError" layoutX="135.0" layoutY="330.0" textFill="RED">
+      <Label fx:id="lbInfo" layoutX="135.0" layoutY="330.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbCryptocurrencyError" layoutX="437.0" layoutY="330.0" textFill="RED">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
+
    </children>
 </AnchorPane>

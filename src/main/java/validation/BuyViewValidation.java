@@ -27,22 +27,15 @@ public final class BuyViewValidation {
         return "valid";
     }
 
-    public String checkIfSufficientFundsToBuy(String usedCurrency,double enteredCurrencyAmount,double enteredCryptocurrencyAmount,double currencyAmountForOneCryptocurrency)
+    public String checkIfSufficientFundsToBuy(String usedCurrency,String cryptocurrencyAmountToBuy)
     {
-        double totalToPay = currencyAmountForOneCryptocurrency*enteredCryptocurrencyAmount;
-        if(totalToPay>enteredCurrencyAmount)
-        {
-            return "Entered currency amount is insufficient";
-        }
-        else
-        {
             double userFunds = getUserFunds(usedCurrency);
-            if(userFunds<totalToPay)
+            if(userFunds<Double.parseDouble(cryptocurrencyAmountToBuy))
             {
                 return "You don't have enough funds";
             }
             return "valid";
-        }
+
     }
 
     public double getUserFunds(String usedCurrency)

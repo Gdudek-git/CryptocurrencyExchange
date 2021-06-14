@@ -37,18 +37,14 @@ public class BuyViewController {
     private TextField tfCurrentCryptocurrencyRates;
 
     @FXML
-    private Label lbCurrencyError;
+    private Label lbInfo;
 
-    @FXML
-    private Label lbCryptocurrencyError;
+
     //endregion
 
-    private static double TAX = 0.02;
-    private int numberOfErrors;
     private int selectedCurrencyIndex=0;
     private String selectedCryptocurrency="BTC";
     private String selectedCurrency="PLN";
-    private double amountUserCanBuy;
     BuyViewValidation buyValidation = BuyViewValidation.getInstance();
 
     @FXML
@@ -94,13 +90,14 @@ public class BuyViewController {
 
     @FXML
     void btnBuyOnAction(ActionEvent event) {
-        numberOfErrors=0;
+
         resetLabels();
-        checkIfDouble();
-        checkIfSufficientFunds();
-        if(numberOfErrors==0)
-        {
-            buyCryptocurrency();
+
+        if(checkIfDouble()) {
+            if(checkIfSufficientFunds())
+            {
+                buyCryptocurrency();
+            }
         }
     }
 
@@ -120,35 +117,31 @@ public class BuyViewController {
     private void buyCryptocurrency()
     {
         RequestToBuyCryptocurrency.getInstance().buyCryptocurrency(selectedCurrency,selectedCryptocurrency,Double.parseDouble(tfCurrencyAmount.getText()),Double.parseDouble(tfCryptocurrencyAmount.getText()));
-        showInfo();
+        showInfo("Bought successfully");
     }
 
-    private void checkIfDouble()
+    private boolean checkIfDouble()
     {
         String currencyValid = buyValidation.checkIfDouble(tfCurrencyAmount.getText());
-        String cryptocurrencyValid = buyValidation.checkIfDouble(tfCryptocurrencyAmount.getText());
 
         if(!currencyValid.equals("valid"))
         {
-            showError(lbCurrencyError,currencyValid);
-            numberOfErrors++;
+            showInfo(currencyValid);
+            return false;
         }
 
-        if(!cryptocurrencyValid.equals("valid"))
-        {
-            showError(lbCryptocurrencyError,cryptocurrencyValid);
-            numberOfErrors++;
-        }
+        return true;
     }
 
-    private void checkIfSufficientFunds()
+    private boolean checkIfSufficientFunds()
     {
-        String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,Double.parseDouble(tfCurrencyAmount.getText()),Double.parseDouble(tfCryptocurrencyAmount.getText()),CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex));
+        String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,tfCryptocurrencyAmount.getText());
         if(!fundsValid.equals("valid"))
         {
-            showError(lbCurrencyError,fundsValid);
-            numberOfErrors++;
+            showInfo(fundsValid);
+            return false;
         }
+        return true;
     }
 
     private void setUI()
@@ -165,30 +158,22 @@ public class BuyViewController {
 
    private void resetLabels()
    {
-       lbCryptocurrencyError.setText("");
-       lbCurrencyError.setText("");
+       lbInfo.setText("");
    }
 
-   private void showError(Label errorLabel, String error)
-   {
-       errorLabel.setText(error);
-   }
+
 
    private void showAmountUserCanBuy()
    {
        if(buyValidation.checkIfDouble(tfCurrencyAmount.getText()).equals("valid")) {
 
-           double amountUserCanBuy = Double.parseDouble(tfCurrencyAmount.getText()) / CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex);
-           amountUserCanBuy -= amountUserCanBuy*TAX;
-           tfCryptocurrencyAmount.setText(String.valueOf(amountUserCanBuy));
+           tfCryptocurrencyAmount.setText(String.valueOf(Double.parseDouble(tfCurrencyAmount.getText()) / CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex)));
        }
    }
 
-
-
-    private void showInfo()
+    private void showInfo(String info)
     {
-        lbCurrencyError.setText("Successfully bought");
+        lbInfo.setText(info);
     }
 
     private MainStage getMainStage() {
