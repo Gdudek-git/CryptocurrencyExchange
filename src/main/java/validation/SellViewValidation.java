@@ -3,6 +3,9 @@ package validation;
 import database.entity.UserWallet;
 import session.LoggedUser;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public final class SellViewValidation {
     private static SellViewValidation sellValidation;
 
@@ -48,6 +51,18 @@ public final class SellViewValidation {
             case "ETH": return userWallet.getEth();
         }
         return 0;
+    }
+
+
+    public double getRoundedCurrency(double currencyAmount)
+    {
+        return round(currencyAmount);
+    }
+
+    private double round(double currencyAmount) {
+        BigDecimal bd = new BigDecimal(Double.toString(currencyAmount));
+        bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+        return bd.doubleValue();
     }
 
 }

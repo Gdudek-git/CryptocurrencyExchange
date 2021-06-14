@@ -44,7 +44,6 @@ public class SellViewController {
     private String selectedCryptocurrency="BTC";
     private String selectedCurrency="PLN";
     private int selectedCurrencyIndex=0;
-    private int numberOfErrors;
     private SellViewValidation sellValidation = SellViewValidation.getInstance();
 
 
@@ -65,7 +64,6 @@ public class SellViewController {
 
     @FXML
     void btnSellOnAction(ActionEvent event) {
-        numberOfErrors = 0;
         resetLabel();
         if(checkIfDouble())
         {
@@ -103,7 +101,6 @@ public class SellViewController {
     {
         if(!sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals("valid"))
         {
-            numberOfErrors++;
             showInfo(sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()));
             return false;
         }
@@ -166,7 +163,7 @@ public class SellViewController {
     private void showAmountUserCanGetFromSelling()
     {
         if(sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals("valid")) {
-            tfCurrencyAmount.setText(String.valueOf(Double.parseDouble(tfCryptocurrencyAmount.getText())*CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex)));
+            tfCurrencyAmount.setText(String.valueOf(sellValidation.getRoundedCurrency(Double.parseDouble(tfCryptocurrencyAmount.getText())*CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex))));
         }
     }
 
@@ -175,6 +172,7 @@ public class SellViewController {
     {
         CryptocurrencyExchangeRates.getInstance().updateRates(selectedCryptocurrency);
     }
+
 
 
 }
