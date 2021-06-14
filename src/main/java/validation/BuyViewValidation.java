@@ -1,18 +1,17 @@
 package validation;
 
-import com.mysql.cj.log.Log;
 import database.entity.UserWallet;
 import session.LoggedUser;
 
-public final class Buy_Send_Sell_ExchangeViewsValidation {
+public final class BuyViewValidation {
 
-    private static Buy_Send_Sell_ExchangeViewsValidation buySendSellExchangeViewsValidation;
+    private static BuyViewValidation buySendSellExchangeViewsValidation;
 
-    public static Buy_Send_Sell_ExchangeViewsValidation getInstance()
+    public static BuyViewValidation getInstance()
     {
         if(buySendSellExchangeViewsValidation ==null)
         {
-            buySendSellExchangeViewsValidation =new Buy_Send_Sell_ExchangeViewsValidation();
+            buySendSellExchangeViewsValidation =new BuyViewValidation();
         }
         return buySendSellExchangeViewsValidation;
     }
