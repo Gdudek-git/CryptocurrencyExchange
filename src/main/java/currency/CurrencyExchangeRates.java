@@ -37,10 +37,10 @@ public final class CurrencyExchangeRates extends CurrencyApi{
             List<Double> currencyExchangeBid_Ask_ValuesArrayList = new ArrayList<>();
             currencyExchangeBid_Ask_ValuesArrayList.add(0.0);
             currencyExchangeBid_Ask_ValuesArrayList.add(0.0);
-            exchangeRatesMap.put("eurToPln", currencyExchangeBid_Ask_ValuesArrayList);
-            exchangeRatesMap.put("usdToPln", currencyExchangeBid_Ask_ValuesArrayList);
-            exchangeRatesMap.put("plnToUsd", currencyExchangeBid_Ask_ValuesArrayList);
-            exchangeRatesMap.put("plnToEur", currencyExchangeBid_Ask_ValuesArrayList);
+            exchangeRatesMap.put("EURToPLN", currencyExchangeBid_Ask_ValuesArrayList);
+            exchangeRatesMap.put("USDToPLN", currencyExchangeBid_Ask_ValuesArrayList);
+            exchangeRatesMap.put("PLNToUSD", currencyExchangeBid_Ask_ValuesArrayList);
+            exchangeRatesMap.put("PLNToEUR", currencyExchangeBid_Ask_ValuesArrayList);
         }
 
 
