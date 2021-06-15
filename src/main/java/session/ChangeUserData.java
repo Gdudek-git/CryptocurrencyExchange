@@ -33,6 +33,16 @@ public class ChangeUserData {
         }
     }
 
+    public void changeSelectedUserData(User user)
+    {
+        if(sessionObj!=null) {
+            sessionObj.beginTransaction();
+            sessionObj.update(user);
+            sessionObj.getTransaction().commit();
+            sessionObj.clear();
+        }
+    }
+
 
 
 }
