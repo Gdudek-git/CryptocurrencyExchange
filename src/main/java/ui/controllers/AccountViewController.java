@@ -4,6 +4,7 @@ import database.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import session.LoadUserData;
 import session.LoggedUser;
 
 import static ui.controllers.MainStage.getScene;
@@ -52,6 +53,7 @@ public class AccountViewController {
 
     @FXML
     private void initialize() {
+        updateUserInfo();
         setUserAccountInfoLabels();
     }
 
@@ -70,11 +72,13 @@ public class AccountViewController {
         getMainStage().setScene(getScene("UserView.fxml"));
     }
 
-    private MainStage getMainStage()
-    {
-        return MainStage.getInstance();
-    }
 
+    private void updateUserInfo()
+    {
+        LoadUserData.getInstance().establishConnection();
+        LoggedUser.getInstance().setLoggedUser(LoadUserData.getInstance().loadUser(LoggedUser.getInstance().getLoggedUser().getUsername()));
+        LoadUserData.getInstance().closeConnection();
+    }
 
     private void setUserAccountInfoLabels()
     {
@@ -107,5 +111,10 @@ public class AccountViewController {
         lbEurAmount.setText(String.valueOf(user.getUserWallet().getEur()));
         lbPlnAmount.setText(String.valueOf(user.getUserWallet().getPln()));
         lbUsdAmount.setText(String.valueOf(user.getUserWallet().getUsd()));
+    }
+
+    private MainStage getMainStage()
+    {
+        return MainStage.getInstance();
     }
 }
