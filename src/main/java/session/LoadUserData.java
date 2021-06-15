@@ -4,7 +4,16 @@ import database.DatabaseConnection;
 import database.entity.User;
 import org.hibernate.Session;
 
-public class LoadUserData {
+public final class LoadUserData {
+    private static LoadUserData loadUserData;
+    public static LoadUserData getInstance()
+    {
+        if(loadUserData==null)
+        {
+            loadUserData=new LoadUserData();
+        }
+        return loadUserData;
+    }
 
     DatabaseConnection databaseConnection;
     Session sessionObj;

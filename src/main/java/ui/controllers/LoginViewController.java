@@ -25,7 +25,7 @@ public class LoginViewController {
     private Label lbWrongLoginData;
 
     User user;
-    LoadUserData loadUserData = new LoadUserData();
+    LoadUserData loadUserData = LoadUserData.getInstance();
     boolean connectedSuccessfully=false;
 
     @FXML

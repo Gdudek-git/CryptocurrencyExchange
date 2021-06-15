@@ -6,7 +6,7 @@ import session.LoggedUser;
 
 public final class SendViewValidation {
     private static SendViewValidation viewValidation;
-    LoadUserData loadUserData = new LoadUserData();
+    LoadUserData loadUserData = LoadUserData.getInstance();
     public static SendViewValidation getInstance()
     {
         if(viewValidation==null)
