@@ -41,6 +41,7 @@ public final class CryptocurrencyExchangeRates extends CryptocurrencyApi {
         exchangeRatesMap.put("BTC",cryptocurrencyExchangeRatesArrayList);
         exchangeRatesMap.put("DOGE",cryptocurrencyExchangeRatesArrayList);
         exchangeRatesMap.put("ETH",cryptocurrencyExchangeRatesArrayList);
+        exchangeRatesMap.put("AVERAGE",cryptocurrencyExchangeRatesArrayList);
     }
 
     public void setCryptocurrencyExchangeRates(String key,double plnRate, double eurRate, double usdRate)
@@ -52,9 +53,9 @@ public final class CryptocurrencyExchangeRates extends CryptocurrencyApi {
         exchangeRatesMap.replace(key,cryptocurrencyExchangeRatesArrayList);
     }
 
-    public void updateRates(String cryptocurrency)
+    public void updateRates(String cryptocurrency,boolean isAverageRate)
     {
-        getData(cryptocurrency);
+        getData(cryptocurrency,isAverageRate);
     }
 
 

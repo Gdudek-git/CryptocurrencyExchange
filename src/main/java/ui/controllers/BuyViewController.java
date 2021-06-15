@@ -152,7 +152,7 @@ public class BuyViewController {
 
    private void updateRates()
    {
-       CryptocurrencyExchangeRates.getInstance().updateRates(selectedCryptocurrency);
+       CryptocurrencyExchangeRates.getInstance().updateRates(selectedCryptocurrency,false);
    }
 
 

@@ -14,11 +14,15 @@ public abstract class CryptocurrencyApi {
     private static SetCryptocurrencyExchangeRates setCryptocurrencyExchangeRates = new SetCryptocurrencyExchangeRates();
     private static String currentCurrency;
     private static String currentCryptocurrency;
+    private static boolean isAverageRate;
     private static ArrayList<Double> cryptocurrencyRates = new ArrayList<>();
 
 
-    public void getData(String cryptocurrency)
+
+
+    public void getData(String cryptocurrency,boolean isAverageRate)
     {
+        this.isAverageRate = isAverageRate;
         cryptocurrencyRates.clear();
         currentCryptocurrency=cryptocurrency;
         HttpClient client = HttpClient.newHttpClient();
@@ -65,11 +69,22 @@ public abstract class CryptocurrencyApi {
 
     private static void getRates(JSONObject jsonObject)
     {
-        cryptocurrencyRates.add(jsonObject.getDouble("PRICE"));
+        if(isAverageRate)
+        {
+            cryptocurrencyRates.add((jsonObject.getDouble("HIGHDAY")+jsonObject.getDouble("LOWDAY"))/2);
+        }
+        else {
+            cryptocurrencyRates.add(jsonObject.getDouble("PRICE"));
+        }
+
     }
 
     private void setRates()
     {
+        if(isAverageRate)
+        {
+            currentCryptocurrency="AVERAGE";
+        }
         setCryptocurrencyExchangeRates.roundAndSetExchangeRates(currentCryptocurrency,cryptocurrencyRates);
     }
 
