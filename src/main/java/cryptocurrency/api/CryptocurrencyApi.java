@@ -20,7 +20,7 @@ public abstract class CryptocurrencyApi {
 
 
 
-    public void getData(String cryptocurrency,boolean isAverageRate)
+    public synchronized void getData(String cryptocurrency,boolean isAverageRate)
     {
         this.isAverageRate = isAverageRate;
         cryptocurrencyRates.clear();
