@@ -40,7 +40,7 @@ public class SellViewController {
     private Label lbInfo;
     //endregion
 
-
+    private static final String VALID = "valid";
     private String selectedCryptocurrency="BTC";
     private String selectedCurrency="PLN";
     private int selectedCurrencyIndex=0;
@@ -99,7 +99,7 @@ public class SellViewController {
 
    public boolean checkIfDouble()
     {
-        if(!sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals("valid"))
+        if(!sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals(VALID))
         {
             showInfo(sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()));
             return false;
@@ -110,7 +110,7 @@ public class SellViewController {
 
     private boolean checkIfSufficientFunds()
     {
-        if(!sellValidation.checkIfSufficientFundsToSell(selectedCryptocurrency,tfCryptocurrencyAmount.getText()).equals("valid"))
+        if(!sellValidation.checkIfSufficientFundsToSell(selectedCryptocurrency,tfCryptocurrencyAmount.getText()).equals(VALID))
         {
             showInfo(sellValidation.checkIfSufficientFundsToSell(selectedCryptocurrency,tfCryptocurrencyAmount.getText()));
             return false;
@@ -162,7 +162,7 @@ public class SellViewController {
 
     private void showAmountUserCanGetFromSelling()
     {
-        if(sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals("valid")) {
+        if(sellValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals(VALID)) {
             tfCurrencyAmount.setText(String.valueOf(sellValidation.getRoundedCurrency(Double.parseDouble(tfCryptocurrencyAmount.getText())*CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex))));
         }
     }

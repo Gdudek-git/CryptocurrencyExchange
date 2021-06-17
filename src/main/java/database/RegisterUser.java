@@ -5,18 +5,13 @@ import database.entity.UserContact;
 import database.entity.UserWallet;
 import org.hibernate.Session;
 
-import java.sql.SQLException;
-
 public class RegisterUser {
 
-    DatabaseConnection databaseConnection;
     Session sessionObj;
-
 
     public void establishConnection()
     {
-        databaseConnection = DatabaseConnection.getInstance();
-        sessionObj =  databaseConnection.getSessionObj();
+        sessionObj =  DatabaseConnection.getInstance().getSessionObj();
     }
 
     public void closeConnection()

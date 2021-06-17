@@ -1,19 +1,17 @@
 package session;
 
-import com.mysql.cj.log.Log;
 import database.DatabaseConnection;
 import database.entity.User;
 import org.hibernate.Session;
 
 public class ChangeUserData {
 
-    DatabaseConnection databaseConnection;
+
     Session sessionObj;
 
     public void establishConnection()
     {
-        databaseConnection = DatabaseConnection.getInstance();
-        sessionObj =  databaseConnection.getSessionObj();
+        sessionObj =  DatabaseConnection.getInstance().getSessionObj();
     }
 
     public void closeConnection()

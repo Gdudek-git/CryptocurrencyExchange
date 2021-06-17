@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 public final class LoadUserData {
     private static LoadUserData loadUserData;
+
     public static LoadUserData getInstance()
     {
         if(loadUserData==null)
@@ -15,13 +16,11 @@ public final class LoadUserData {
         return loadUserData;
     }
 
-    DatabaseConnection databaseConnection;
     Session sessionObj;
 
     public void establishConnection()
     {
-        databaseConnection = DatabaseConnection.getInstance();
-        sessionObj =  databaseConnection.getSessionObj();
+        sessionObj =  DatabaseConnection.getInstance().getSessionObj();
     }
 
     public void closeConnection()

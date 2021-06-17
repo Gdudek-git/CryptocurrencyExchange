@@ -39,7 +39,7 @@ public class ExchangeViewController {
     @FXML
     private Label lbInfo;
     //endregion
-
+    private static final String VALID = "valid";
     private String selectedCurrency="PLN";
     private String selectedCurrencyToObtain="EUR";
     ExchangeViewValidation exchangeValidation = ExchangeViewValidation.getInstance();
@@ -66,7 +66,7 @@ public class ExchangeViewController {
 
     private boolean checkIfDouble()
     {
-        if(!exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()).equals("valid"))
+        if(!exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(VALID))
         {
             showInfo(exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()));
             return false;
@@ -77,7 +77,7 @@ public class ExchangeViewController {
 
     private boolean checkIfSufficientFunds()
     {
-        if(!exchangeValidation.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText()).equals("valid"))
+        if(!exchangeValidation.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText()).equals(VALID))
         {
             showInfo(exchangeValidation.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText()));
             return false;
@@ -153,7 +153,7 @@ public class ExchangeViewController {
 
     private void showAmountUserCanBuy()
     {
-        if(exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()).equals("valid")) {
+        if(exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(VALID)) {
             if(selectedCurrency.equals("PLN")) {
                 tfCurrencyToObtainAmount.setText(String.valueOf(exchangeValidation.getRoundedCurrency(Double.parseDouble(tfCurrencyAmount.getText()) * CurrencyExchangeRates.getInstance().getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain).get(1))));
             }else

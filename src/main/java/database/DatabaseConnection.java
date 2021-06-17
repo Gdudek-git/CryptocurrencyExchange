@@ -18,7 +18,7 @@ public final class DatabaseConnection {
         return  databaseConnection;
     }
 
-    private static SessionFactory buildSessionFactory () {
+    private  SessionFactory buildSessionFactory () {
 
         SessionFactory sessionFactoryObj;
 
@@ -34,10 +34,9 @@ public final class DatabaseConnection {
         return sessionFactoryObj;
     }
 
-    public static Session getSessionObj()
+    public  Session getSessionObj()
     {
-        Session sessionObj;
-        return sessionObj = buildSessionFactory().openSession();
+        return  buildSessionFactory().openSession();
     }
 
 

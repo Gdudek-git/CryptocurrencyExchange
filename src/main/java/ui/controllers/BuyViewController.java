@@ -42,6 +42,7 @@ public class BuyViewController {
 
     //endregion
 
+    private static final String VALID = "valid";
     private int selectedCurrencyIndex=0;
     private String selectedCryptocurrency="BTC";
     private String selectedCurrency="PLN";
@@ -124,7 +125,7 @@ public class BuyViewController {
     {
         String currencyValid = buyValidation.checkIfDouble(tfCurrencyAmount.getText());
 
-        if(!currencyValid.equals("valid"))
+        if(!currencyValid.equals(VALID))
         {
             showInfo(currencyValid);
             return false;
@@ -136,7 +137,7 @@ public class BuyViewController {
     private boolean checkIfSufficientFunds()
     {
         String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,tfCryptocurrencyAmount.getText());
-        if(!fundsValid.equals("valid"))
+        if(!fundsValid.equals(VALID))
         {
             showInfo(fundsValid);
             return false;
@@ -165,7 +166,7 @@ public class BuyViewController {
 
    private void showAmountUserCanBuy()
    {
-       if(buyValidation.checkIfDouble(tfCurrencyAmount.getText()).equals("valid")) {
+       if(buyValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(VALID)) {
 
            tfCryptocurrencyAmount.setText(String.valueOf(Double.parseDouble(tfCurrencyAmount.getText()) / CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex)));
        }

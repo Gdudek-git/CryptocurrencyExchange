@@ -25,7 +25,7 @@ public class SendViewController {
 
     @FXML
     private Label lbInfo;
-
+    private static final String VALID = "valid";
     private String selectedCryptocurrency="BTC";
     private SendViewValidation sendValidation = SendViewValidation.getInstance();
 
@@ -67,7 +67,7 @@ public class SendViewController {
 
     private boolean checkIfDouble()
     {
-        if(!sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals("valid"))
+        if(!sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals(VALID))
         {
             showInfo(sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()));
             return false;
@@ -77,7 +77,7 @@ public class SendViewController {
 
     private boolean checkIfSufficientFunds()
     {
-        if(!sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency, tfCryptocurrencyAmount.getText()).equals("valid"))
+        if(!sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency, tfCryptocurrencyAmount.getText()).equals(VALID))
         {
             showInfo(sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency,tfCryptocurrencyAmount.getText()));
             return false;
@@ -87,7 +87,7 @@ public class SendViewController {
 
     private boolean checkIfRecipientExist()
     {
-        if(!sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()).equals("valid"))
+        if(!sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()).equals(VALID))
         {
             showInfo(sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()));
             return false;
