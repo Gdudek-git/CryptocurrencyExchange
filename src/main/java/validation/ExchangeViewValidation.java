@@ -28,7 +28,7 @@ public final class ExchangeViewValidation {
         catch (Exception ex){
             return ("Not a valid double value");
         }
-        return "valid";
+        return Valid.VALID;
     }
 
     public String checkIfSufficientFundsToExchange(String usedCurrency,String currencyAmountToExchange)
@@ -38,7 +38,7 @@ public final class ExchangeViewValidation {
         {
             return "You don't have enough funds";
         }
-        return "valid";
+        return Valid.VALID;
 
     }
 
@@ -78,7 +78,7 @@ public final class ExchangeViewValidation {
 
     private double round(double currencyAmount) {
         BigDecimal bd = new BigDecimal(Double.toString(currencyAmount));
-        bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+        bd = bd.setScale(2, RoundingMode.DOWN);
         return bd.doubleValue();
     }
 }

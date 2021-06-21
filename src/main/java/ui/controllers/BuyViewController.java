@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import services.RequestToBuyCryptocurrency;
 import validation.BuyViewValidation;
+import validation.Valid;
 
 
 import static ui.controllers.MainStage.getScene;
@@ -42,7 +43,7 @@ public class BuyViewController {
 
     //endregion
 
-    private static final String VALID = "valid";
+
     private int selectedCurrencyIndex=0;
     private String selectedCryptocurrency="BTC";
     private String selectedCurrency="PLN";
@@ -125,7 +126,7 @@ public class BuyViewController {
     {
         String currencyValid = buyValidation.checkIfDouble(tfCurrencyAmount.getText());
 
-        if(!currencyValid.equals(VALID))
+        if(!currencyValid.equals(Valid.VALID))
         {
             showInfo(currencyValid);
             return false;
@@ -137,7 +138,7 @@ public class BuyViewController {
     private boolean checkIfSufficientFunds()
     {
         String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,tfCryptocurrencyAmount.getText());
-        if(!fundsValid.equals(VALID))
+        if(!fundsValid.equals(Valid.VALID))
         {
             showInfo(fundsValid);
             return false;
@@ -166,7 +167,7 @@ public class BuyViewController {
 
    private void showAmountUserCanBuy()
    {
-       if(buyValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(VALID)) {
+       if(buyValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(Valid.VALID)) {
 
            tfCryptocurrencyAmount.setText(String.valueOf(Double.parseDouble(tfCurrencyAmount.getText()) / CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex)));
        }

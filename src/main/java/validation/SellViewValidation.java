@@ -27,7 +27,7 @@ public final class SellViewValidation {
         catch (Exception ex){
             return ("Not a valid double value");
         }
-        return "valid";
+        return Valid.VALID;
     }
 
 
@@ -37,7 +37,7 @@ public final class SellViewValidation {
         {
             return "You don't have enough funds";
         }
-        return "valid";
+        return Valid.VALID;
     }
 
 

@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import session.ChangeUserData;
 import session.LoggedUser;
 import validation.UserDataValidation;
+import validation.Valid;
 
 import static ui.controllers.MainStage.getScene;
 
@@ -128,7 +129,7 @@ public class ChangePersonalDataViewController {
 
     private boolean canChangeData(String result, Label label)
     {
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(label,result);
             return false;

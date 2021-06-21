@@ -81,7 +81,7 @@ public class UserDataValidation {
     {
         if(!username.equals("")) {
             String result = isValidLength(username);
-            if(result.equals("valid"))
+            if(result.equals( Valid.VALID))
             {
                 result = registerUser.checkIfUsernameIsInDatabase(username);
             }
@@ -131,7 +131,7 @@ public class UserDataValidation {
 
         if(validLength&&containsDigit&&containsUppercase)
         {
-            return "valid";
+            return Valid.VALID;
         }
         if(validLength&&containsDigit&&!containsUppercase)
         {
@@ -153,7 +153,7 @@ public class UserDataValidation {
             {
                 return "Enter valid email";
             }
-            return "valid";
+            return Valid.VALID;
         }
         return "Enter valid email";
     }

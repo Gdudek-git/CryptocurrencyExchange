@@ -7,6 +7,7 @@ public final class BuyViewValidation {
 
     private static BuyViewValidation buySendSellExchangeViewsValidation;
 
+
     public static BuyViewValidation getInstance()
     {
         if(buySendSellExchangeViewsValidation ==null)
@@ -24,7 +25,7 @@ public final class BuyViewValidation {
         catch (Exception ex){
             return ("Not a valid double value");
         }
-        return "valid";
+        return Valid.VALID;
     }
 
     public String checkIfSufficientFundsToBuy(String usedCurrency,String cryptocurrencyAmountToBuy)
@@ -34,7 +35,7 @@ public final class BuyViewValidation {
             {
                 return "You don't have enough funds";
             }
-            return "valid";
+        return Valid.VALID;
 
     }
 

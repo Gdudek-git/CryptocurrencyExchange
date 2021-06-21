@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import services.RequestToSendCryptocurrency;
 import validation.SendViewValidation;
+import validation.Valid;
 
 import static ui.controllers.MainStage.getScene;
 
@@ -25,7 +26,6 @@ public class SendViewController {
 
     @FXML
     private Label lbInfo;
-    private static final String VALID = "valid";
     private String selectedCryptocurrency="BTC";
     private SendViewValidation sendValidation = SendViewValidation.getInstance();
 
@@ -67,7 +67,7 @@ public class SendViewController {
 
     private boolean checkIfDouble()
     {
-        if(!sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals(VALID))
+        if(!sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals( Valid.VALID))
         {
             showInfo(sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()));
             return false;
@@ -77,7 +77,7 @@ public class SendViewController {
 
     private boolean checkIfSufficientFunds()
     {
-        if(!sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency, tfCryptocurrencyAmount.getText()).equals(VALID))
+        if(!sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency, tfCryptocurrencyAmount.getText()).equals(Valid.VALID))
         {
             showInfo(sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency,tfCryptocurrencyAmount.getText()));
             return false;
@@ -87,7 +87,7 @@ public class SendViewController {
 
     private boolean checkIfRecipientExist()
     {
-        if(!sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()).equals(VALID))
+        if(!sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()).equals(Valid.VALID))
         {
             showInfo(sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()));
             return false;

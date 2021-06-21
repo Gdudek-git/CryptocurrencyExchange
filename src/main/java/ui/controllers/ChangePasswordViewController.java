@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import session.ChangeUserData;
 import session.LoggedUser;
 import validation.UserDataValidation;
+import validation.Valid;
 
 import static ui.controllers.MainStage.getScene;
 
@@ -75,7 +76,7 @@ public class ChangePasswordViewController {
     {
         String result = userDataValidation.checkPassword(pfNewPassword.getText(),pfConfirmedNewPassword.getText());
 
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbIncorrectNewPassword,result);
         }

@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import validation.UserDataValidation;
+import validation.Valid;
 
 import static ui.controllers.MainStage.getScene;
 public class RegisterViewController {
@@ -143,7 +144,7 @@ public class RegisterViewController {
     private void checkPassword()
     {
            String result = userDataValidation.checkPassword(tfPassword.getText(),tfConfirmPassword.getText());
-           if(!result.equals("valid"))
+           if(!result.equals(Valid.VALID))
            {
                showError(lbPasswordError,result);
            }
@@ -156,7 +157,7 @@ public class RegisterViewController {
     private void checkPhoneNumber()
     {
         String result = userDataValidation.checkPhoneNumber(tfPhoneNumber.getText());
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbPhoneNumberError,result);
         }
@@ -169,7 +170,7 @@ public class RegisterViewController {
     private void checkFirstAndLastName()
     {
         String result= userDataValidation.checkFirstName(tfFirstName.getText());
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbFirstNameError,result);
         }
@@ -178,7 +179,7 @@ public class RegisterViewController {
             errorCount--;
         }
         result= userDataValidation.checkLastName(tfLastName.getText());
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbLastNameError,result);
         }
@@ -191,7 +192,7 @@ public class RegisterViewController {
     private void checkCountry()
     {
         String result= userDataValidation.checkCountry(tfCountry.getText());
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbCountryError,result);
         }
@@ -204,7 +205,7 @@ public class RegisterViewController {
     private void checkUsername()
     {
         String result= userDataValidation.checkUsername(tfUsername.getText(),registerUser);
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbUsernameError,result);
         }
@@ -217,7 +218,7 @@ public class RegisterViewController {
     private void checkEmail()
     {
         String result= userDataValidation.checkEmail(tfEmail.getText());
-        if(!result.equals("valid"))
+        if(!result.equals(Valid.VALID))
         {
             showError(lbEmailError,result);
         }

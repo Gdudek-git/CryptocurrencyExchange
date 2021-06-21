@@ -30,7 +30,7 @@ public final class SendViewValidation {
         catch (Exception ex){
             return ("Not a valid double value");
         }
-        return "valid";
+        return Valid.VALID;
     }
 
     public String checkIfSufficientFundsToSend(String selectedCryptocurrency, String amountToSend)
@@ -39,7 +39,7 @@ public final class SendViewValidation {
         {
             return "You don't have enough funds";
         }
-        return "valid";
+        return Valid.VALID;
     }
 
 
@@ -61,7 +61,7 @@ public final class SendViewValidation {
         {
             return "Recipient don't exist";
         }
-        return "valid";
+        return Valid.VALID;
     }
 
     public void establishConnectionWithDatabase()
