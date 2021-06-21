@@ -137,7 +137,7 @@ public class BuyViewController {
 
     private boolean checkIfSufficientFunds()
     {
-        String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,tfCryptocurrencyAmount.getText());
+        String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,tfCurrencyAmount.getText());
         if(!fundsValid.equals(Valid.VALID))
         {
             showInfo(fundsValid);

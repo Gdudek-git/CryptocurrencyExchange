@@ -28,10 +28,10 @@ public final class BuyViewValidation {
         return Valid.VALID;
     }
 
-    public String checkIfSufficientFundsToBuy(String usedCurrency,String cryptocurrencyAmountToBuy)
+    public String checkIfSufficientFundsToBuy(String usedCurrency,String currencyAmountToPay)
     {
             double userFunds = getUserFunds(usedCurrency);
-            if(userFunds<Double.parseDouble(cryptocurrencyAmountToBuy))
+            if(userFunds<Double.parseDouble(currencyAmountToPay))
             {
                 return "You don't have enough funds";
             }
