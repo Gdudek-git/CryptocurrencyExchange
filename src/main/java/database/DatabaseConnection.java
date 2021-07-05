@@ -26,7 +26,6 @@ public final class DatabaseConnection {
         configObj.addAnnotatedClass(User.class);
         configObj.addAnnotatedClass(UserContact.class);
         configObj.addAnnotatedClass(UserWallet.class);
-        configObj.setProperty("hibernate.connection.password", System.getenv("password"));
         configObj.configure("hibernate.cfg.xml");
 
         ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build();
