@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import validation.UserDataValidation;
 import validation.Valid;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 public class RegisterViewController {
 
 
@@ -233,8 +233,8 @@ public class RegisterViewController {
         registerUser.register(tfFirstName.getText(),tfLastName.getText(),tfUsername.getText(),tfPhoneNumber.getText(),tfCountry.getText(),tfEmail.getText(),cbxGender.getValue(),tfPassword.getText());
     }
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
     private void changeScene()

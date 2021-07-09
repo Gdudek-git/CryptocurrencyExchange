@@ -9,7 +9,7 @@ import session.LoggedUser;
 import validation.UserDataValidation;
 import validation.Valid;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 public class ChangePersonalDataViewController {
 
@@ -146,8 +146,8 @@ public class ChangePersonalDataViewController {
         changeUserData.changeUserData();
     }
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
     private void showError(Label errorLabel, String message)

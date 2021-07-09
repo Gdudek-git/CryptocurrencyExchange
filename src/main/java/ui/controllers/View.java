@@ -8,25 +8,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainStage
+public final class View
 {
-
-    private static MainStage mainStage;
+    private static View view;
     private AnchorPane rootPane;
     private Stage rootStage;
 
-    private MainStage()
+    public static View getInstance()
     {
-    }
-
-
-    static{
-        mainStage = new MainStage();
-    }
-
-    public static MainStage getInstance()
-    {
-        return mainStage;
+        if(view==null)
+        {
+            view = new View();
+        }
+        return view;
     }
 
     public void setStage(Stage rootStage)
@@ -35,7 +29,7 @@ public class MainStage
     }
 
     public void setRootPane() throws IOException {
-        this.rootPane = FXMLLoader.load(MainStage.class.getResource("views/LoginView.fxml"));
+        this.rootPane = FXMLLoader.load(View.class.getResource("views/LoginView.fxml"));
 
     }
 
@@ -57,7 +51,7 @@ public class MainStage
     public static Scene getScene(String sceneName)
     {
         try {
-            AnchorPane newPane =  FXMLLoader.load(MainStage.class.getResource("views/"+sceneName));
+            AnchorPane newPane =  FXMLLoader.load(View.class.getResource("views/"+sceneName));
             return new Scene(newPane,800,600);
         } catch (IOException e) {
             e.printStackTrace();

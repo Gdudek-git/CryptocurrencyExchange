@@ -2,7 +2,6 @@ package ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import session.ChangeUserData;
@@ -10,7 +9,7 @@ import session.LoggedUser;
 import validation.UserDataValidation;
 import validation.Valid;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 public class ChangePasswordViewController {
 
@@ -89,17 +88,13 @@ public class ChangePasswordViewController {
     }
 
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
     private boolean isCurrentPasswordCorrect()
     {
-        if(pfPassword.getText().equals(LoggedUser.getInstance().getLoggedUser().getPassword()))
-        {
-            return true;
-        }
-        return false;
+        return pfPassword.getText().equals(LoggedUser.getInstance().getLoggedUser().getPassword());
     }
 
     private void showError(Label label, String message)

@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import session.LoadUserData;
 import session.LoggedUser;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 
 public class AccountViewController {
@@ -113,8 +113,8 @@ public class AccountViewController {
         lbUsdAmount.setText(String.valueOf(user.getUserWallet().getUsd()));
     }
 
-    private MainStage getMainStage()
+    private View getMainStage()
     {
-        return MainStage.getInstance();
+        return View.getInstance();
     }
 }

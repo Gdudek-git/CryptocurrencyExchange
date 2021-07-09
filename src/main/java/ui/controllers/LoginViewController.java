@@ -1,18 +1,15 @@
 package ui.controllers;
 
 import database.entity.User;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import session.LoadUserData;
 import session.LoggedUser;
-import validation.UserDataValidation;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 public class LoginViewController {
 
@@ -69,8 +66,8 @@ public class LoginViewController {
         getMainStage().setScene(getScene("RegisterView.fxml"));
     }
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
 

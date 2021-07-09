@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 import services.CryptocurrencyRatesUpdateTimer;
 import session.LoggedUser;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 public class UserViewController {
 
@@ -262,8 +262,8 @@ public class UserViewController {
         CryptocurrencyRatesUpdateTimer.getInstance().stopTimer();
     }
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
 }

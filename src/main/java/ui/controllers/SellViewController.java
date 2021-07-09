@@ -13,7 +13,7 @@ import services.RequestToSellCryptocurrency;
 import validation.SellViewValidation;
 import validation.Valid;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 public class SellViewController {
 
@@ -135,8 +135,8 @@ public class SellViewController {
 
     }
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
 

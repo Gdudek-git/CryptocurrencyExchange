@@ -11,7 +11,7 @@ import services.RequestToSendCryptocurrency;
 import validation.SendViewValidation;
 import validation.Valid;
 
-import static ui.controllers.MainStage.getScene;
+import static ui.controllers.View.getScene;
 
 public class SendViewController {
 
@@ -121,8 +121,8 @@ public class SendViewController {
         lbInfo.setText("");
     }
 
-    private MainStage getMainStage() {
-        return MainStage.getInstance();
+    private View getMainStage() {
+        return View.getInstance();
     }
 
 }

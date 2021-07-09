@@ -1,7 +1,7 @@
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import ui.controllers.MainStage;
+import ui.controllers.View;
 
 
 
@@ -10,10 +10,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        MainStage mainStage = MainStage.getInstance();
-        mainStage.setStage(primaryStage);
-        mainStage.setRootPane();
-        mainStage.setMainScene();
+        View view = View.getInstance();
+        view.setStage(primaryStage);
+        view.setRootPane();
+        view.setMainScene();
     }
 
 
