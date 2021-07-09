@@ -1,6 +1,7 @@
 package validation;
 
 import database.RegisterUser;
+import database.entity.User;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
@@ -62,8 +63,8 @@ public class UserDataValidation {
     {
         if(!firstName.equals(""))
         {
-            String result = isValidLength(firstName);
-            return result;
+            return isValidLength(firstName);
+
         }
         return emptyFieldError();
     }
@@ -71,8 +72,8 @@ public class UserDataValidation {
     public String checkLastName(String lastName)
     {
         if(!lastName.equals("")) {
-            String result = isValidLength(lastName);
-            return result;
+            return isValidLength(lastName);
+
         }
         return emptyFieldError();
     }
@@ -83,18 +84,33 @@ public class UserDataValidation {
             String result = isValidLength(username);
             if(result.equals( Valid.VALID))
             {
-                result = registerUser.checkIfUsernameIsInDatabase(username);
+                result = checkIfUsernameIsInDatabase(username,registerUser);
             }
             return result;
         }
         return emptyFieldError();
     }
 
+    public String checkIfUsernameIsInDatabase(String username,RegisterUser registerUser)
+    {
+        registerUser.getSessionObj().beginTransaction();
+        User user =  registerUser.getSessionObj().get(User.class, username);
+        registerUser.getSessionObj().getTransaction().commit();
+        registerUser.getSessionObj().clear();
+        if(user==null)
+        {
+            return Valid.VALID;
+        }
+        else
+        {
+            return"That username is taken";
+        }
+    }
+
     public String checkCountry(String country)
     {
         if(!country.equals("")) {
-            String result = isValidLength(country);
-            return result;
+            return isValidLength(country);
         }
         return emptyFieldError();
     }
@@ -119,12 +135,12 @@ public class UserDataValidation {
             validLength = true;
         }
 
-        if(password.matches(".*\\d.*"))
+        if(password.matches(".*[0-9].*"))
         {
             containsDigit = true;
         }
 
-        if(password.matches(".*[A-Z]*"))
+        if(password.matches(".*[A-Z].*"))
         {
             containsUppercase = true;
         }
@@ -133,15 +149,7 @@ public class UserDataValidation {
         {
             return Valid.VALID;
         }
-        if(validLength&&containsDigit&&!containsUppercase)
-        {
-            return "Password must contain at least one uppercase letter";
-        }
-        if(validLength&&!containsDigit&&!containsUppercase)
-        {
-            return "Password must contain at least one uppercase and digit";
-        }
-            return "Password must have at least one uppercase, digit and 6 to 16 characters";
+        return "Password must have at least one uppercase, digit and 6 to 16 characters";
     }
 
     private String isEmailValid(String email)

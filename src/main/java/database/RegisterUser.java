@@ -4,10 +4,16 @@ import database.entity.User;
 import database.entity.UserContact;
 import database.entity.UserWallet;
 import org.hibernate.Session;
+import validation.Valid;
 
 public class RegisterUser {
 
     Session sessionObj;
+
+    public Session getSessionObj()
+    {
+        return  sessionObj;
+    }
 
     public void establishConnection()
     {
@@ -25,13 +31,9 @@ public class RegisterUser {
     {
 
         User userObj = new User();
-        UserWallet userWalletObj = new UserWallet();
-        UserContact userContactObj = new UserContact();
-
+        setUserEntityData(userObj,firstName,lastName,username,phoneNumber,country,email,gender,password);
         try {
-            addUserEntity(sessionObj, userObj, firstName, lastName, username, password, gender);
-            addUserWalletEntity(sessionObj, userObj, userWalletObj);
-            addUserContactEntity(sessionObj, userObj, userContactObj, phoneNumber, email, country);
+            addUserEntityToDatabase(sessionObj, userObj);
         }
         catch (Exception sqlException)
         {
@@ -39,60 +41,34 @@ public class RegisterUser {
                 sessionObj.getTransaction().rollback();
             }
         }
+    }
+
+    private void setUserEntityData(User userObj,String firstName,String lastName, String username, String phoneNumber, String country, String email, String gender,String password)
+    {
+        userObj.setUsername(username);
+        userObj.setFirstName(firstName);
+        userObj.setLastName(lastName);
+        userObj.setGender(gender);
+        userObj.setPassword(password);
+
+        userObj.getUserContact().setUser(userObj);
+        userObj.getUserContact().setPhoneNumber(phoneNumber);
+        userObj.getUserContact().setEmail(email);
+        userObj.getUserContact().setCountry(country);
+
+        userObj.getUserWallet().setUser(userObj);
+        userObj.getUserWallet().setEur(500);
+        userObj.getUserWallet().setPln(1000);
+        userObj.getUserWallet().setUsd(500);
 
     }
 
-    private void addUserEntity(Session sessionObj, User userObj, String firstName,String lastName, String username,String password,String gender)
+    private void addUserEntityToDatabase(Session sessionObj, User userObj )
     {
             sessionObj.beginTransaction();
-            userObj.setUsername(username);
-            userObj.setFirstName(firstName);
-            userObj.setLastName(lastName);
-            userObj.setGender(gender);
-            userObj.setPassword(password);
             sessionObj.save(userObj);
             sessionObj.getTransaction().commit();
             sessionObj.clear();
     }
 
-    private void addUserWalletEntity(Session sessionObj, User userObj, UserWallet userWalletObj)
-    {
-        sessionObj.beginTransaction();
-        userWalletObj.setUser(userObj);
-        userWalletObj.setEur(500);
-        userWalletObj.setPln(1000);
-        userWalletObj.setUsd(500);
-        sessionObj.save(userWalletObj);
-        sessionObj.getTransaction().commit();
-        sessionObj.clear();
-    }
-
-    private void addUserContactEntity(Session sessionObj, User userObj, UserContact userContactObj, String phoneNumber,String email, String country)
-    {
-        sessionObj.beginTransaction();
-        userContactObj.setUser(userObj);
-        userContactObj.setPhoneNumber(phoneNumber);
-        userContactObj.setCountry(country);
-        userContactObj.setEmail(email);
-        sessionObj.save(userContactObj);
-        sessionObj.getTransaction().commit();
-        sessionObj.clear();
-    }
-
-
-    public String checkIfUsernameIsInDatabase(String username)
-    {
-        sessionObj.beginTransaction();
-        User user = sessionObj.get(User.class, username);
-        sessionObj.getTransaction().commit();
-        sessionObj.clear();
-        if(user==null)
-        {
-            return"valid";
-        }
-        else
-        {
-            return"That username is taken";
-        }
-    }
 }
