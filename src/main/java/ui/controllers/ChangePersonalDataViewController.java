@@ -13,7 +13,7 @@ import static ui.controllers.MainStage.getScene;
 
 public class ChangePersonalDataViewController {
 
-    //region Controllers
+    //region Controls
 
     @FXML
     private TextField tfNewFirstName;

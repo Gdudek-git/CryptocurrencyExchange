@@ -15,6 +15,9 @@ import validation.UserDataValidation;
 import static ui.controllers.MainStage.getScene;
 
 public class LoginViewController {
+
+
+    //region Controls
     @FXML
     private TextField tfUsername;
 
@@ -23,6 +26,7 @@ public class LoginViewController {
 
     @FXML
     private Label lbWrongLoginData;
+    //endregion
 
     User user;
     LoadUserData loadUserData = LoadUserData.getInstance();

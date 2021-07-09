@@ -16,7 +16,7 @@ import static ui.controllers.MainStage.getScene;
 public class RegisterViewController {
 
 
-    //region Controllers
+    //region Controls
     @FXML
     private TextField tfFirstName;
 

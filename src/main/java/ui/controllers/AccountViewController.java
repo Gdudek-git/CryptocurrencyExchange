@@ -12,7 +12,7 @@ import static ui.controllers.MainStage.getScene;
 
 public class AccountViewController {
 
-    //region Controllers
+    //region Controls
     @FXML
     private Label lbBtcAmount;
 

@@ -15,6 +15,7 @@ import static ui.controllers.MainStage.getScene;
 
 public class SendViewController {
 
+    //region Controls
     @FXML
     private TextField tfCryptocurrencyAmount;
 
@@ -26,6 +27,8 @@ public class SendViewController {
 
     @FXML
     private Label lbInfo;
+    //endregion
+
     private String selectedCryptocurrency="BTC";
     private SendViewValidation sendValidation = SendViewValidation.getInstance();
 

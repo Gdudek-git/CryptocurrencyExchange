@@ -19,7 +19,7 @@ import static ui.controllers.MainStage.getScene;
 public class ExchangeViewController {
 
 
-    //region Controllers
+    //region Controls
     @FXML
     private ComboBox<String> cbxCurrencyToObtain;
 
@@ -41,6 +41,7 @@ public class ExchangeViewController {
     @FXML
     private Label lbInfo;
     //endregion
+
     private String selectedCurrency="PLN";
     private String selectedCurrencyToObtain="EUR";
     ExchangeViewValidation exchangeValidation = ExchangeViewValidation.getInstance();

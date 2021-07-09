@@ -17,7 +17,7 @@ import static ui.controllers.MainStage.getScene;
 
 public class SellViewController {
 
-    //region Controllers
+    //region Controls
 
     @FXML
     private ComboBox<String> cbxCryptocurrency;

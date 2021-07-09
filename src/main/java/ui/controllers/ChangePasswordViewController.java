@@ -14,7 +14,7 @@ import static ui.controllers.MainStage.getScene;
 
 public class ChangePasswordViewController {
 
-    //region Controllers
+    //region Controls
     @FXML
     private PasswordField pfPassword;
 

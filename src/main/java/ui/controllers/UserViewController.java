@@ -13,9 +13,8 @@ import session.LoggedUser;
 import static ui.controllers.MainStage.getScene;
 
 public class UserViewController {
-    //region javafx controls
 
-
+    //region Controls
     @FXML
     private TextField tfUsername;
 
@@ -47,12 +46,8 @@ public class UserViewController {
     @FXML
     private MenuItem mi1Min;
 
-
     @FXML
     private RadioButton rbHourly;
-
-    @FXML
-    private ToggleGroup chartUpdateGroup;
 
     @FXML
     private RadioButton rbDaily;
@@ -72,7 +67,6 @@ public class UserViewController {
 
     @FXML
     private TextField tfAverageCryptocurrencyRate;
-
     //endregion
 
 
