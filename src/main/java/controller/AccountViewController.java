@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import database.entity.User;
 import javafx.event.ActionEvent;
@@ -6,8 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import session.LoadUserData;
 import session.LoggedUser;
-
-import static ui.controllers.View.getScene;
 
 
 public class AccountViewController {
@@ -59,17 +57,17 @@ public class AccountViewController {
 
     @FXML
     void btnChangePasswordOnAction(ActionEvent event) {
-        getMainStage().setScene(getScene("ChangePasswordView.fxml"));
+        getMainStage().setScene(View.getScene("ChangePasswordView.fxml"));
     }
 
     @FXML
     void btnChangePersonalDataOnAction(ActionEvent event) {
-        getMainStage().setScene(getScene("ChangePersonalDataView.fxml"));
+        getMainStage().setScene(View.getScene("ChangePersonalDataView.fxml"));
     }
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
-        getMainStage().setScene(getScene("UserView.fxml"));
+        getMainStage().setScene(View.getScene("UserView.fxml"));
     }
 
 

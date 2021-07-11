@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +13,7 @@ public final class View
     private static View view;
     private AnchorPane rootPane;
     private Stage rootStage;
+
 
     public static View getInstance()
     {
@@ -29,8 +30,8 @@ public final class View
     }
 
     public void setRootPane() throws IOException {
-        this.rootPane = FXMLLoader.load(View.class.getResource("views/LoginView.fxml"));
 
+        this.rootPane = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
     }
 
     public void setMainScene()
@@ -51,7 +52,7 @@ public final class View
     public static Scene getScene(String sceneName)
     {
         try {
-            AnchorPane newPane =  FXMLLoader.load(View.class.getResource("views/"+sceneName));
+            AnchorPane newPane =  FXMLLoader.load(View.class.getResource("/view/"+sceneName));
             return new Scene(newPane,800,600);
         } catch (IOException e) {
             e.printStackTrace();

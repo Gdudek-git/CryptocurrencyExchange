@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import database.entity.User;
 import javafx.event.ActionEvent;
@@ -8,8 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import session.LoadUserData;
 import session.LoggedUser;
-
-import static ui.controllers.View.getScene;
 
 public class LoginViewController {
 
@@ -50,7 +48,7 @@ public class LoginViewController {
             if (areLoginDataValid()) {
                 LoggedUser.getInstance().setLoggedUser(user);
                 loadUserData.closeConnection();
-                getMainStage().setScene(getScene("UserView.fxml"));
+                getMainStage().setScene(View.getScene("UserView.fxml"));
             }
         }
         else
@@ -63,7 +61,7 @@ public class LoginViewController {
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
         loadUserData.closeConnection();
-        getMainStage().setScene(getScene("RegisterView.fxml"));
+        getMainStage().setScene(View.getScene("RegisterView.fxml"));
     }
 
     private View getMainStage() {

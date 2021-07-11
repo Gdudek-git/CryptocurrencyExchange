@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import cryptocurrency.CryptocurrencyExchangeRates;
 import cryptocurrency.CryptocurrencyRatesChart;
@@ -9,8 +9,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import services.CryptocurrencyRatesUpdateTimer;
 import session.LoggedUser;
-
-import static ui.controllers.View.getScene;
 
 public class UserViewController {
 
@@ -226,34 +224,34 @@ public class UserViewController {
     @FXML
     void btnBuyOnAction(ActionEvent event) {
         stopTimer();
-        getMainStage().setScene(getScene("BuyView.fxml"));
+        getMainStage().setScene(View.getScene("BuyView.fxml"));
     }
 
     @FXML
     void btnExchangeOnAction(ActionEvent event) {
         stopTimer();
-        getMainStage().setScene(getScene("ExchangeView.fxml"));
+        getMainStage().setScene(View.getScene("ExchangeView.fxml"));
     }
 
     @FXML
     void btnSellOnAction(ActionEvent event) {stopTimer();
-        getMainStage().setScene(getScene("SellView.fxml"));
+        getMainStage().setScene(View.getScene("SellView.fxml"));
     }
 
     @FXML
     void btnSendOnAction(ActionEvent event) {stopTimer();
-        getMainStage().setScene(getScene("SendView.fxml"));
+        getMainStage().setScene(View.getScene("SendView.fxml"));
     }
 
     @FXML
     void btnAccountOnAction(ActionEvent event) {
         stopTimer();
-        getMainStage().setScene(getScene("AccountView.fxml"));
+        getMainStage().setScene(View.getScene("AccountView.fxml"));
     }
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {stopTimer();
-        getMainStage().setScene(getScene("LoginView.fxml"));
+        getMainStage().setScene(View.getScene("LoginView.fxml"));
     }
 
 

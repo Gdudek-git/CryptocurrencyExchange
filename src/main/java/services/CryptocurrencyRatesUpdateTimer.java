@@ -2,7 +2,7 @@ package services;
 
 import cryptocurrency.CryptocurrencyExchangeRates;
 import javafx.application.Platform;
-import ui.controllers.UserViewController;
+import controller.UserViewController;
 
 import javax.swing.*;
 

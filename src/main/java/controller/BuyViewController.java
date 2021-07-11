@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import cryptocurrency.CryptocurrencyExchangeRates;
 import javafx.collections.FXCollections;
@@ -12,9 +12,6 @@ import javafx.scene.input.KeyEvent;
 import services.RequestToBuyCryptocurrency;
 import validation.BuyViewValidation;
 import validation.Valid;
-
-
-import static ui.controllers.View.getScene;
 
 public class BuyViewController {
 
@@ -107,7 +104,7 @@ public class BuyViewController {
     @FXML
     void btnReturnOnClick(ActionEvent event) {
         RequestToBuyCryptocurrency.getInstance().closeConnectionWithDatabase();
-        getMainStage().setScene(getScene("UserView.fxml"));
+        getMainStage().setScene(View.getScene("UserView.fxml"));
     }
 
     @FXML

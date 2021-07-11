@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.SellViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SellViewController">
     <children>
-        <Button layoutX="437.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnSellOnAction" prefHeight="86.0" prefWidth="214.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Sell">
+        <Button layoutX="437.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnSellOnAction" prefHeight="86.0" prefWidth="214.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Sell">
             <font>
                 <Font size="40.0" />
             </font>
@@ -18,8 +18,8 @@
                 <FontAwesomeIcon iconName="CHECK" />
             </graphic>
         </Button>
-        <ComboBox fx:id="cbxCryptocurrency" layoutX="105.0" layoutY="195.0" onAction="#cbxCryptocurrencyOnAction" prefHeight="43.0" prefWidth="289.0" promptText="Choose Cryptocurrency" style="-fx-background-color: white; -fx-font-size: 20; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../../css/HoverStyle.css" />
-        <Button layoutX="138.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnReturnOnClick" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Return">
+        <ComboBox fx:id="cbxCryptocurrency" layoutX="105.0" layoutY="195.0" onAction="#cbxCryptocurrencyOnAction" prefHeight="43.0" prefWidth="289.0" promptText="Choose Cryptocurrency" style="-fx-background-color: white; -fx-font-size: 20; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../css/HoverStyle.css" />
+        <Button layoutX="138.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnReturnOnClick" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Return">
             <font>
                 <Font size="40.0" />
             </font>
@@ -27,7 +27,7 @@
                 <FontAwesomeIcon iconName="REPLY" />
             </graphic>
         </Button>
-        <ComboBox fx:id="cbxCurrency" layoutX="405.0" layoutY="195.0" onAction="#cbxCurrencyOnAction" prefHeight="43.0" prefWidth="289.0" promptText="Choose Currency" style="-fx-background-color: white; -fx-font-size: 20; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../../css/HoverStyle.css" />
+        <ComboBox fx:id="cbxCurrency" layoutX="405.0" layoutY="195.0" onAction="#cbxCurrencyOnAction" prefHeight="43.0" prefWidth="289.0" promptText="Choose Currency" style="-fx-background-color: white; -fx-font-size: 20; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../css/HoverStyle.css" />
         <TextField fx:id="tfCurrencyAmount" editable="false" layoutX="425.0" layoutY="288.0" promptText="You will get" style="-fx-background-color: white; -fx-background-radius: 0.5cm;">
             <font>
                 <Font size="20.0" />

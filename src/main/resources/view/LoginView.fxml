@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.LoginViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginViewController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="379.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/loginImage.png" />
+            <Image url="@../images/loginImage.png" />
          </image>
       </ImageView>
       <Label layoutX="463.0" layoutY="37.0" prefHeight="131.0" prefWidth="255.0" text="Login" textFill="WHITE">
@@ -37,7 +37,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="466.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Login">
+      <Button fx:id="btnLogin" layoutX="466.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Login">
          <font>
             <Font size="20.0" />
          </font>
@@ -45,7 +45,7 @@
             <FontAwesomeIcon iconName="SIGN_IN" selectionFill="BLACK" />
          </graphic>
       </Button>
-      <Button fx:id="btnRegister" layoutX="466.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Register">
+      <Button fx:id="btnRegister" layoutX="466.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Register">
          <font>
             <Font size="20.0" />
          </font>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb); -fx-text-size: 30;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.ChangePersonalDataViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb); -fx-text-size: 30;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChangePersonalDataViewController">
     <children>
                 <Label fx:id="lbIncorrectFirstName" layoutX="150.0" layoutY="120.0" textFill="RED">
                     <font>
@@ -59,7 +59,7 @@
                 <Font size="20.0" />
             </font>
         </TextField>
-        <Button layoutX="414.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnChangeFirstNameOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Change first name">
+        <Button layoutX="414.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnChangeFirstNameOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Change first name">
             <font>
                 <Font size="20.0" />
             </font>
@@ -67,7 +67,7 @@
                 <FontAwesomeIcon iconName="EDIT" />
             </graphic>
         </Button>
-        <Button layoutX="414.0" layoutY="150.0" mnemonicParsing="false" onAction="#btnChangeLastNameOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Change last name">
+        <Button layoutX="414.0" layoutY="150.0" mnemonicParsing="false" onAction="#btnChangeLastNameOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Change last name">
             <font>
                 <Font size="20.0" />
             </font>
@@ -75,7 +75,7 @@
                 <FontAwesomeIcon iconName="EDIT" />
             </graphic>
         </Button>
-        <Button layoutX="414.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnChangeNumberOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Change number">
+        <Button layoutX="414.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnChangeNumberOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Change number">
             <font>
                 <Font size="20.0" />
             </font>
@@ -83,7 +83,7 @@
                 <FontAwesomeIcon iconName="EDIT" />
             </graphic>
         </Button>
-        <Button layoutX="414.0" layoutY="290.0" mnemonicParsing="false" onAction="#btnChangeEmailOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Change email">
+        <Button layoutX="414.0" layoutY="290.0" mnemonicParsing="false" onAction="#btnChangeEmailOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Change email">
             <font>
                 <Font size="20.0" />
             </font>
@@ -91,7 +91,7 @@
                 <FontAwesomeIcon iconName="EDIT" />
             </graphic>
         </Button>
-        <Button layoutX="414.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnChangeCountryOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Change country">
+        <Button layoutX="414.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnChangeCountryOnAction" prefHeight="43.0" prefWidth="220.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Change country">
             <font>
                 <Font size="20.0" />
             </font>
@@ -99,7 +99,7 @@
                 <FontAwesomeIcon iconName="EDIT" />
             </graphic>
         </Button>
-        <Button layoutX="275.0" layoutY="445.0" mnemonicParsing="false" onAction="#btnReturnOnAction" prefHeight="52.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Return">
+        <Button layoutX="275.0" layoutY="445.0" mnemonicParsing="false" onAction="#btnReturnOnAction" prefHeight="52.0" prefWidth="249.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Return">
             <font>
                 <Font size="25.0" />
             </font>

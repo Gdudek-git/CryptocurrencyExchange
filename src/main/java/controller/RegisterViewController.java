@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 
 import database.RegisterUser;
@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import validation.UserDataValidation;
 import validation.Valid;
 
-import static ui.controllers.View.getScene;
 public class RegisterViewController {
 
 
@@ -239,7 +238,7 @@ public class RegisterViewController {
 
     private void changeScene()
     {
-        getMainStage().setScene(getScene("LoginView.fxml"));
+        getMainStage().setScene(View.getScene("LoginView.fxml"));
     }
 
     private void showError(Label label, String text)

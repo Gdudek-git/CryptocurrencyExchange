@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.RegisterViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterViewController">
    <children>
       <AnchorPane fx:id="labelsRoot" prefHeight="600.0" prefWidth="800.0">
        <children>
@@ -124,8 +124,8 @@
            </font>
        </Label>
 
-      <ComboBox fx:id="cbxGender" focusTraversable="false" layoutX="129.0" layoutY="375.0" prefHeight="26.0" prefWidth="530.0" promptText="Gender" style="-fx-font-size: 15; -fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../../css/HoverStyle.css" />
-      <Button layoutX="124.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Cancel">
+      <ComboBox fx:id="cbxGender" focusTraversable="false" layoutX="129.0" layoutY="375.0" prefHeight="26.0" prefWidth="530.0" promptText="Gender" style="-fx-font-size: 15; -fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../css/HoverStyle.css" />
+      <Button layoutX="124.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Cancel">
          <font>
             <Font size="20.0" />
          </font>
@@ -133,7 +133,7 @@
             <FontAwesomeIcon iconName="CLOSE" />
          </graphic>
       </Button>
-      <Button layoutX="465.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnConfirmOnAction" prefHeight="43.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../../css/HoverStyle.css" text="Confirm">
+      <Button layoutX="465.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnConfirmOnAction" prefHeight="43.0" prefWidth="202.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Confirm">
          <font>
             <Font size="20.0" />
          </font>

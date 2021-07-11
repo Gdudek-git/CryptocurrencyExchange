@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import currency.CurrencyExchangeRates;
 import javafx.collections.FXCollections;
@@ -12,9 +12,6 @@ import javafx.scene.input.KeyEvent;
 import services.RequestToExchangeCurrency;
 import validation.ExchangeViewValidation;
 import validation.Valid;
-
-
-import static ui.controllers.View.getScene;
 
 public class ExchangeViewController {
 
@@ -98,7 +95,7 @@ public class ExchangeViewController {
     @FXML
     void btnReturnOnAction(ActionEvent event) {
         RequestToExchangeCurrency.getInstance().closeConnectionWithDatabase();
-        getMainStage().setScene(getScene("UserView.fxml"));
+        getMainStage().setScene(View.getScene("UserView.fxml"));
     }
 
     private void setComboBoxItems() {

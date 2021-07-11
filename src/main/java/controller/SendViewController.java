@@ -1,4 +1,4 @@
-package ui.controllers;
+package controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +10,6 @@ import javafx.scene.control.TextField;
 import services.RequestToSendCryptocurrency;
 import validation.SendViewValidation;
 import validation.Valid;
-
-import static ui.controllers.View.getScene;
 
 public class SendViewController {
 
@@ -44,7 +42,7 @@ public class SendViewController {
     {
         RequestToSendCryptocurrency.getInstance().closeConnectionWithDatabase();
         sendValidation.closeConnectionWithDatabase();
-        getMainStage().setScene(getScene("UserView.fxml"));
+        getMainStage().setScene(View.getScene("UserView.fxml"));
     }
 
     @FXML
