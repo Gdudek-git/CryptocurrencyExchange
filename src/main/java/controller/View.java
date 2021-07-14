@@ -43,13 +43,13 @@ public final class View
         rootStage.show();
     }
 
-    public void setScene(Scene newScene)
+    public void setView(Scene newScene)
     {
         rootStage.setScene(newScene);
     }
 
 
-    public static Scene getScene(String sceneName)
+    public static Scene getView(String sceneName)
     {
         try {
             AnchorPane newPane =  FXMLLoader.load(View.class.getResource("/view/"+sceneName));
