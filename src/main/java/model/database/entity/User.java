@@ -1,4 +1,4 @@
-package database.entity;
+package model.database.entity;
 
 import javax.persistence.*;
 
@@ -32,14 +32,14 @@ public class User {
     private UserContact userContact;
 
     public UserWallet getUserWallet() {
-        if(userWallet==null) {
+        if(userWallet ==null) {
             userWallet = new UserWallet();
         }
         return userWallet;
     }
 
     public UserContact getUserContact() {
-        if(userContact==null) {
+        if(userContact ==null) {
             userContact = new UserContact();
         }
         return userContact;
@@ -67,10 +67,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getGender() {
-        return gender;
     }
 
     public void setGender(String gender) {
