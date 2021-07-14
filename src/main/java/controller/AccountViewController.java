@@ -1,11 +1,10 @@
 package controller;
 
-import database.entity.User;
+import model.database.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import session.LoadUserData;
-import session.LoggedUser;
+import model.session.LoggedUser;
 
 
 public class AccountViewController {
@@ -48,46 +47,32 @@ public class AccountViewController {
     private Label lbCountry;
     //endregion
 
-
+    private User user;
+    
     @FXML
     private void initialize() {
-        updateUserInfo();
-        setUserAccountInfoLabels();
+        user = LoggedUser.getInstance().getLoggedUser();
+        setUserData();
+        setObtainedCurrency();
+        setObtainedCryptocurrency();
     }
 
     @FXML
     void btnChangePasswordOnAction(ActionEvent event) {
-        getMainStage().setScene(View.getScene("ChangePasswordView.fxml"));
+        View.getInstance().setView(View.getView("ChangePasswordView.fxml"));
     }
 
     @FXML
     void btnChangePersonalDataOnAction(ActionEvent event) {
-        getMainStage().setScene(View.getScene("ChangePersonalDataView.fxml"));
+        View.getInstance().setView(View.getView("ChangePersonalDataView.fxml"));
     }
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
-        getMainStage().setScene(View.getScene("UserView.fxml"));
+        View.getInstance().setView(View.getView("UserView.fxml"));
     }
 
-
-    private void updateUserInfo()
-    {
-        LoadUserData.getInstance().establishConnection();
-        LoggedUser.getInstance().setLoggedUser(LoadUserData.getInstance().loadUser(LoggedUser.getInstance().getLoggedUser().getUsername()));
-        LoadUserData.getInstance().closeConnection();
-    }
-
-    private void setUserAccountInfoLabels()
-    {
-        User user = LoggedUser.getInstance().getLoggedUser();
-        setObtainedCryptocurrency(user);
-        setObtainedCurrency(user);
-        setUserData(user);
-
-    }
-
-    private void setUserData(User user)
+    private void setUserData()
     {
         lbUsername.setText(user.getUsername());
         lbFirstName.setText(user.getFirstName());
@@ -97,22 +82,17 @@ public class AccountViewController {
         lbNumber.setText(user.getUserContact().getPhoneNumber());
     }
 
-    private void setObtainedCryptocurrency(User user)
+    private void setObtainedCryptocurrency()
     {
         lbBtcAmount.setText(String.valueOf(user.getUserWallet().getBtc()));
         lbEthAmount.setText(String.valueOf(user.getUserWallet().getEth()));
         lbDogeAmount.setText(String.valueOf(user.getUserWallet().getDoge()));
     }
 
-    private void setObtainedCurrency(User user)
+    private void setObtainedCurrency()
     {
         lbEurAmount.setText(String.valueOf(user.getUserWallet().getEur()));
         lbPlnAmount.setText(String.valueOf(user.getUserWallet().getPln()));
         lbUsdAmount.setText(String.valueOf(user.getUserWallet().getUsd()));
-    }
-
-    private View getMainStage()
-    {
-        return View.getInstance();
     }
 }

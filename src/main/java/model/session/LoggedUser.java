@@ -1,6 +1,6 @@
-package session;
+package model.session;
 
-import database.entity.User;
+import model.database.entity.User;
 
 public final class LoggedUser {
 
@@ -19,7 +19,7 @@ public final class LoggedUser {
 
     public void setLoggedUser(User user)
     {
-        this.user=user;
+        this.user = user;
     }
 
 

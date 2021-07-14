@@ -1,7 +1,8 @@
 package controller;
 
 
-import database.RegisterUser;
+import model.database.DatabaseConnectionModel;
+import model.database.RegisterUserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,8 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import validation.UserDataValidation;
-import validation.Valid;
+import org.hibernate.Session;
+import model.validation.UserDataValidationModel;
+import model.validation.Valid;
 
 public class RegisterViewController {
 
@@ -68,14 +70,18 @@ public class RegisterViewController {
     private Label lbPasswordError;
     //endregion
 
-    private RegisterUser registerUser = new RegisterUser();
-    private UserDataValidation userDataValidation;
+    private DatabaseConnectionModel databaseConnectionModel;
+    private RegisterUserModel registerUserModel;
+    private UserDataValidationModel userDataValidationModel;
+    private Session session;
     private int errorCount;
 
 
     @FXML
     private void initialize() {
-        userDataValidation=new UserDataValidation();
+        databaseConnectionModel = new DatabaseConnectionModel();
+        registerUserModel = new RegisterUserModel();
+        userDataValidationModel = new UserDataValidationModel();
         establishConnectionWithDatabase();
         setComboBoxItems();
         setTextFieldsFormatter();
@@ -83,14 +89,8 @@ public class RegisterViewController {
 
     private void establishConnectionWithDatabase()
     {
-        Thread thread = new Thread(() -> registerUser.establishConnection());
+        Thread thread = new Thread(() -> session = databaseConnectionModel.getSessionObj());
         thread.start();
-    }
-
-    @FXML
-    void btnCancelOnAction(ActionEvent event) {
-        registerUser.closeConnection();
-        changeScene();
     }
 
     private void setComboBoxItems() {
@@ -101,31 +101,23 @@ public class RegisterViewController {
 
     private void setTextFieldsFormatter()
     {
-        userDataValidation.setTextFieldFormatter(tfPhoneNumber,"[0-9]+");
-        userDataValidation.setTextFieldFormatter(tfFirstName,"[a-zA-Z]+");
-        userDataValidation.setTextFieldFormatter(tfLastName,"[a-zA-Z]+");
-        userDataValidation.setTextFieldFormatter(tfCountry,"[a-zA-Z]+");
-        userDataValidation.setTextFieldFormatter(tfUsername,"^[a-zA-Z0-9]+$");
+        userDataValidationModel.setTextFieldFormatter(tfPhoneNumber,"[0-9]+");
+        userDataValidationModel.setTextFieldFormatter(tfFirstName,"[a-zA-Z]+");
+        userDataValidationModel.setTextFieldFormatter(tfLastName,"[a-zA-Z]+");
+        userDataValidationModel.setTextFieldFormatter(tfCountry,"[a-zA-Z]+");
+        userDataValidationModel.setTextFieldFormatter(tfUsername,"^[a-zA-Z0-9]+$");
     }
 
     @FXML
-    void btnConfirmOnAction(ActionEvent event) {
+    private void btnConfirmOnAction(ActionEvent event) {
         resetLabels();
         validate();
         if(errorCount==0)
         {
             registerUser();
             showAlert();
-            changeScene();
+            btnReturnOnAction(null);
         }
-    }
-
-    private void showAlert()
-    {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText("User successfully registered");
-        alert.showAndWait();
     }
 
     private void validate()
@@ -137,113 +129,6 @@ public class RegisterViewController {
         checkCountry();
         checkUsername();
         checkEmail();
-
-    }
-
-    private void checkPassword()
-    {
-           String result = userDataValidation.checkPassword(tfPassword.getText(),tfConfirmPassword.getText());
-           if(!result.equals(Valid.VALID))
-           {
-               showError(lbPasswordError,result);
-           }
-           else
-           {
-               errorCount--;
-           }
-    }
-
-    private void checkPhoneNumber()
-    {
-        String result = userDataValidation.checkPhoneNumber(tfPhoneNumber.getText());
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbPhoneNumberError,result);
-        }
-        else
-        {
-            errorCount--;
-        }
-    }
-
-    private void checkFirstAndLastName()
-    {
-        String result= userDataValidation.checkFirstName(tfFirstName.getText());
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbFirstNameError,result);
-        }
-        else
-        {
-            errorCount--;
-        }
-        result= userDataValidation.checkLastName(tfLastName.getText());
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbLastNameError,result);
-        }
-        else
-        {
-            errorCount--;
-        }
-    }
-
-    private void checkCountry()
-    {
-        String result= userDataValidation.checkCountry(tfCountry.getText());
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbCountryError,result);
-        }
-        else
-        {
-            errorCount--;
-        }
-    }
-
-    private void checkUsername()
-    {
-        String result= userDataValidation.checkUsername(tfUsername.getText(),registerUser);
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbUsernameError,result);
-        }
-        else
-        {
-            errorCount--;
-        }
-    }
-
-    private void checkEmail()
-    {
-        String result= userDataValidation.checkEmail(tfEmail.getText());
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbEmailError,result);
-        }
-        else
-        {
-            errorCount--;
-        }
-    }
-
-    private void registerUser()
-    {
-        registerUser.register(tfFirstName.getText(),tfLastName.getText(),tfUsername.getText(),tfPhoneNumber.getText(),tfCountry.getText(),tfEmail.getText(),cbxGender.getValue(),tfPassword.getText());
-    }
-
-    private View getMainStage() {
-        return View.getInstance();
-    }
-
-    private void changeScene()
-    {
-        getMainStage().setScene(View.getScene("LoginView.fxml"));
-    }
-
-    private void showError(Label label, String text)
-    {
-        label.setText(text);
     }
 
     private void resetLabels()
@@ -254,9 +139,116 @@ public class RegisterViewController {
         }
     }
 
+    private void checkPassword()
+    {
+           String passwordValid = userDataValidationModel.checkPassword(tfPassword.getText(),tfConfirmPassword.getText());
+           if(!passwordValid.equals(Valid.VALID))
+           {
+               showError(lbPasswordError,passwordValid);
+           }
+           else
+           {
+               errorCount--;
+           }
+    }
 
+    private void checkPhoneNumber()
+    {
+        String phoneNumberValid = userDataValidationModel.checkPhoneNumber(tfPhoneNumber.getText());
+        if(!phoneNumberValid.equals(Valid.VALID))
+        {
+            showError(lbPhoneNumberError,phoneNumberValid);
+        }
+        else
+        {
+            errorCount--;
+        }
+    }
 
+    private void checkFirstAndLastName()
+    {
+        String firstNameValid = userDataValidationModel.checkFirstName(tfFirstName.getText());
+        if(!firstNameValid.equals(Valid.VALID))
+        {
+            showError(lbFirstNameError,firstNameValid);
+        }
+        else
+        {
+            errorCount--;
+        }
 
+        String lastNameValid = userDataValidationModel.checkLastName(tfLastName.getText());
+        if(!lastNameValid.equals(Valid.VALID))
+        {
+            showError(lbLastNameError,lastNameValid);
+        }
+        else
+        {
+            errorCount--;
+        }
+    }
 
+    private void checkCountry()
+    {
+        String rcountryValid= userDataValidationModel.checkCountry(tfCountry.getText());
+        if(!rcountryValid.equals(Valid.VALID))
+        {
+            showError(lbCountryError,rcountryValid);
+        }
+        else
+        {
+            errorCount--;
+        }
+    }
+
+    private void checkUsername()
+    {
+        String usernameValid= userDataValidationModel.checkUsername(tfUsername.getText(),registerUserModel,session);
+        if(!usernameValid.equals(Valid.VALID))
+        {
+            showError(lbUsernameError,usernameValid);
+        }
+        else
+        {
+            errorCount--;
+        }
+    }
+
+    private void checkEmail()
+    {
+        String emailValid= userDataValidationModel.checkEmail(tfEmail.getText());
+        if(!emailValid.equals(Valid.VALID))
+        {
+            showError(lbEmailError,emailValid);
+        }
+        else
+        {
+            errorCount--;
+        }
+    }
+
+    private void showError(Label label, String text)
+    {
+        label.setText(text);
+    }
+
+    private void registerUser()
+    {
+        registerUserModel.register(tfFirstName.getText(),tfLastName.getText(),tfUsername.getText(),tfPhoneNumber.getText(),tfCountry.getText(),tfEmail.getText(),cbxGender.getValue(),tfPassword.getText(),session);
+    }
+
+    private void showAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText("User successfully registered");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void btnReturnOnAction(ActionEvent event) {
+        databaseConnectionModel.closeConnection(session);
+        View.getInstance().setView(View.getView("LoginView.fxml"));
+    }
 }
 

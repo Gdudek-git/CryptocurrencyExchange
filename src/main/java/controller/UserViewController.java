@@ -1,14 +1,16 @@
 package controller;
 
-import cryptocurrency.CryptocurrencyExchangeRates;
-import cryptocurrency.CryptocurrencyRatesChart;
+import model.cryptocurrency.CryptocurrencyExchangeRatesModel;
+import model.cryptocurrency.CryptocurrencyRatesChartModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
-import services.CryptocurrencyRatesUpdateTimer;
-import session.LoggedUser;
+import model.TimerModel;
+import model.session.LoggedUser;
+
+import java.util.stream.IntStream;
 
 public class UserViewController {
 
@@ -23,32 +25,7 @@ public class UserViewController {
     private TextField tfDeposit;
 
     @FXML
-    private MenuItem miPLN;
-
-    @FXML
-    private MenuItem miUSD;
-
-    @FXML
-    private MenuItem miEUR;
-
-    @FXML
-    private MenuItem miBTC;
-
-    @FXML
-    private MenuItem miDOGE;
-
-
-    @FXML
-    private MenuItem mi10s;
-
-    @FXML
-    private MenuItem mi1Min;
-
-    @FXML
-    private RadioButton rbHourly;
-
-    @FXML
-    private RadioButton rbDaily;
+    private Menu currencyMenu;
 
     @FXML
     private NumberAxis y;
@@ -68,48 +45,45 @@ public class UserViewController {
     //endregion
 
 
-    private String selectedCryptocurrency = "BTC";
-    private String selectedCurrency = "PLN";
-    private int selectedCurrencyIndex = 0;
-    private int selectedUpdateRate=10000;
-    private String chartType = "minutes";
+    private CryptocurrencyExchangeRatesModel cryptocurrencyExchangeRatesModel;
+    private CryptocurrencyRatesChartModel cryptocurrencyRatesChartModel;
+    private TimerModel timerModel;
+
+    private String selectedCryptocurrency;
+    private String selectedCurrency;
+    private String chartType;
+
+    private int selectedCurrencyIndex;
+    private int updateRate;
 
 
     @FXML
     void initialize()
     {
-        CryptocurrencyRatesUpdateTimer.getInstance().setUserViewController(this);
+        cryptocurrencyExchangeRatesModel = new CryptocurrencyExchangeRatesModel();
+        cryptocurrencyRatesChartModel = new CryptocurrencyRatesChartModel();
+        timerModel = new TimerModel();
+        timerModel.setUserViewController(this);
         tfUsername.setText(LoggedUser.getInstance().getLoggedUser().getUsername());
-        updateTextFieldBalance();
-        updateTextFieldDeposit();
+        setVariables();
+        setTextFieldBalance();
+        setTextFieldDeposit();
         updateRateAfterChangingCurrency_Cryptocurrency();
-        updateCryptocurrencyRatesUI();
-        updateChart();
-        callUpdateTimer();
+        setCryptocurrencyRatesUI();
+        setChart();
+        startTimer();
     }
 
-
-    public void updateChart()
+    private void setVariables()
     {
-
-        CryptocurrencyRatesChart.getInstance().createChart(cryptocurrencyChart,selectedCryptocurrency,selectedCurrency,chartType,y);
+        selectedCryptocurrency="BTC";
+        selectedCurrency = "PLN";
+        selectedCurrencyIndex = 0;
+        updateRate = 10000;
+        chartType="minutes";
     }
 
-
-    private void callUpdateTimer()
-    {
-        CryptocurrencyRatesUpdateTimer.getInstance().stopTimer();
-        CryptocurrencyRatesUpdateTimer.getInstance().startUpdating(selectedUpdateRate,selectedCryptocurrency);
-    }
-
-    private void updateRateAfterChangingCurrency_Cryptocurrency()
-    {
-        CryptocurrencyExchangeRates.getInstance().updateRates(selectedCryptocurrency,false);
-        CryptocurrencyExchangeRates.getInstance().updateRates(selectedCryptocurrency,true);
-    }
-
-
-    private void updateTextFieldBalance()
+    private void setTextFieldBalance()
     {
         switch(selectedCurrency)
         {
@@ -120,7 +94,7 @@ public class UserViewController {
         tfBalance.setText(tfBalance.getText()+selectedCurrency);
     }
 
-    private void updateTextFieldDeposit()
+    private void setTextFieldDeposit()
     {
         switch(selectedCryptocurrency)
         {
@@ -131,137 +105,118 @@ public class UserViewController {
         tfDeposit.setText(tfDeposit.getText()+selectedCryptocurrency);
     }
 
-    public synchronized void updateCryptocurrencyRatesUI()
+    private void updateRateAfterChangingCurrency_Cryptocurrency()
     {
-        tfCurrencyType.setText(selectedCryptocurrency);
-        tfAverageCryptocurrencyRate.setText(CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get("AVERAGE").get(selectedCurrencyIndex).toString()+selectedCurrency);
-        tfCryptocurrencyRate.setText(CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex).toString()+selectedCurrency);
+        cryptocurrencyExchangeRatesModel.updateRates(selectedCryptocurrency,false);
+        cryptocurrencyExchangeRatesModel.updateRates(selectedCryptocurrency,true);
     }
 
+    public synchronized void setCryptocurrencyRatesUI()
+    {
+        tfCurrencyType.setText(selectedCryptocurrency);
+        tfAverageCryptocurrencyRate.setText(cryptocurrencyExchangeRatesModel.getExchangeRatesMap().get("AVERAGE").get(selectedCurrencyIndex).toString()+selectedCurrency);
+        tfCryptocurrencyRate.setText(cryptocurrencyExchangeRatesModel.getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex).toString()+selectedCurrency);
+    }
+
+    public void setChart()
+    {
+        cryptocurrencyRatesChartModel.createChart(cryptocurrencyChart,selectedCryptocurrency,selectedCurrency,chartType,y);
+    }
+
+    private void startTimer()
+    {
+        timerModel.stopTimer();
+        timerModel.startUpdating(updateRate);
+    }
+
+    public void updateRates()
+    {
+        cryptocurrencyExchangeRatesModel.updateRates(selectedCryptocurrency,false);
+        cryptocurrencyExchangeRatesModel.updateRates(selectedCryptocurrency,true);
+    }
 
     @FXML
     void currencyMenuOnAction(ActionEvent event) {
 
-           if(event.getSource().equals(miPLN))
-           {
-               selectedCurrencyIndex=0;
-               selectedCurrency="PLN";
-           }
-           else if(event.getSource().equals(miEUR))
-           {
-               selectedCurrencyIndex=1;
-               selectedCurrency="EUR";
-           }
-           else if(event.getSource().equals(miUSD))
-           {
-               selectedCurrencyIndex=2;
-               selectedCurrency="USD";
-           }
-           updateRateAfterChangingCurrency_Cryptocurrency();
-           updateCryptocurrencyRatesUI();
-           updateTextFieldBalance();
-           updateChart();
+        MenuItem currencyType = (MenuItem) event.getSource();
+        selectedCurrency = currencyType.getText();
+        selectedCurrencyIndex = IntStream.range(0,currencyMenu.getItems().size())
+                .filter(item -> currencyMenu.getItems().get(item).getText().equals(selectedCurrency)).findFirst().getAsInt();
+
+        updateRateAfterChangingCurrency_Cryptocurrency();
+        setCryptocurrencyRatesUI();
+        setTextFieldBalance();
+        setChart();
 
     }
 
     @FXML
     void cryptocurrencyMenuOnAction(ActionEvent event) {
+        MenuItem cryptocurrencyType = (MenuItem) event.getSource();
+        selectedCryptocurrency = cryptocurrencyType.getText();
 
-        if(event.getSource().equals(miBTC))
-        {
-            selectedCryptocurrency="BTC";
-        }
-        else if(event.getSource().equals(miDOGE))
-        {
-            selectedCryptocurrency="DOGE";
-        }
-        else
-        {
-            selectedCryptocurrency="ETH";
-        }
         updateRateAfterChangingCurrency_Cryptocurrency();
-        updateCryptocurrencyRatesUI();
-        updateTextFieldDeposit();
-        updateChart();
+        setCryptocurrencyRatesUI();
+        setTextFieldDeposit();
+        setChart();
     }
 
     @FXML
     void updateMenuOnAction(ActionEvent event) {
-
-        if(event.getSource().equals(mi10s))
-        {
-            selectedUpdateRate = 10000;
-        }
-        else if(event.getSource().equals(mi1Min))
-        {
-            selectedUpdateRate=60000;
-        }
-        else
-        {
-            selectedUpdateRate=600000;
-        }
-        callUpdateTimer();
+        MenuItem menuItem  = (MenuItem)event.getSource();
+        updateRate = timerModel.changeUpdateRate(menuItem.getText());
+        startTimer();
     }
 
 
     @FXML
     void rbOnAction(ActionEvent event) {
-
-        if(event.getSource().equals(rbHourly))
-        {
-            chartType="hours";
-        }
-        else if(event.getSource().equals(rbDaily)) {
-            chartType="days";
-        }
-        else
-        {
-            chartType="minutes";
-        }
-        updateChart();
+        RadioButton radioButton =(RadioButton) event.getSource();
+        chartType =  cryptocurrencyRatesChartModel.changeChartType(radioButton.getText());
+        setChart();
     }
 
     @FXML
     void btnBuyOnAction(ActionEvent event) {
         stopTimer();
-        getMainStage().setScene(View.getScene("BuyView.fxml"));
+        View.getInstance().setView(View.getView("BuyView.fxml"));
     }
 
     @FXML
     void btnExchangeOnAction(ActionEvent event) {
         stopTimer();
-        getMainStage().setScene(View.getScene("ExchangeView.fxml"));
+        View.getInstance().setView(View.getView("ExchangeView.fxml"));
     }
 
     @FXML
-    void btnSellOnAction(ActionEvent event) {stopTimer();
-        getMainStage().setScene(View.getScene("SellView.fxml"));
+    void btnSellOnAction(ActionEvent event) {
+        stopTimer();
+        View.getInstance().setView(View.getView("SellView.fxml"));
     }
 
     @FXML
-    void btnSendOnAction(ActionEvent event) {stopTimer();
-        getMainStage().setScene(View.getScene("SendView.fxml"));
+    void btnSendOnAction(ActionEvent event) {
+        stopTimer();
+        View.getInstance().setView(View.getView("SendView.fxml"));
     }
 
     @FXML
     void btnAccountOnAction(ActionEvent event) {
         stopTimer();
-        getMainStage().setScene(View.getScene("AccountView.fxml"));
+        View.getInstance().setView(View.getView("AccountView.fxml"));
     }
 
     @FXML
-    void btnLogoutOnAction(ActionEvent event) {stopTimer();
-        getMainStage().setScene(View.getScene("LoginView.fxml"));
+    void btnLogoutOnAction(ActionEvent event) {
+        stopTimer();
+        View.getInstance().setView(View.getView("LoginView.fxml"));
     }
 
 
     private void stopTimer()
     {
-        CryptocurrencyRatesUpdateTimer.getInstance().stopTimer();
+        timerModel.stopTimer();
     }
 
-    private View getMainStage() {
-        return View.getInstance();
-    }
 
 }

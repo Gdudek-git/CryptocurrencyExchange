@@ -1,27 +1,19 @@
-package database;
+package model.database;
 
-import database.entity.UserContact;
-import database.entity.UserWallet;
+import model.database.entity.UserContact;
+import model.database.entity.UserWallet;
+import model.database.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import database.entity.User;
 
-public final class DatabaseConnection {
-
-    private static DatabaseConnection databaseConnection = new DatabaseConnection();
-
-    public static DatabaseConnection getInstance()
-    {
-        return  databaseConnection;
-    }
+public  class DatabaseConnectionModel {
 
     private  SessionFactory buildSessionFactory () {
 
         SessionFactory sessionFactoryObj;
-
         Configuration configObj = new Configuration();
         configObj.addAnnotatedClass(User.class);
         configObj.addAnnotatedClass(UserContact.class);
@@ -37,6 +29,11 @@ public final class DatabaseConnection {
     public  Session getSessionObj()
     {
         return  buildSessionFactory().openSession();
+    }
+
+    public void closeConnection(Session session)
+    {
+        session.close();
     }
 
 

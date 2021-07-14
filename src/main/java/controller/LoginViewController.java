@@ -1,16 +1,18 @@
 package controller;
 
-import database.entity.User;
+import model.database.DatabaseConnectionModel;
+import model.database.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import session.LoadUserData;
-import session.LoggedUser;
+import model.session.LoginModel;
+import org.hibernate.Session;
+import model.session.LoadUserModel;
+
 
 public class LoginViewController {
-
 
     //region Controls
     @FXML
@@ -23,65 +25,65 @@ public class LoginViewController {
     private Label lbWrongLoginData;
     //endregion
 
-    User user;
-    LoadUserData loadUserData = LoadUserData.getInstance();
-    boolean connectedSuccessfully=false;
+    private LoadUserModel loadUserModel;
+    private LoginModel loginModel;
+    private DatabaseConnectionModel databaseConnectionModel;
+    private Session session;
+
 
     @FXML
     private void initialize() {
-       establishConnectionWithDatabase();
+        loadUserModel = new LoadUserModel();
+        databaseConnectionModel = new DatabaseConnectionModel();
+        loginModel = new LoginModel();
+        establishConnectionWithDatabase();
     }
 
     private void establishConnectionWithDatabase()
     {
-        Thread thread = new Thread(() -> {loadUserData.establishConnection();
-        connectedSuccessfully=true;
-        });
+        Thread thread = new Thread(() -> session = databaseConnectionModel.getSessionObj());
         thread.start();
-    }
-
-
-    @FXML
-    void btnLoginOnAction(ActionEvent event) {
-        if(connectedSuccessfully) {
-            user = loadUserData.loadUser(tfUsername.getText());
-            if (areLoginDataValid()) {
-                LoggedUser.getInstance().setLoggedUser(user);
-                loadUserData.closeConnection();
-                getMainStage().setScene(View.getScene("UserView.fxml"));
-            }
-        }
-        else
-        {
-            establishConnectionWithDatabase();
-        }
-
     }
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
-        loadUserData.closeConnection();
-        getMainStage().setScene(View.getScene("RegisterView.fxml"));
+        databaseConnectionModel.closeConnection(session);
+        changeView("RegisterView.fxml");
     }
 
-    private View getMainStage() {
-        return View.getInstance();
+    @FXML
+    void btnLoginOnAction(ActionEvent event) {
+
+        User user = loadUserModel.loadUser(tfUsername.getText(),session);
+            if (areLoginDataValid(user)) {
+                login(user);
+            }
+            else
+            {
+                showError("Incorrect username or password");
+            }
     }
 
-
-    private boolean areLoginDataValid()
+    private boolean areLoginDataValid(User user)
     {
-        if(user==null||!user.getPassword().equals(tfPassword.getText()))
-        {
-            showError();
-            return false;
-        }
-        return true;
+        return loginModel.areLoginDataValid(user,tfUsername.getText(),tfPassword.getText());
     }
 
-    private void showError()
+    private void login(User user)
     {
-        lbWrongLoginData.setText("The username or password you entered is incorrect");
+        loginModel.setLoggedUser(user);
+        databaseConnectionModel.closeConnection(session);
+        changeView("UserView.fxml");
     }
+    private void changeView(String name)
+    {
+        View.getInstance().setView(View.getView(name));
+    }
+
+    private void showError(String error)
+    {
+        lbWrongLoginData.setText(error);
+    }
+
 
 }

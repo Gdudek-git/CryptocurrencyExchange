@@ -1,6 +1,7 @@
 package controller;
 
-import cryptocurrency.CryptocurrencyExchangeRates;
+import model.cryptocurrency.CryptocurrencyExchangeRatesModel;
+import model.database.DatabaseConnectionModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,9 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import services.RequestToBuyCryptocurrency;
-import validation.BuyViewValidation;
-import validation.Valid;
+import org.hibernate.Session;
+import model.operations.BuyCryptocurrencyModel;
+import model.session.ChangeUserDataModel;
+import model.validation.BuyViewValidationModel;
+import model.validation.Valid;
 
 public class BuyViewController {
 
@@ -41,17 +44,38 @@ public class BuyViewController {
     //endregion
 
 
-    private int selectedCurrencyIndex=0;
-    private String selectedCryptocurrency="BTC";
-    private String selectedCurrency="PLN";
-    BuyViewValidation buyValidation = BuyViewValidation.getInstance();
+    private DatabaseConnectionModel databaseConnectionModel;
+    private CryptocurrencyExchangeRatesModel cryptocurrencyExchangeRatesModel;
+    private BuyCryptocurrencyModel buyCryptocurrencyModel;
+    private ChangeUserDataModel changeUserDataModel;
+    private BuyViewValidationModel buyViewValidationModel;
+
+    private int selectedCurrencyIndex;
+    private String selectedCryptocurrency;
+    private String selectedCurrency;
+    private Session session;
+
 
     @FXML
     public void initialize() {
-        RequestToBuyCryptocurrency.getInstance().establishConnectionWithDatabase();
+        databaseConnectionModel = new DatabaseConnectionModel();
+        cryptocurrencyExchangeRatesModel = new CryptocurrencyExchangeRatesModel();
+        buyCryptocurrencyModel = new BuyCryptocurrencyModel();
+        changeUserDataModel = new ChangeUserDataModel();
+        buyViewValidationModel = new BuyViewValidationModel();
+
+        selectedCryptocurrency = "BTC";
+        selectedCurrency = "PLN";
+        selectedCurrencyIndex=0;
+
+        establishConnectionWithDatabase();
         setComboBoxItems();
         updateRates();
         setUI();
+    }
+    private void establishConnectionWithDatabase() {
+        Thread thread = new Thread(() -> session =  databaseConnectionModel.getSessionObj());
+        thread.start();
     }
 
     private void setComboBoxItems() {
@@ -64,21 +88,30 @@ public class BuyViewController {
 
     }
 
-    @FXML
-    void cbxCurrencyOnAction(ActionEvent event)
+    private void updateRates()
     {
-        switch(cbxCurrency.getSelectionModel().getSelectedItem()){
-            case "PLN":selectedCurrencyIndex=0;break;
-            case "EUR":selectedCurrencyIndex=1;break;
-            case "USD":selectedCurrencyIndex=2;break;
-        }
+        cryptocurrencyExchangeRatesModel.updateRates(selectedCryptocurrency,false);
+    }
+
+    private void setUI()
+    {
+        tfCurrentCryptocurrencyRates.setText("1 "+ selectedCryptocurrency);
+        tfCurrentCurrencyRates.setText(cryptocurrencyExchangeRatesModel.getExchangeRatesMap()
+                .get(selectedCryptocurrency).get(selectedCurrencyIndex)
+                .toString()+" "+selectedCurrency);
+    }
+
+    @FXML
+    private void cbxCurrencyOnAction(ActionEvent event)
+    {
+        selectedCurrencyIndex =cbxCurrency.getSelectionModel().getSelectedIndex();
         selectedCurrency=cbxCurrency.getSelectionModel().getSelectedItem();
         setUI();
         showAmountUserCanBuy();
     }
 
     @FXML
-    void cbxCryptocurrencyOnAction(ActionEvent event)
+    private void cbxCryptocurrencyOnAction(ActionEvent event)
     {
         selectedCryptocurrency = cbxCryptocurrency.getSelectionModel().getSelectedItem();
         updateRates();
@@ -86,12 +119,9 @@ public class BuyViewController {
         showAmountUserCanBuy();
     }
 
-
     @FXML
-    void btnBuyOnAction(ActionEvent event) {
-
+    private void btnBuyOnAction(ActionEvent event) {
         resetLabels();
-
         if(checkIfDouble()) {
             if(checkIfSufficientFunds())
             {
@@ -100,82 +130,63 @@ public class BuyViewController {
         }
     }
 
-
-    @FXML
-    void btnReturnOnClick(ActionEvent event) {
-        RequestToBuyCryptocurrency.getInstance().closeConnectionWithDatabase();
-        getMainStage().setScene(View.getScene("UserView.fxml"));
-    }
-
-    @FXML
-    void tfOnKeyTyped(KeyEvent event) {
-        showAmountUserCanBuy();
-    }
-
-
-    private void buyCryptocurrency()
+    private void resetLabels()
     {
-        RequestToBuyCryptocurrency.getInstance().buyCryptocurrency(selectedCurrency,selectedCryptocurrency,Double.parseDouble(tfCurrencyAmount.getText()),Double.parseDouble(tfCryptocurrencyAmount.getText()));
-        showInfo("Bought successfully");
+        lbInfo.setText("");
     }
 
     private boolean checkIfDouble()
     {
-        String currencyValid = buyValidation.checkIfDouble(tfCurrencyAmount.getText());
-
-        if(!currencyValid.equals(Valid.VALID))
+        String isDouble = buyViewValidationModel.checkIfDouble(tfCurrencyAmount.getText());
+        if(!isDouble.equals(Valid.VALID))
         {
-            showInfo(currencyValid);
+            showInfo(isDouble);
             return false;
         }
-
         return true;
     }
 
     private boolean checkIfSufficientFunds()
     {
-        String fundsValid = buyValidation.checkIfSufficientFundsToBuy(selectedCurrency,tfCurrencyAmount.getText());
-        if(!fundsValid.equals(Valid.VALID))
+        String sufficientFunds = buyViewValidationModel.checkIfSufficientFundsToBuy(selectedCurrency,tfCurrencyAmount.getText());
+        if(!sufficientFunds.equals(Valid.VALID))
         {
-            showInfo(fundsValid);
+            showInfo(sufficientFunds);
             return false;
         }
         return true;
     }
 
-    private void setUI()
+    private void buyCryptocurrency()
     {
-        tfCurrentCryptocurrencyRates.setText("1 "+ selectedCryptocurrency);
-        tfCurrentCurrencyRates.setText(CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex).toString()+" "+selectedCurrency);
+        buyCryptocurrencyModel.buyCryptocurrency(selectedCurrency,selectedCryptocurrency,tfCurrencyAmount.getText(),tfCryptocurrencyAmount.getText());
+        changeUserDataModel.updateLoggedUserData(session);
+        showInfo("Bought successfully");
     }
-
-   private void updateRates()
-   {
-       CryptocurrencyExchangeRates.getInstance().updateRates(selectedCryptocurrency,false);
-   }
-
-
-   private void resetLabels()
-   {
-       lbInfo.setText("");
-   }
-
-
-
-   private void showAmountUserCanBuy()
-   {
-       if(buyValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(Valid.VALID)) {
-
-           tfCryptocurrencyAmount.setText(String.valueOf(Double.parseDouble(tfCurrencyAmount.getText()) / CryptocurrencyExchangeRates.getInstance().getExchangeRatesMap().get(selectedCryptocurrency).get(selectedCurrencyIndex)));
-       }
-   }
 
     private void showInfo(String info)
     {
         lbInfo.setText(info);
     }
 
-    private View getMainStage() {
-        return View.getInstance();
+    @FXML
+    private void tfOnKeyTyped(KeyEvent event) {
+        showAmountUserCanBuy();
+    }
+
+    private void showAmountUserCanBuy()
+    {
+        if(buyViewValidationModel.checkIfDouble(tfCurrencyAmount.getText()).equals(Valid.VALID)) {
+
+            tfCryptocurrencyAmount.setText(String.valueOf(Double.parseDouble(tfCurrencyAmount.getText())
+                    /cryptocurrencyExchangeRatesModel.getExchangeRatesMap()
+                    .get(selectedCryptocurrency).get(selectedCurrencyIndex)));
+        }
+    }
+
+    @FXML
+    void btnReturnOnClick(ActionEvent event) {
+        databaseConnectionModel.closeConnection(session);
+        View.getInstance().setView(View.getView("UserView.fxml"));
     }
 }

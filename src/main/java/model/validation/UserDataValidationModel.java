@@ -1,13 +1,14 @@
-package validation;
+package model.validation;
 
-import database.RegisterUser;
-import database.entity.User;
+import model.database.RegisterUserModel;
+import model.database.entity.User;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import org.hibernate.Session;
 
 import java.util.function.UnaryOperator;
 
-public class UserDataValidation {
+public class UserDataValidationModel {
 
 
 
@@ -78,26 +79,25 @@ public class UserDataValidation {
         return emptyFieldError();
     }
 
-    public String checkUsername(String username, RegisterUser registerUser)
+    public String checkUsername(String username, RegisterUserModel registerUserModel,Session session)
     {
         if(!username.equals("")) {
             String result = isValidLength(username);
             if(result.equals( Valid.VALID))
             {
-                result = checkIfUsernameIsInDatabase(username,registerUser);
+                result = checkIfUsernameIsInDatabase(username, registerUserModel,session);
             }
             return result;
         }
         return emptyFieldError();
     }
 
-    public String checkIfUsernameIsInDatabase(String username,RegisterUser registerUser)
+    public String checkIfUsernameIsInDatabase(String username, RegisterUserModel registerUserModel, Session session)
     {
-        registerUser.getSessionObj().beginTransaction();
-        User user =  registerUser.getSessionObj().get(User.class, username);
-        registerUser.getSessionObj().getTransaction().commit();
-        registerUser.getSessionObj().clear();
-        if(user==null)
+
+        User user =  session.get(User.class, username);
+        session.clear();
+        if(user ==null)
         {
             return Valid.VALID;
         }

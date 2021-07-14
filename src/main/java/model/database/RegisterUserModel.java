@@ -1,33 +1,12 @@
-package database;
+package model.database;
 
-import database.entity.User;
-import database.entity.UserContact;
-import database.entity.UserWallet;
+import model.database.entity.User;
 import org.hibernate.Session;
-import validation.Valid;
 
-public class RegisterUser {
+public class RegisterUserModel {
 
-    Session sessionObj;
 
-    public Session getSessionObj()
-    {
-        return  sessionObj;
-    }
-
-    public void establishConnection()
-    {
-        sessionObj =  DatabaseConnection.getInstance().getSessionObj();
-    }
-
-    public void closeConnection()
-    {
-        if(sessionObj!=null) {
-            sessionObj.close();
-        }
-    }
-
-    public void register(String firstName,String lastName, String username, String phoneNumber, String country, String email, String gender, String password)
+    public void register(String firstName,String lastName, String username, String phoneNumber, String country, String email, String gender, String password,Session sessionObj)
     {
 
         User userObj = new User();
@@ -43,7 +22,7 @@ public class RegisterUser {
         }
     }
 
-    private void setUserEntityData(User userObj,String firstName,String lastName, String username, String phoneNumber, String country, String email, String gender,String password)
+    private void setUserEntityData(User userObj, String firstName, String lastName, String username, String phoneNumber, String country, String email, String gender, String password)
     {
         userObj.setUsername(username);
         userObj.setFirstName(firstName);
@@ -63,7 +42,7 @@ public class RegisterUser {
 
     }
 
-    private void addUserEntityToDatabase(Session sessionObj, User userObj )
+    private void addUserEntityToDatabase(Session sessionObj, User userObj)
     {
             sessionObj.beginTransaction();
             sessionObj.save(userObj);

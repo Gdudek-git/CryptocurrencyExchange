@@ -1,4 +1,4 @@
-package cryptocurrency.api;
+package model.cryptocurrency.api;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

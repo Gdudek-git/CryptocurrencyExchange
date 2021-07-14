@@ -1,5 +1,8 @@
 package controller;
 
+
+import model.database.DatabaseConnectionModel;
+import model.database.entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,9 +10,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import services.RequestToSendCryptocurrency;
-import validation.SendViewValidation;
-import validation.Valid;
+import org.hibernate.Session;
+import model.operations.SendCryptocurrencyModel;
+import model.session.ChangeUserDataModel;
+import model.session.LoadUserModel;
+import model.validation.SendViewValidationModel;
+import model.validation.Valid;
 
 public class SendViewController {
 
@@ -27,22 +33,44 @@ public class SendViewController {
     private Label lbInfo;
     //endregion
 
-    private String selectedCryptocurrency="BTC";
-    private SendViewValidation sendValidation = SendViewValidation.getInstance();
+    private  DatabaseConnectionModel databaseConnectionModel;
+    private SendCryptocurrencyModel sendCryptocurrencyModel;
+    private ChangeUserDataModel changeUserDataModel;
+    private SendViewValidationModel sendViewValidationModel;
+    private LoadUserModel loadUserModel;
+
+    private Session session;
+
+    private String selectedCryptocurrency;
 
     @FXML
     public void initialize() {
-        sendValidation.establishConnectionWithDatabase();
-        RequestToSendCryptocurrency.getInstance().establishConnectionWithDatabase();
+        databaseConnectionModel = new DatabaseConnectionModel();
+        sendCryptocurrencyModel = new SendCryptocurrencyModel();
+        changeUserDataModel = new ChangeUserDataModel();
+        sendViewValidationModel = new SendViewValidationModel();
+        loadUserModel = new LoadUserModel();
+
+        selectedCryptocurrency = "BTC";
+
+        establishConnectionWithDatabase();
         setComboBoxItems();
     }
 
+    private void establishConnectionWithDatabase() {
+        Thread thread = new Thread(() -> session =  databaseConnectionModel.getSessionObj());
+        thread.start();
+    }
+
+    private void setComboBoxItems() {
+        ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC", "DOGE", "ETH");
+        cbxCryptocurrency.setItems(cryptocurrency);
+        cbxCryptocurrency.getSelectionModel().selectFirst();
+    }
+
     @FXML
-    void btnReturnOnAction(ActionEvent event)
-    {
-        RequestToSendCryptocurrency.getInstance().closeConnectionWithDatabase();
-        sendValidation.closeConnectionWithDatabase();
-        getMainStage().setScene(View.getScene("UserView.fxml"));
+    void cbxCryptocurrencyOnAction(ActionEvent event) {
+        selectedCryptocurrency = cbxCryptocurrency.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -61,26 +89,17 @@ public class SendViewController {
         }
     }
 
-    private void sendCryptocurrency()
+    private void resetLabel()
     {
-        RequestToSendCryptocurrency.getInstance().sendCryptocurrency(selectedCryptocurrency,Double.parseDouble(tfCryptocurrencyAmount.getText()),sendValidation.getLoadUserData().loadUser(tfRecipientNickname.getText()));
+        lbInfo.setText("");
     }
 
     private boolean checkIfDouble()
     {
-        if(!sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()).equals( Valid.VALID))
+        String isDouble = sendViewValidationModel.checkIfDouble(tfCryptocurrencyAmount.getText());
+        if(!isDouble.equals( Valid.VALID))
         {
-            showInfo(sendValidation.checkIfDouble(tfCryptocurrencyAmount.getText()));
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkIfSufficientFunds()
-    {
-        if(!sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency, tfCryptocurrencyAmount.getText()).equals(Valid.VALID))
-        {
-            showInfo(sendValidation.checkIfSufficientFundsToSend(selectedCryptocurrency,tfCryptocurrencyAmount.getText()));
+            showInfo(isDouble);
             return false;
         }
         return true;
@@ -88,25 +107,33 @@ public class SendViewController {
 
     private boolean checkIfRecipientExist()
     {
-        if(!sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()).equals(Valid.VALID))
+        String recipientExist = sendViewValidationModel.checkIfRecipientExist(tfRecipientNickname.getText(),session,loadUserModel);
+        if(!recipientExist.equals(Valid.VALID))
         {
-            showInfo(sendValidation.checkIfRecipientExist(tfRecipientNickname.getText()));
+            showInfo(recipientExist);
             return false;
         }
         return true;
     }
 
-
-
-    @FXML
-    void cbxCryptocurrencyOnAction(ActionEvent event) {
-        selectedCryptocurrency = cbxCryptocurrency.getSelectionModel().getSelectedItem();
+    private boolean checkIfSufficientFunds()
+    {
+        String sufficientFunds = sendViewValidationModel.checkIfSufficientFundsToSend(selectedCryptocurrency,tfCryptocurrencyAmount.getText());
+        if(!sufficientFunds.equals(Valid.VALID))
+        {
+            showInfo(sufficientFunds);
+            return false;
+        }
+        return true;
     }
 
-    private void setComboBoxItems() {
-        ObservableList<String> cryptocurrency = FXCollections.observableArrayList("BTC", "DOGE", "ETH");
-        cbxCryptocurrency.setItems(cryptocurrency);
-        cbxCryptocurrency.getSelectionModel().selectFirst();
+    private void sendCryptocurrency()
+    {
+        User recipient = loadUserModel.loadUser(tfRecipientNickname.getText(),session);
+        sendCryptocurrencyModel.sendCryptocurrency(selectedCryptocurrency,tfCryptocurrencyAmount.getText(),recipient);
+        changeUserDataModel.updateLoggedUserData(session);
+        changeUserDataModel.updateSelectedUserData(recipient,session);
+        showInfo("Send successfully");
     }
 
     private void showInfo(String info)
@@ -114,13 +141,10 @@ public class SendViewController {
         lbInfo.setText(info);
     }
 
-    private void resetLabel()
+    @FXML
+    void btnReturnOnAction(ActionEvent event)
     {
-        lbInfo.setText("");
+        databaseConnectionModel.closeConnection(session);
+        View.getInstance().setView(View.getView("UserView.fxml"));
     }
-
-    private View getMainStage() {
-        return View.getInstance();
-    }
-
 }

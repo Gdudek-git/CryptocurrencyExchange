@@ -1,34 +1,23 @@
-package cryptocurrency;
+package model.cryptocurrency;
 
-import cryptocurrency.api.CryptocurrencyApi;
+import model.cryptocurrency.api.CryptocurrencyApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class CryptocurrencyExchangeRates extends CryptocurrencyApi {
+public class CryptocurrencyExchangeRatesModel extends CryptocurrencyApi {
 
-    private static CryptocurrencyExchangeRates cryptocurrencyExchangeRates;
 
     public Map<String, List<Double>> getExchangeRatesMap() {
         return exchangeRatesMap;
     }
 
-    private Map<String, List<Double>> exchangeRatesMap = new HashMap<>();
+    private Map<String, List<Double>> exchangeRatesMap;
 
-
-    public static CryptocurrencyExchangeRates  getInstance()
-    {
-        if(cryptocurrencyExchangeRates ==null)
-        {
-            cryptocurrencyExchangeRates = new CryptocurrencyExchangeRates();
-        }
-        return cryptocurrencyExchangeRates;
-    }
-
-    private CryptocurrencyExchangeRates()
-    {
+    public CryptocurrencyExchangeRatesModel()
+    {   exchangeRatesMap = new HashMap<>();
         setMapKeys();
     }
 

@@ -1,6 +1,7 @@
-package cryptocurrency.api;
+package model.cryptocurrency.api;
 
-import cryptocurrency.SetCryptocurrencyExchangeRates;
+import model.cryptocurrency.CryptocurrencyExchangeRatesModel;
+import model.cryptocurrency.SetCryptocurrencyExchangeRates;
 import org.json.JSONObject;
 
 import java.net.URI;
@@ -9,21 +10,17 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
-public abstract class CryptocurrencyApi {
+public abstract class CryptocurrencyApi extends SetCryptocurrencyExchangeRates{
 
-    private static SetCryptocurrencyExchangeRates setCryptocurrencyExchangeRates = new SetCryptocurrencyExchangeRates();
     private static String currentCurrency;
     private static String currentCryptocurrency;
     private static boolean isAverageRate;
-    private static ArrayList<Double> cryptocurrencyRates = new ArrayList<>();
-
-
-
+    private static ArrayList<Double> cryptocurrencyRates;
 
     public synchronized void getData(String cryptocurrency,boolean isAverageRate)
     {
+        cryptocurrencyRates = new ArrayList<>();
         this.isAverageRate = isAverageRate;
-        cryptocurrencyRates.clear();
         currentCryptocurrency=cryptocurrency;
         HttpClient client = HttpClient.newHttpClient();
         getPlnRate(client);
@@ -85,7 +82,7 @@ public abstract class CryptocurrencyApi {
         {
             currentCryptocurrency="AVERAGE";
         }
-        setCryptocurrencyExchangeRates.roundAndSetExchangeRates(currentCryptocurrency,cryptocurrencyRates);
+        roundAndSetExchangeRates(currentCryptocurrency,cryptocurrencyRates, (CryptocurrencyExchangeRatesModel)this);
     }
 
 

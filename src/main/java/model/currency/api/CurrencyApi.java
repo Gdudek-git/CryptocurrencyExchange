@@ -1,7 +1,8 @@
-package currency.api;
+package model.currency.api;
 
 
-import currency.CalculateAndSetCurrencyExchangeRates;
+import model.currency.CalculateAndSetCurrencyExchangeRates;
+import model.currency.CurrencyExchangeRatesModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,13 +11,23 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public abstract class CurrencyApi {
+public abstract class CurrencyApi extends CalculateAndSetCurrencyExchangeRates {
 
-    private static CalculateAndSetCurrencyExchangeRates calculateAndSetCurrencyExchangeRates = new CalculateAndSetCurrencyExchangeRates();
+
+    private static double usdToPlnBid;
+    private static double usdToPlnAsk;
+    private static double eurToPlnBid;
+    private static double eurToPlnAsk;
 
     public void getData()
     {
         HttpClient client = HttpClient.newHttpClient();
+        sendRequest(client);
+        setKnownRates(usdToPlnBid,usdToPlnAsk,eurToPlnBid,eurToPlnAsk,(CurrencyExchangeRatesModel)this);
+    }
+
+    private void sendRequest(HttpClient client)
+    {
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://api.nbp.pl/api/exchangerates/tables/C/?format=JSON" )).build();
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
@@ -33,12 +44,10 @@ public abstract class CurrencyApi {
 
     private static void getRates(JSONArray jsonArray)
     {
-        double usdToPlnBid = getUsdToPlnBid(jsonArray);
-        double usdToPlnAsk = getUsdToPlnAsk(jsonArray);
-        double eurToPlnBid = getEurToPlnBid(jsonArray);
-        double eurToPlnAsk = getEurToPlnAsk(jsonArray);
-
-        calculateAndSetCurrencyExchangeRates.setKnownRates(usdToPlnBid,usdToPlnAsk,eurToPlnBid,eurToPlnAsk);
+         usdToPlnBid = getUsdToPlnBid(jsonArray);
+         usdToPlnAsk = getUsdToPlnAsk(jsonArray);
+         eurToPlnBid = getEurToPlnBid(jsonArray);
+         eurToPlnAsk = getEurToPlnAsk(jsonArray);
     }
 
 

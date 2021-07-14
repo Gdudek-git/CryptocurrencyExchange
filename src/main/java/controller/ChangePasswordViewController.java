@@ -1,13 +1,15 @@
 package controller;
 
+import model.database.DatabaseConnectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import session.ChangeUserData;
-import session.LoggedUser;
-import validation.UserDataValidation;
-import validation.Valid;
+import org.hibernate.Session;
+import model.session.ChangeUserDataModel;
+import model.session.LoggedUser;
+import model.validation.UserDataValidationModel;
+import model.validation.Valid;
 
 public class ChangePasswordViewController {
 
@@ -22,35 +24,36 @@ public class ChangePasswordViewController {
     private PasswordField pfConfirmedNewPassword;
 
     @FXML
-    private Label lbIncorrectCurrentPassword;
+    private Label lbCurrentPassword;
 
     @FXML
-    private Label lbIncorrectNewPassword;
+    private Label lbNewPassword;
     //endregion
 
 
-    ChangeUserData changeUserData = new ChangeUserData();
-    UserDataValidation userDataValidation = new UserDataValidation();
-    boolean connectedSuccessfully=false;
-
+    private ChangeUserDataModel changeUserDataModel;
+    private DatabaseConnectionModel databaseConnectionModel;
+    private UserDataValidationModel userDataValidationModel;
+    private Session session;
 
     @FXML
     private void initialize() {
+        changeUserDataModel = new ChangeUserDataModel();
+        databaseConnectionModel = new DatabaseConnectionModel();
+        userDataValidationModel = new UserDataValidationModel();
         establishConnectionWithDatabase();
     }
 
     private void establishConnectionWithDatabase()
     {
-        Thread thread = new Thread(() -> {changeUserData.establishConnection();
-        connectedSuccessfully=true;
-        });
+        Thread thread = new Thread(() -> session=  databaseConnectionModel.getSessionObj());
         thread.start();
     }
 
     @FXML
-    void btnConfirmOnAction(ActionEvent event) {
+    private void btnConfirmOnAction(ActionEvent event) {
         resetLabels();
-        if(connectedSuccessfully)
+        if(session!=null)
         {
             if(isCurrentPasswordCorrect())
             {
@@ -58,36 +61,9 @@ public class ChangePasswordViewController {
             }
             else
             {
-                showError(lbIncorrectCurrentPassword,"Incorrect password");
+                showMessage(lbCurrentPassword,"Incorrect password");
             }
         }
-    }
-
-    @FXML
-    void btnReturnOnAction(ActionEvent event) {
-        changeUserData.closeConnection();
-        getMainStage().setScene(View.getScene("AccountView.fxml"));
-    }
-
-    private void tryToChangePassword()
-    {
-        String result = userDataValidation.checkPassword(pfNewPassword.getText(),pfConfirmedNewPassword.getText());
-
-        if(!result.equals(Valid.VALID))
-        {
-            showError(lbIncorrectNewPassword,result);
-        }
-        else
-        {
-            LoggedUser.getInstance().getLoggedUser().setPassword(pfNewPassword.getText());
-            changeUserData.changeUserData();
-            showChangedSuccessfullyMessage();
-        }
-    }
-
-
-    private View getMainStage() {
-        return View.getInstance();
     }
 
     private boolean isCurrentPasswordCorrect()
@@ -95,21 +71,42 @@ public class ChangePasswordViewController {
         return pfPassword.getText().equals(LoggedUser.getInstance().getLoggedUser().getPassword());
     }
 
-    private void showError(Label label, String message)
+    @FXML
+    private void btnReturnOnAction(ActionEvent event) {
+        databaseConnectionModel.closeConnection(session);
+        View.getInstance().setView(View.getView("AccountView.fxml"));
+    }
+
+    private void tryToChangePassword()
+    {
+        String result = userDataValidationModel.checkPassword(pfNewPassword.getText(),pfConfirmedNewPassword.getText());
+
+        if(!result.equals(Valid.VALID))
+        {
+            showMessage(lbNewPassword,result);
+        }
+        else
+        {
+           changePassword();
+        }
+    }
+
+    private void showMessage(Label label, String message)
     {
         label.setText(message);
     }
 
-
-    private void showChangedSuccessfullyMessage()
+    private void changePassword()
     {
-        lbIncorrectNewPassword.setText("Changed successfully");
+        changeUserDataModel.changePassword(LoggedUser.getInstance().getLoggedUser(),pfNewPassword.getText());
+        changeUserDataModel.updateLoggedUserData(session);
+        showMessage(lbNewPassword,"Changed successfully");
     }
 
     private void resetLabels()
     {
-        lbIncorrectCurrentPassword.setText("");
-        lbIncorrectNewPassword.setText("");
+        lbCurrentPassword.setText("");
+        lbNewPassword.setText("");
     }
 
 }

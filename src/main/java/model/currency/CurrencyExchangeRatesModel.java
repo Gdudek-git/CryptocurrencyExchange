@@ -1,29 +1,19 @@
-package currency;
+package model.currency;
 
-import currency.api.CurrencyApi;
+import model.currency.api.CurrencyApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class CurrencyExchangeRates extends CurrencyApi{
+public class CurrencyExchangeRatesModel extends CurrencyApi {
 
-        private static CurrencyExchangeRates currencyExchangeRates;
-        private Map<String, List<Double>> exchangeRatesMap = new HashMap<>();
+        private Map<String, List<Double>> exchangeRatesMap;
 
-       public static CurrencyExchangeRates getInstance()
-    {
-        if(currencyExchangeRates==null)
+        public CurrencyExchangeRatesModel()
         {
-            currencyExchangeRates = new CurrencyExchangeRates();
-        }
-        return currencyExchangeRates;
-    }
-
-
-        private CurrencyExchangeRates()
-        {
+            exchangeRatesMap = new HashMap<>();
             setMapKeys();
         }
 
@@ -43,7 +33,6 @@ public final class CurrencyExchangeRates extends CurrencyApi{
             exchangeRatesMap.put("PLNToEUR", currencyExchangeBid_Ask_ValuesArrayList);
         }
 
-
         public void setCurrencyExchangeRates(String key,double bid, double ask)
         {
             List<Double> currencyExchangeBid_Ask_ValuesArrayList = new ArrayList<>();
@@ -51,7 +40,6 @@ public final class CurrencyExchangeRates extends CurrencyApi{
             currencyExchangeBid_Ask_ValuesArrayList.add(ask);
             exchangeRatesMap.replace(key, currencyExchangeBid_Ask_ValuesArrayList);
         }
-
 
         public void updateRates()
         {

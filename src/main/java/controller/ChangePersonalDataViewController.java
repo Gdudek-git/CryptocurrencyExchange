@@ -1,13 +1,15 @@
 package controller;
 
+import model.database.DatabaseConnectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import session.ChangeUserData;
-import session.LoggedUser;
-import validation.UserDataValidation;
-import validation.Valid;
+import org.hibernate.Session;
+import model.session.ChangeUserDataModel;
+import model.session.LoggedUser;
+import model.validation.UserDataValidationModel;
+import model.validation.Valid;
 
 public class ChangePersonalDataViewController {
 
@@ -45,130 +47,121 @@ public class ChangePersonalDataViewController {
 
     //endregion
 
-    ChangeUserData changeUserData = new ChangeUserData();
-    UserDataValidation userDataValidation = new UserDataValidation();
-    boolean connectedSuccessfully=false;
+    private ChangeUserDataModel changeUserDataModel;
+    private UserDataValidationModel userDataValidationModel;
+    private DatabaseConnectionModel databaseConnectionModel;
+    private Session session;
 
     @FXML
     private void initialize() {
+        changeUserDataModel = new ChangeUserDataModel();
+        userDataValidationModel = new UserDataValidationModel();
+        databaseConnectionModel = new DatabaseConnectionModel();
         establishConnectionWithDatabase();
         setTextFieldsFormatter();
     }
 
     private void establishConnectionWithDatabase()
     {
-        Thread thread = new Thread(() -> {changeUserData.establishConnection();
-            connectedSuccessfully=true;
-        });
+        Thread thread = new Thread(() -> session = databaseConnectionModel.getSessionObj());
         thread.start();
     }
 
+    private void setTextFieldsFormatter()
+    {
+        userDataValidationModel.setTextFieldFormatter(tfNewNumber,"[0-9]+");
+        userDataValidationModel.setTextFieldFormatter(tfNewFirstName,"[a-zA-Z]+");
+        userDataValidationModel.setTextFieldFormatter(tfNewLastName,"[a-zA-Z]+");
+        userDataValidationModel.setTextFieldFormatter(tfNewCountry,"[a-zA-Z]+");
+    }
+
     @FXML
-    void btnChangeCountryOnAction(ActionEvent event) {
+    private void btnChangeCountryOnAction(ActionEvent event) {
         resetLabel(lbIncorrectCountry);
-        if(connectedSuccessfully) {
-            if (canChangeData(userDataValidation.checkCountry(tfNewCountry.getText()), lbIncorrectCountry)) {
-                LoggedUser.getInstance().getLoggedUser().getUserContact().setCountry(tfNewCountry.getText());
-                changeData();
+        if(session!=null) {
+            if (canChangeData(userDataValidationModel.checkCountry(tfNewCountry.getText()), lbIncorrectCountry)) {
+                changeUserDataModel.changeCountry(LoggedUser.getInstance().getLoggedUser(),tfNewCountry.getText());
+                updateUserData();
             }
         }
     }
 
     @FXML
-    void btnChangeEmailOnAction(ActionEvent event) {
+    private void btnChangeEmailOnAction(ActionEvent event) {
             resetLabel(lbIncorrectEmail);
-            if(connectedSuccessfully) {
-                if (canChangeData(userDataValidation.checkEmail(tfNewEmail.getText()), lbIncorrectEmail)) {
-                    LoggedUser.getInstance().getLoggedUser().getUserContact().setEmail(tfNewEmail.getText());
-                    changeData();
+            if(session!=null) {
+                if (canChangeData(userDataValidationModel.checkEmail(tfNewEmail.getText()), lbIncorrectEmail)) {
+                    changeUserDataModel.changeEmail(LoggedUser.getInstance().getLoggedUser(),tfNewEmail.getText());
+                    updateUserData();
                 }
             }
     }
 
     @FXML
-    void btnChangeFirstNameOnAction(ActionEvent event) {
+    private void btnChangeFirstNameOnAction(ActionEvent event) {
         resetLabel(lbIncorrectFirstName);
-        if(connectedSuccessfully) {
-            if (canChangeData(userDataValidation.checkFirstName(tfNewFirstName.getText()), lbIncorrectFirstName)) {
-                LoggedUser.getInstance().getLoggedUser().setFirstName(tfNewFirstName.getText());
-                changeData();
+        if(session!=null) {
+            if (canChangeData(userDataValidationModel.checkFirstName(tfNewFirstName.getText()), lbIncorrectFirstName)) {
+                changeUserDataModel.changeFirstName(LoggedUser.getInstance().getLoggedUser(),tfNewFirstName.getText());
+                updateUserData();
             }
         }
     }
 
     @FXML
-    void btnChangeLastNameOnAction(ActionEvent event) {
+    private void btnChangeLastNameOnAction(ActionEvent event) {
         resetLabel(lbIncorrectLastName);
-        if(connectedSuccessfully) {
-            if (canChangeData(userDataValidation.checkLastName(tfNewLastName.getText()), lbIncorrectLastName)) {
-                LoggedUser.getInstance().getLoggedUser().setLastName(tfNewLastName.getText());
-                changeData();
+        if(session!=null) {
+            if (canChangeData(userDataValidationModel.checkLastName(tfNewLastName.getText()), lbIncorrectLastName)) {
+                changeUserDataModel.changeLastName(LoggedUser.getInstance().getLoggedUser(),tfNewLastName.getText());
+                updateUserData();
             }
         }
     }
 
     @FXML
-    void btnChangeNumberOnAction(ActionEvent event) {
+    private void btnChangeNumberOnAction(ActionEvent event) {
         resetLabel(lbIncorrectNumber);
-        if(connectedSuccessfully) {
-            if (canChangeData(userDataValidation.checkPhoneNumber(tfNewNumber.getText()), lbIncorrectNumber)) {
-                LoggedUser.getInstance().getLoggedUser().getUserContact().setPhoneNumber(tfNewNumber.getText());
-                changeData();
+        if(session!=null) {
+            if (canChangeData(userDataValidationModel.checkPhoneNumber(tfNewNumber.getText()), lbIncorrectNumber)) {
+                changeUserDataModel.changePhoneNumber(LoggedUser.getInstance().getLoggedUser(),tfNewNumber.getText());
+                updateUserData();
             }
         }
     }
-
-    @FXML
-    void btnReturnOnAction(ActionEvent event) {
-        changeUserData.closeConnection();
-        getMainStage().setScene(View.getScene("AccountView.fxml"));
-    }
-
 
     private boolean canChangeData(String result, Label label)
     {
         if(!result.equals(Valid.VALID))
         {
-            showError(label,result);
+            showMessage(label,result);
             return false;
         }
         else
         {
-            showChangedSuccessfullyMessage(label);
+            showMessage(label,"Changed succesfully");
             return true;
         }
     }
 
-    private void changeData()
+    private void updateUserData()
     {
-        changeUserData.changeUserData();
+        changeUserDataModel.updateLoggedUserData(session);
     }
 
-    private View getMainStage() {
-        return View.getInstance();
+    private void showMessage(Label label, String message)
+    {
+        label.setText(message);
     }
 
-    private void showError(Label errorLabel, String message)
+    private void resetLabel(Label label)
     {
-        errorLabel.setText(message);
+        label.setText("");
     }
 
-    private void showChangedSuccessfullyMessage(Label label)
-    {
-        label.setText("Changed successfully");
-    }
-
-    private void resetLabel(Label errorLabel)
-    {
-            errorLabel.setText("");
-    }
-
-
-    private void setTextFieldsFormatter()
-    {
-        userDataValidation.setTextFieldFormatter(tfNewNumber,"[0-9]+");
-        userDataValidation.setTextFieldFormatter(tfNewFirstName,"[a-zA-Z]+");
-        userDataValidation.setTextFieldFormatter(tfNewLastName,"[a-zA-Z]+");
-        userDataValidation.setTextFieldFormatter(tfNewCountry,"[a-zA-Z]+");
+    @FXML
+    private void btnReturnOnAction(ActionEvent event) {
+        databaseConnectionModel.closeConnection(session);
+        View.getInstance().setView(View.getView("AccountView.fxml"));
     }
 }

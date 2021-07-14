@@ -1,21 +1,9 @@
-package validation;
+package model.validation;
 
-import database.entity.UserWallet;
-import session.LoggedUser;
+import model.database.entity.UserWallet;
+import model.session.LoggedUser;
 
-public final class BuyViewValidation {
-
-    private static BuyViewValidation buySendSellExchangeViewsValidation;
-
-
-    public static BuyViewValidation getInstance()
-    {
-        if(buySendSellExchangeViewsValidation ==null)
-        {
-            buySendSellExchangeViewsValidation =new BuyViewValidation();
-        }
-        return buySendSellExchangeViewsValidation;
-    }
+public class BuyViewValidationModel {
 
     public String checkIfDouble(String number)
     {

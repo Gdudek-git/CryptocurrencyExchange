@@ -1,6 +1,7 @@
 package controller;
 
-import currency.CurrencyExchangeRates;
+import model.currency.CurrencyExchangeRatesModel;
+import model.database.DatabaseConnectionModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,9 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import services.RequestToExchangeCurrency;
-import validation.ExchangeViewValidation;
-import validation.Valid;
+import org.hibernate.Session;
+import model.operations.ExchangeCurrencyModel;
+import model.session.ChangeUserDataModel;
+import model.validation.ExchangeViewValidationModel;
+import model.validation.Valid;
 
 public class ExchangeViewController {
 
@@ -39,17 +42,83 @@ public class ExchangeViewController {
     private Label lbInfo;
     //endregion
 
-    private String selectedCurrency="PLN";
-    private String selectedCurrencyToObtain="EUR";
-    ExchangeViewValidation exchangeValidation = ExchangeViewValidation.getInstance();
+    private DatabaseConnectionModel databaseConnectionModel;
+    private CurrencyExchangeRatesModel currencyExchangeRatesModel;
+    private ExchangeCurrencyModel exchangeCurrencyModel;
+    private ChangeUserDataModel changeUserDataModel;
+    private ExchangeViewValidationModel exchangeViewValidationModel;
+
+    private String selectedCurrency;
+    private String selectedCurrencyToObtain;
+    private Session session;
 
     @FXML
     public void initialize()
     {
-        RequestToExchangeCurrency.getInstance().establishConnectionWithDatabase();
+        databaseConnectionModel = new DatabaseConnectionModel();
+        currencyExchangeRatesModel = new CurrencyExchangeRatesModel();
+        exchangeCurrencyModel = new ExchangeCurrencyModel();
+        changeUserDataModel = new ChangeUserDataModel();
+        exchangeViewValidationModel = new ExchangeViewValidationModel();
+
+        selectedCurrency = "PLN";
+        selectedCurrencyToObtain = "EUR";
+
+        establishConnectionWithDatabase();
+        setComboBoxItems();
         updateRates();
         setUI();
-        setComboBoxItems();
+    }
+
+    private void establishConnectionWithDatabase() {
+        Thread thread = new Thread(() -> session =  databaseConnectionModel.getSessionObj());
+        thread.start();
+    }
+
+    private void setComboBoxItems() {
+        ObservableList<String> currency = FXCollections.observableArrayList("PLN", "EUR", "USD");
+        ObservableList<String> currencyToObtain = FXCollections.observableArrayList( "EUR","USD");
+        cbxCurrentCurrency.setItems(currency);
+        cbxCurrentCurrency.getSelectionModel().selectFirst();
+        cbxCurrencyToObtain.setItems(currencyToObtain);
+        cbxCurrencyToObtain.getSelectionModel().selectFirst();
+    }
+
+    private void updateRates()
+    {
+        currencyExchangeRatesModel.updateRates();
+    }
+
+    private void setUI()
+    {
+        tfCurrentCurrencyRate.setText("1 "+selectedCurrency);
+        if(selectedCurrency.equals("PLN")) {
+            tfCurrencyToObtainRate.setText(exchangeViewValidationModel.getRoundedCurrency(currencyExchangeRatesModel.getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain).get(1))+" "+selectedCurrencyToObtain);
+        }else{
+            tfCurrencyToObtainRate.setText(exchangeViewValidationModel.getRoundedCurrency(currencyExchangeRatesModel.getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain).get(0))+" "+selectedCurrencyToObtain);
+        }
+    }
+
+    @FXML
+    void cbxCurrencyToObtainOnAction(ActionEvent event){
+        if(cbxCurrencyToObtain.getItems().size()>1) {
+            selectedCurrencyToObtain = cbxCurrencyToObtain.getSelectionModel().getSelectedItem();
+            if(selectedCurrencyToObtain==null)
+            {
+                selectedCurrencyToObtain="EUR";
+            }
+            setUI();
+            showAmountUserCanExchange();
+        }
+    }
+    @FXML
+    void cbxCurrentCurrencyOnAction(ActionEvent event) {
+        selectedCurrency = cbxCurrentCurrency.getSelectionModel().getSelectedItem();
+        exchangeViewValidationModel.validateComboBox(cbxCurrencyToObtain,selectedCurrency);
+        selectedCurrencyToObtain = cbxCurrencyToObtain.getSelectionModel().getSelectedItem();
+        updateRates();
+        setUI();
+        showAmountUserCanExchange();
     }
 
     @FXML
@@ -62,12 +131,17 @@ public class ExchangeViewController {
         }
     }
 
+    private void resetLabel()
+    {
+        lbInfo.setText("");
+    }
 
     private boolean checkIfDouble()
     {
-        if(!exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(Valid.VALID))
+        String isDouble = exchangeViewValidationModel.checkIfDouble(tfCurrencyAmount.getText());
+        if(!isDouble.equals(Valid.VALID))
         {
-            showInfo(exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()));
+            showInfo(isDouble);
             return false;
         }
         return true;
@@ -76,9 +150,10 @@ public class ExchangeViewController {
 
     private boolean checkIfSufficientFunds()
     {
-        if(!exchangeValidation.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText()).equals(Valid.VALID))
+        String sufficientFunds = exchangeViewValidationModel.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText());
+        if(!sufficientFunds.equals(Valid.VALID))
         {
-            showInfo(exchangeValidation.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText()));
+            showInfo(sufficientFunds);
             return false;
         }
         return true;
@@ -86,81 +161,9 @@ public class ExchangeViewController {
 
     private void exchangeCurrency()
     {
-        RequestToExchangeCurrency.getInstance().exchangeCurrency(selectedCurrency,selectedCurrencyToObtain,Double.parseDouble(tfCurrencyAmount.getText()),Double.parseDouble(tfCurrencyToObtainAmount.getText()));
+        exchangeCurrencyModel.exchangeCurrency(selectedCurrency,selectedCurrencyToObtain,tfCurrencyAmount.getText(),tfCurrencyToObtainAmount.getText());
+        changeUserDataModel.updateLoggedUserData(session);
         showInfo("Exchanged successfully");
-    }
-
-
-
-    @FXML
-    void btnReturnOnAction(ActionEvent event) {
-        RequestToExchangeCurrency.getInstance().closeConnectionWithDatabase();
-        getMainStage().setScene(View.getScene("UserView.fxml"));
-    }
-
-    private void setComboBoxItems() {
-        ObservableList<String> currency = FXCollections.observableArrayList("PLN", "EUR", "USD");
-        ObservableList<String> currencyToObtain = FXCollections.observableArrayList( "EUR","USD");
-        cbxCurrentCurrency.setItems(currency);
-        cbxCurrentCurrency.getSelectionModel().selectFirst();
-        cbxCurrencyToObtain.setItems(currencyToObtain);
-        cbxCurrencyToObtain.getSelectionModel().selectFirst();
-    }
-
-    @FXML
-    void cbxCurrencyToObtainOnAction(ActionEvent event){
-        if(cbxCurrencyToObtain.getItems().size()>1) {
-            selectedCurrencyToObtain = cbxCurrencyToObtain.getSelectionModel().getSelectedItem();
-            if(selectedCurrencyToObtain==null)
-            {
-                selectedCurrencyToObtain="EUR";
-            }
-            setUI();
-            showAmountUserCanBuy();
-        }
-    }
-    @FXML
-    void cbxCurrentCurrencyOnAction(ActionEvent event) {
-        selectedCurrency = cbxCurrentCurrency.getSelectionModel().getSelectedItem();
-        exchangeValidation.validateComboBox(cbxCurrencyToObtain,selectedCurrency);
-        selectedCurrencyToObtain = cbxCurrencyToObtain.getSelectionModel().getSelectedItem();
-        updateRates();
-        setUI();
-        showAmountUserCanBuy();
-    }
-
-
-    @FXML
-    void tfCurrencyAmountOnKeyTyped(KeyEvent event) {
-        showAmountUserCanBuy();
-    }
-
-    private void setUI()
-    {
-        tfCurrentCurrencyRate.setText("1 "+selectedCurrency);
-        if(selectedCurrency.equals("PLN")) {
-            tfCurrencyToObtainRate.setText(exchangeValidation.getRoundedCurrency(CurrencyExchangeRates.getInstance().getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain).get(1))+" "+selectedCurrencyToObtain);
-        }else{
-            tfCurrencyToObtainRate.setText(exchangeValidation.getRoundedCurrency(CurrencyExchangeRates.getInstance().getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain).get(0))+" "+selectedCurrencyToObtain);
-        }
-    }
-
-    private void updateRates()
-    {
-        CurrencyExchangeRates.getInstance().updateRates();
-    }
-
-    private void showAmountUserCanBuy()
-    {
-
-        if(exchangeValidation.checkIfDouble(tfCurrencyAmount.getText()).equals(Valid.VALID)) {
-            if(selectedCurrency.equals("PLN")) {
-                tfCurrencyToObtainAmount.setText(String.valueOf(exchangeValidation.getRoundedCurrency(Double.parseDouble(tfCurrencyAmount.getText()) / CurrencyExchangeRates.getInstance().getExchangeRates().get(selectedCurrencyToObtain + "To" + selectedCurrency).get(1))));
-            }else
-            {
-                tfCurrencyToObtainAmount.setText(String.valueOf(exchangeValidation.getRoundedCurrency(Double.parseDouble(tfCurrencyAmount.getText()) * CurrencyExchangeRates.getInstance().getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain).get(0))));
-            }
-        }
     }
 
     private void showInfo(String info)
@@ -168,13 +171,34 @@ public class ExchangeViewController {
         lbInfo.setText(info);
     }
 
-    private void resetLabel()
+    @FXML
+    void tfCurrencyAmountOnKeyTyped(KeyEvent event) {
+        showAmountUserCanExchange();
+    }
+
+    private void showAmountUserCanExchange()
     {
-        lbInfo.setText("");
+        if(exchangeViewValidationModel.checkIfDouble(tfCurrencyAmount.getText()).equals(Valid.VALID)) {
+            if(selectedCurrency.equals("PLN")) {
+                tfCurrencyToObtainAmount.setText(String.valueOf(exchangeViewValidationModel
+                        .getRoundedCurrency(exchangeCurrencyModel
+                                .getHowMuchUserCanExchange(selectedCurrency,tfCurrencyAmount.getText(),currencyExchangeRatesModel
+                                        .getExchangeRates().get(selectedCurrencyToObtain + "To" + selectedCurrency)
+                                        .get(1)))));
+            }else
+            {
+                tfCurrencyToObtainAmount.setText(String.valueOf(exchangeViewValidationModel
+                        .getRoundedCurrency(exchangeCurrencyModel
+                                .getHowMuchUserCanExchange(selectedCurrency,tfCurrencyAmount.getText(),currencyExchangeRatesModel
+                                        .getExchangeRates().get(selectedCurrency + "To" + selectedCurrencyToObtain)
+                                        .get(0)))));
+            }
+        }
     }
 
-    private View getMainStage() {
-        return View.getInstance();
+    @FXML
+    void btnReturnOnAction(ActionEvent event) {
+        databaseConnectionModel.closeConnection(session);
+        View.getInstance().setView(View.getView("UserView.fxml"));
     }
-
 }

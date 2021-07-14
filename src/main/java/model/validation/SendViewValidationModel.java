@@ -1,26 +1,11 @@
-package validation;
+package model.validation;
 
-import database.entity.UserWallet;
-import session.LoadUserData;
-import session.LoggedUser;
+import model.database.entity.UserWallet;
+import org.hibernate.Session;
+import model.session.LoadUserModel;
+import model.session.LoggedUser;
 
-public final class SendViewValidation {
-    private static SendViewValidation viewValidation;
-    LoadUserData loadUserData = LoadUserData.getInstance();
-    public static SendViewValidation getInstance()
-    {
-        if(viewValidation==null)
-        {
-            viewValidation = new SendViewValidation();
-        }
-        return viewValidation;
-    }
-
-    public LoadUserData getLoadUserData()
-    {
-        return loadUserData;
-    }
-
+public  class SendViewValidationModel {
 
     public String checkIfDouble(String enteredCryptocurrency)
     {
@@ -42,7 +27,6 @@ public final class SendViewValidation {
         return Valid.VALID;
     }
 
-
     private double getUserCryptocurrencyFunds(String selectedCryptocurrency)
     {
         UserWallet userWallet = LoggedUser.getInstance().getLoggedUser().getUserWallet();
@@ -55,24 +39,16 @@ public final class SendViewValidation {
         return 0;
     }
 
-    public String checkIfRecipientExist(String recipientNickname)
+    public String checkIfRecipientExist(String recipientNickname, Session session, LoadUserModel loadUserModel)
     {
-        if(loadUserData.loadUser(recipientNickname)==null)
+        if(loadUserModel.loadUser(recipientNickname,session)==null)
         {
             return "Recipient don't exist";
         }
         return Valid.VALID;
     }
 
-    public void establishConnectionWithDatabase()
-    {
-        loadUserData.establishConnection();
-    }
 
-    public void closeConnectionWithDatabase()
-    {
-        loadUserData.closeConnection();
-    }
 
 
 }

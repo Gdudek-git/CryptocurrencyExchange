@@ -1,24 +1,15 @@
-package validation;
+package model.validation;
 
-import database.entity.UserWallet;
+import model.database.entity.UserWallet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
-import session.LoggedUser;
+import model.session.LoggedUser;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public final class ExchangeViewValidation {
-    private static ExchangeViewValidation exchangeValidation;
-    public static ExchangeViewValidation getInstance()
-    {
-        if(exchangeValidation==null)
-        {
-            exchangeValidation = new ExchangeViewValidation();
-        }
-        return exchangeValidation;
-    }
+public class ExchangeViewValidationModel {
 
     public String checkIfDouble(String number)
     {

@@ -1,6 +1,6 @@
-package cryptocurrency;
+package model.cryptocurrency;
 
-import cryptocurrency.api.CryptocurrencyChartApi;
+import model.cryptocurrency.api.CryptocurrencyChartApi;
 
 import javafx.scene.chart.LineChart;
 
@@ -12,18 +12,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 
-public final class CryptocurrencyRatesChart extends CryptocurrencyChartApi {
-    private static CryptocurrencyRatesChart cryptocurrencyRatesChart;
-
-
-    public static CryptocurrencyRatesChart getInstance()
-    {
-        if(cryptocurrencyRatesChart ==null)
-        {
-            cryptocurrencyRatesChart =new CryptocurrencyRatesChart();
-        }
-        return  cryptocurrencyRatesChart;
-    }
+public class CryptocurrencyRatesChartModel extends CryptocurrencyChartApi {
 
     @Override
     protected void getData(String selectedCryptocurrency, String selectedCurrency, String chartType) {
@@ -70,4 +59,19 @@ public final class CryptocurrencyRatesChart extends CryptocurrencyChartApi {
         return dateFormat.format(date);
     }
 
+
+    public String changeChartType(String selectedChartType)
+    {
+        if(selectedChartType.equals("Hourly"))
+        {
+            return "hours";
+        }
+        else if(selectedChartType.equals("Daily")) {
+            return "days";
+        }
+        else
+        {
+            return "minutes";
+        }
+    }
 }

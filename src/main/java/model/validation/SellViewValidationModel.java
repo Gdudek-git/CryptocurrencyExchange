@@ -1,23 +1,12 @@
-package validation;
+package model.validation;
 
-import database.entity.UserWallet;
-import session.LoggedUser;
+import model.database.entity.UserWallet;
+import model.session.LoggedUser;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public final class SellViewValidation {
-    private static SellViewValidation sellValidation;
-
-    public static SellViewValidation getInstance()
-    {
-        if(sellValidation==null)
-        {
-            sellValidation=new SellViewValidation();
-        }
-        return sellValidation;
-    }
-
+public  class SellViewValidationModel {
 
     public String checkIfDouble(String enteredCryptocurrency)
     {
@@ -29,7 +18,6 @@ public final class SellViewValidation {
         }
         return Valid.VALID;
     }
-
 
     public String checkIfSufficientFundsToSell(String selectedCryptocurrency, String amountToSell)
     {
@@ -54,13 +42,13 @@ public final class SellViewValidation {
     }
 
 
-    public double getRoundedCurrency(double currencyAmount)
+    public double getRoundedCurrencyExchangeRate(String currencyAmount,double currencyRate)
     {
-        return round(currencyAmount);
+        return round(String.valueOf(Double.parseDouble(currencyAmount)*currencyRate));
     }
 
-    private double round(double currencyAmount) {
-        BigDecimal bd = new BigDecimal(Double.toString(currencyAmount));
+    private double round(String currencyAmount) {
+        BigDecimal bd = new BigDecimal(currencyAmount);
         bd = bd.setScale(2, RoundingMode.HALF_DOWN);
         return bd.doubleValue();
     }
