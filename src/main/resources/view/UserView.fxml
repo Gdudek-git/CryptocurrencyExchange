@@ -52,7 +52,7 @@
       </AnchorPane>
       <MenuBar prefHeight="26.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" stylesheets="@../css/MenuStyle.css">
         <menus>
-          <Menu mnemonicParsing="false" text="Currency Type">
+          <Menu fx:id="currencyMenu" mnemonicParsing="false" text="Currency Type">
             <items>
               <MenuItem fx:id="miPLN" mnemonicParsing="false" onAction="#currencyMenuOnAction" text="PLN" />
                   <MenuItem fx:id="miUSD" mnemonicParsing="false" onAction="#currencyMenuOnAction" text="USD" />

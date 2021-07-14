@@ -125,7 +125,7 @@
        </Label>
 
       <ComboBox fx:id="cbxGender" focusTraversable="false" layoutX="129.0" layoutY="375.0" prefHeight="26.0" prefWidth="530.0" promptText="Gender" style="-fx-font-size: 15; -fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="comboBoxHover" stylesheets="@../css/HoverStyle.css" />
-      <Button layoutX="124.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnCancelOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Cancel">
+      <Button layoutX="124.0" layoutY="549.0" mnemonicParsing="false" onAction="#btnReturnOnAction" prefHeight="43.0" prefWidth="195.0" style="-fx-background-color: white; -fx-background-radius: 0.5cm;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="Return">
          <font>
             <Font size="20.0" />
          </font>
