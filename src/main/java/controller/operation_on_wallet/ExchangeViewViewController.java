@@ -1,6 +1,7 @@
 package controller.operation_on_wallet;
 
-import controller.View;
+import view.AvailableViews;
+import view.View;
 import model.currency.CurrencyExchangeRatesModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -177,6 +178,6 @@ public class ExchangeViewViewController extends AbstractOperationOnWalletViewCon
     @FXML
     void btnReturnOnAction(ActionEvent event) {
         super.closeConnection();
-        View.getInstance().setView(View.getView("MainMenuView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.MAIN_MENU_VIEW));
     }
 }

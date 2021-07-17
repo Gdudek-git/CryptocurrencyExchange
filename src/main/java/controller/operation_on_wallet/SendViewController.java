@@ -1,7 +1,8 @@
 package controller.operation_on_wallet;
 
 
-import controller.View;
+import view.AvailableViews;
+import view.View;
 import model.database.entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.hibernate.Session;
 import model.operations.SendCryptocurrencyModel;
 import model.session.LoadUserModel;
 import model.validation.SendViewValidationModel;
@@ -125,6 +125,6 @@ public class SendViewController extends AbstractOperationOnWalletViewController 
     void btnReturnOnAction(ActionEvent event)
     {
         super.closeConnection();
-        View.getInstance().setView(View.getView("MainMenuView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.MAIN_MENU_VIEW));
     }
 }

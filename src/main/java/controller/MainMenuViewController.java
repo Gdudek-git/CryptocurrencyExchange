@@ -1,5 +1,7 @@
 package controller;
 
+import view.AvailableViews;
+import view.View;
 import model.cryptocurrency.CryptocurrencyExchangeRatesModel;
 import model.cryptocurrency.CryptocurrencyRatesChartModel;
 import javafx.event.ActionEvent;
@@ -179,37 +181,37 @@ public class MainMenuViewController {
     @FXML
     void btnBuyOnAction(ActionEvent event) {
         stopTimer();
-        View.getInstance().setView(View.getView("BuyView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.BUY_VIEW));
     }
 
     @FXML
     void btnExchangeOnAction(ActionEvent event) {
         stopTimer();
-        View.getInstance().setView(View.getView("ExchangeView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.EXCHANGE_VIEW));
     }
 
     @FXML
     void btnSellOnAction(ActionEvent event) {
         stopTimer();
-        View.getInstance().setView(View.getView("SellView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.SELL_VIEW));
     }
 
     @FXML
     void btnSendOnAction(ActionEvent event) {
         stopTimer();
-        View.getInstance().setView(View.getView("SendView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.SEND_VIEW));
     }
 
     @FXML
     void btnAccountOnAction(ActionEvent event) {
         stopTimer();
-        View.getInstance().setView(View.getView("AccountView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.ACCOUNT_VIEW));
     }
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {
         stopTimer();
-        View.getInstance().setView(View.getView("LoginView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.LOGIN_VIEW));
     }
 
 

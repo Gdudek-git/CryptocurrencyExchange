@@ -1,6 +1,7 @@
 package controller.account;
 
-import controller.View;
+import view.AvailableViews;
+import view.View;
 import model.database.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,17 +61,17 @@ public class AccountViewController {
 
     @FXML
     void btnChangePasswordOnAction(ActionEvent event) {
-        View.getInstance().setView(View.getView("ChangePasswordView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.CHANGE_PASSWORD_VIEW));
     }
 
     @FXML
     void btnChangePersonalDataOnAction(ActionEvent event) {
-        View.getInstance().setView(View.getView("ChangePersonalDataView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.CHANGE_PERSONAL_DATA_VIEW));
     }
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
-        View.getInstance().setView(View.getView("MainMenuView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.MAIN_MENU_VIEW));
     }
 
     private void setUserData()

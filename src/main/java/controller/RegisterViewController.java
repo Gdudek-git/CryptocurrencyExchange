@@ -1,6 +1,8 @@
 package controller;
 
 
+import view.AvailableViews;
+import view.View;
 import model.database.DatabaseConnectionModel;
 import model.database.RegisterUserModel;
 import javafx.collections.FXCollections;
@@ -248,7 +250,7 @@ public class RegisterViewController {
     @FXML
     private void btnReturnOnAction(ActionEvent event) {
         databaseConnectionModel.closeConnection(session);
-        View.getInstance().setView(View.getView("LoginView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.LOGIN_VIEW));
     }
 }
 

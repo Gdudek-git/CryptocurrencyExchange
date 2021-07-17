@@ -1,6 +1,7 @@
 package controller.account;
 
-import controller.View;
+import view.AvailableViews;
+import view.View;
 import model.database.DatabaseConnectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -140,7 +141,7 @@ public class ChangePersonalDataViewController {
         }
         else
         {
-            showMessage(label,"Changed succesfully");
+            showMessage(label,"Changed successfully");
             return true;
         }
     }
@@ -163,6 +164,6 @@ public class ChangePersonalDataViewController {
     @FXML
     private void btnReturnOnAction(ActionEvent event) {
         databaseConnectionModel.closeConnection(session);
-        View.getInstance().setView(View.getView("AccountView.fxml"));
+        View.getInstance().setView(View.getView(AvailableViews.ACCOUNT_VIEW));
     }
 }

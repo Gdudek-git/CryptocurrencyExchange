@@ -1,5 +1,7 @@
 package controller;
 
+import view.AvailableViews;
+import view.View;
 import model.database.DatabaseConnectionModel;
 import model.database.entity.User;
 import javafx.event.ActionEvent;
@@ -48,7 +50,7 @@ public class LoginViewController {
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
         databaseConnectionModel.closeConnection(session);
-        changeView("RegisterView.fxml");
+        changeView(AvailableViews.REGISTER_VIEW);
     }
 
     @FXML
@@ -73,7 +75,7 @@ public class LoginViewController {
     {
         loginModel.setLoggedUser(user);
         databaseConnectionModel.closeConnection(session);
-        changeView("MainMenuView.fxml");
+        changeView(AvailableViews.MAIN_MENU_VIEW);
     }
     private void changeView(String name)
     {
