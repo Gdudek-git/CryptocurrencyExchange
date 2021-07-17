@@ -1,7 +1,7 @@
-package controller;
+package controller.operation_on_wallet;
 
+import controller.View;
 import model.currency.CurrencyExchangeRatesModel;
-import model.database.DatabaseConnectionModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,13 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import org.hibernate.Session;
 import model.operations.ExchangeCurrencyModel;
-import model.session.ChangeUserDataModel;
 import model.validation.ExchangeViewValidationModel;
 import model.validation.Valid;
 
-public class ExchangeViewController {
+public class ExchangeViewViewController extends AbstractOperationOnWalletViewController {
 
 
     //region Controls
@@ -42,37 +40,27 @@ public class ExchangeViewController {
     private Label lbInfo;
     //endregion
 
-    private DatabaseConnectionModel databaseConnectionModel;
     private CurrencyExchangeRatesModel currencyExchangeRatesModel;
     private ExchangeCurrencyModel exchangeCurrencyModel;
-    private ChangeUserDataModel changeUserDataModel;
     private ExchangeViewValidationModel exchangeViewValidationModel;
 
     private String selectedCurrency;
     private String selectedCurrencyToObtain;
-    private Session session;
 
     @FXML
     public void initialize()
     {
-        databaseConnectionModel = new DatabaseConnectionModel();
         currencyExchangeRatesModel = new CurrencyExchangeRatesModel();
         exchangeCurrencyModel = new ExchangeCurrencyModel();
-        changeUserDataModel = new ChangeUserDataModel();
         exchangeViewValidationModel = new ExchangeViewValidationModel();
 
         selectedCurrency = "PLN";
         selectedCurrencyToObtain = "EUR";
 
-        establishConnectionWithDatabase();
+        super.establishConnectionWithDatabase();
         setComboBoxItems();
         updateRates();
         setUI();
-    }
-
-    private void establishConnectionWithDatabase() {
-        Thread thread = new Thread(() -> session =  databaseConnectionModel.getSessionObj());
-        thread.start();
     }
 
     private void setComboBoxItems() {
@@ -123,7 +111,7 @@ public class ExchangeViewController {
 
     @FXML
     void btnExchangeOnAction(ActionEvent event) {
-        resetLabel();
+        super.resetLabel(lbInfo);
         if(checkIfDouble()){
             if (checkIfSufficientFunds()) {
                 exchangeCurrency();
@@ -131,17 +119,12 @@ public class ExchangeViewController {
         }
     }
 
-    private void resetLabel()
-    {
-        lbInfo.setText("");
-    }
-
     private boolean checkIfDouble()
     {
         String isDouble = exchangeViewValidationModel.checkIfDouble(tfCurrencyAmount.getText());
         if(!isDouble.equals(Valid.VALID))
         {
-            showInfo(isDouble);
+            super.showInfo(lbInfo,isDouble);
             return false;
         }
         return true;
@@ -153,7 +136,7 @@ public class ExchangeViewController {
         String sufficientFunds = exchangeViewValidationModel.checkIfSufficientFundsToExchange(selectedCurrency,tfCurrencyAmount.getText());
         if(!sufficientFunds.equals(Valid.VALID))
         {
-            showInfo(sufficientFunds);
+            super.showInfo(lbInfo,sufficientFunds);
             return false;
         }
         return true;
@@ -162,13 +145,8 @@ public class ExchangeViewController {
     private void exchangeCurrency()
     {
         exchangeCurrencyModel.exchangeCurrency(selectedCurrency,selectedCurrencyToObtain,tfCurrencyAmount.getText(),tfCurrencyToObtainAmount.getText());
-        changeUserDataModel.updateLoggedUserData(session);
-        showInfo("Exchanged successfully");
-    }
-
-    private void showInfo(String info)
-    {
-        lbInfo.setText(info);
+        super.updateLoggedUserData();
+        super.showInfo(lbInfo,"Exchanged successfully");
     }
 
     @FXML
@@ -198,7 +176,7 @@ public class ExchangeViewController {
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
-        databaseConnectionModel.closeConnection(session);
-        View.getInstance().setView(View.getView("UserView.fxml"));
+        super.closeConnection();
+        View.getInstance().setView(View.getView("MainMenuView.fxml"));
     }
 }

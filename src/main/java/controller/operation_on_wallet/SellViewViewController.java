@@ -1,7 +1,7 @@
-package controller;
+package controller.operation_on_wallet;
 
+import controller.View;
 import model.cryptocurrency.CryptocurrencyExchangeRatesModel;
-import model.database.DatabaseConnectionModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,13 +10,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import org.hibernate.Session;
 import model.operations.SellCryptocurrencyModel;
-import model.session.ChangeUserDataModel;
 import model.validation.SellViewValidationModel;
 import model.validation.Valid;
 
-public class SellViewController {
+public class SellViewViewController extends AbstractOperationOnWalletViewController {
 
     //region Controls
 
@@ -42,40 +40,31 @@ public class SellViewController {
     private Label lbInfo;
     //endregion
 
-    private DatabaseConnectionModel databaseConnectionModel;
     private CryptocurrencyExchangeRatesModel cryptocurrencyExchangeRatesModel;
     private SellCryptocurrencyModel sellCryptocurrencyModel;
-    private ChangeUserDataModel changeUserDataModel;
     private SellViewValidationModel sellViewValidationModel;
 
     private int selectedCurrencyIndex;
     private String selectedCryptocurrency;
     private String selectedCurrency;
-    private Session session;
 
     @FXML
     public void initialize() {
 
-        databaseConnectionModel = new DatabaseConnectionModel();
         cryptocurrencyExchangeRatesModel = new CryptocurrencyExchangeRatesModel();
         sellCryptocurrencyModel = new SellCryptocurrencyModel();
-        changeUserDataModel = new ChangeUserDataModel();
         sellViewValidationModel = new SellViewValidationModel();
 
         selectedCryptocurrency = "BTC";
         selectedCurrency = "PLN";
         selectedCurrencyIndex=0;
 
-        establishConnectionWithDatabase();
+        super.establishConnectionWithDatabase();
         setComboBoxItems();
         updateRates();
         setUI();
     }
-    private void establishConnectionWithDatabase()
-    {
-        Thread thread = new Thread(() -> session =  databaseConnectionModel.getSessionObj());
-        thread.start();
-    }
+
 
     private void setComboBoxItems() {
         ObservableList<String> currency = FXCollections.observableArrayList("PLN", "USD", "EUR");
@@ -115,7 +104,7 @@ public class SellViewController {
 
     @FXML
     private void btnSellOnAction(ActionEvent event) {
-        resetLabel();
+        super.resetLabel(lbInfo);
         if(checkIfDouble())
         {
             if(checkIfSufficientFunds()) {
@@ -124,28 +113,23 @@ public class SellViewController {
         }
     }
 
-    private void resetLabel()
-    {
-        lbInfo.setText("");
-    }
-
     public boolean checkIfDouble()
     {
         String isDouble = sellViewValidationModel.checkIfDouble(tfCryptocurrencyAmount.getText());
         if(!isDouble.equals(Valid.VALID))
         {
-            showInfo(isDouble);
+            super.showInfo(lbInfo,isDouble);
             return false;
         }
         return true;
     }
 
-    private boolean checkIfSufficientFunds()
+    protected boolean checkIfSufficientFunds()
     {
         String sufficientFunds = sellViewValidationModel.checkIfSufficientFundsToSell(selectedCryptocurrency,tfCryptocurrencyAmount.getText());
         if(!sufficientFunds.equals(Valid.VALID))
         {
-            showInfo(sufficientFunds);
+            super.showInfo(lbInfo,sufficientFunds);
             return false;
         }
         return true;
@@ -153,13 +137,8 @@ public class SellViewController {
 
     private void sellCryptocurrency()
     {   sellCryptocurrencyModel.sellCryptocurrency(selectedCryptocurrency,selectedCurrency,tfCryptocurrencyAmount.getText(),tfCurrencyAmount.getText());
-        changeUserDataModel.updateLoggedUserData(session);
-        showInfo("Sold successfully");
-    }
-
-    private void showInfo(String info)
-    {
-        lbInfo.setText(info);
+        super.updateLoggedUserData();
+        super.showInfo(lbInfo,"Sold successfully");
     }
 
     @FXML
@@ -177,8 +156,8 @@ public class SellViewController {
     @FXML
     private void btnReturnOnClick(ActionEvent event)
     {
-        databaseConnectionModel.closeConnection(session);
-        View.getInstance().setView(View.getView("UserView.fxml"));
+        super.closeConnection();
+        View.getInstance().setView(View.getView("MainMenuView.fxml"));
     }
 
 }
