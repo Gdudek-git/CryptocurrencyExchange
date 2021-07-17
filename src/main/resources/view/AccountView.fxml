@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600" prefWidth="800" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountViewController">
+<AnchorPane prefHeight="600" prefWidth="800" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.account.AccountViewController">
     <children>
         <ScrollPane layoutX="8.0" layoutY="370.0" prefHeight="216.0" prefWidth="784.0" style="-fx-border-color: white; -fx-background-color: black;" stylesheets="@../css/ScrollBarStyle.css">
          <content>

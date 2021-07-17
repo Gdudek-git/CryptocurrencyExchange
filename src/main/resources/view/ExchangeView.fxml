@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExchangeViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right bottom, #001ee1, #3e33dc, #5745d7, #6a56d1, #7a67cb);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.operation_on_wallet.ExchangeViewViewController">
     <children>
         <Button layoutX="444.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnExchangeOnAction" prefHeight="86.0" prefWidth="311.0" style="-fx-background-radius: 0.5cm; -fx-background-color: white;" styleClass="radiusButtonHover" stylesheets="@../css/HoverStyle.css" text="EXCHANGE">
             <font>

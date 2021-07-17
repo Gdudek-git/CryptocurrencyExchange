@@ -12,7 +12,7 @@ import model.session.LoggedUser;
 
 import java.util.stream.IntStream;
 
-public class UserViewController {
+public class MainMenuViewController {
 
     //region Controls
     @FXML
@@ -63,7 +63,7 @@ public class UserViewController {
         cryptocurrencyExchangeRatesModel = new CryptocurrencyExchangeRatesModel();
         cryptocurrencyRatesChartModel = new CryptocurrencyRatesChartModel();
         timerModel = new TimerModel();
-        timerModel.setUserViewController(this);
+        timerModel.setMainMenuViewController(this);
         tfUsername.setText(LoggedUser.getInstance().getLoggedUser().getUsername());
         setVariables();
         setTextFieldBalance();

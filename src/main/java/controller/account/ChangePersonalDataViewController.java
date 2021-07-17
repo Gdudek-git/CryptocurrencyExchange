@@ -1,5 +1,6 @@
-package controller;
+package controller.account;
 
+import controller.View;
 import model.database.DatabaseConnectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

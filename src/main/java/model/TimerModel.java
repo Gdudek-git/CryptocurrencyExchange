@@ -1,27 +1,27 @@
 package model;
 
 import javafx.application.Platform;
-import controller.UserViewController;
+import controller.MainMenuViewController;
 import javax.swing.*;
 
 public  class TimerModel {
 
     private Timer timer;
-    private UserViewController userViewController;
+    private MainMenuViewController mainMenuViewController;
 
-    public void setUserViewController(UserViewController userViewController)
+    public void setMainMenuViewController(MainMenuViewController mainMenuViewController)
     {
-        this.userViewController = userViewController;
+        this.mainMenuViewController = mainMenuViewController;
     }
 
     public void startUpdating(int updateTime)
     {
 
          timer = new Timer(updateTime, arg0 -> {
-            userViewController.updateRates();
+            mainMenuViewController.updateRates();
             Platform.runLater(()->{
-                   userViewController.setCryptocurrencyRatesUI();
-                   userViewController.setChart();
+                   mainMenuViewController.setCryptocurrencyRatesUI();
+                   mainMenuViewController.setChart();
            });
         });
         timer.setRepeats(true);

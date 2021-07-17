@@ -73,7 +73,7 @@ public class LoginViewController {
     {
         loginModel.setLoggedUser(user);
         databaseConnectionModel.closeConnection(session);
-        changeView("UserView.fxml");
+        changeView("MainMenuView.fxml");
     }
     private void changeView(String name)
     {

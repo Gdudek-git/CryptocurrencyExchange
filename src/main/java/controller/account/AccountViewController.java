@@ -1,5 +1,6 @@
-package controller;
+package controller.account;
 
+import controller.View;
 import model.database.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +70,7 @@ public class AccountViewController {
 
     @FXML
     void btnReturnOnAction(ActionEvent event) {
-        View.getInstance().setView(View.getView("UserView.fxml"));
+        View.getInstance().setView(View.getView("MainMenuView.fxml"));
     }
 
     private void setUserData()
