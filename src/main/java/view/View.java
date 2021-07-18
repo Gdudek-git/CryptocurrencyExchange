@@ -38,7 +38,7 @@ public final class View
     {
         rootStage.setScene(new Scene(rootPane,800,600));
         rootStage.setResizable(false);
-        rootStage.setTitle("Grzegorz Dudek");
+        rootStage.setTitle("Cryptocurrency Exchange");
         rootStage.centerOnScreen();
         rootStage.show();
     }
