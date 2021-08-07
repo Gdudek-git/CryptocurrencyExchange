@@ -10,3 +10,20 @@ Project is created with:
 * Hibernate: 5.4.25
 * OpenJFX: 11
 * MySQL
+
+
+## Screenshots
+Login View:
+![Alt text](/../master/src/main/screenshots/LoginView.png?raw=true)
+
+Main Menu View:
+![Alt text](/../master/src/main/screenshots/MainMenuView.png?raw=true)
+
+Account View:
+![Alt text](/../master/src/main/screenshots/AccountView.png?raw=true)
+
+Exchange View:
+![Alt text](/../master/src/main/screenshots/ExchangeView.png?raw=true)
+
+Buy View:
+![Alt text](/../master/src/main/screenshots/BuyView.png?raw=true)
