@@ -27,3 +27,7 @@ Exchange View:
 
 Buy View:
 ![Alt text](/../master/src/main/screenshots/BuyView.png?raw=true)
+
+## Gif
+(Combobox and menu items weren't captured by screen recorder)
+![Alt Text](https://github.com/Gdudek-git/CryptocurrencyExchange/blob/master/src/main/gif/CryptocurrencyExchange.gif)
